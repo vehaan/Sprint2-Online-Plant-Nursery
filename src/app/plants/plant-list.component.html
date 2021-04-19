@@ -1,0 +1,17 @@
+<p>plant-list works!</p>
+<div class="container">
+    <button class="btn btn-danger" style="width:100px" (click)="addPlant()"> Add Plant</button>
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th colspan="2">Plant List</th>
+        </tr>
+        <tr>
+            <th colspan="2">Plants</th>
+        </tr>
+        <tr *ngFor="let c of plants">
+            <td><a [routerLink]="['/plants/',c.id]">{{c.commonName}}</a></td>
+            <td ngClass="td1"> <button (click)="onEdit(c)">Edit</button></td>
+            <td ngClass="td1"><button (click)="onDelete(c)">Delete</button></td>
+        </tr>
+    </table>
+</div>
