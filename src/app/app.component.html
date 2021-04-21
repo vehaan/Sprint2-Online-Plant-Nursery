@@ -17,7 +17,7 @@
         <li><a href="#">About</a></li> -->
         <li><a href="#plant">Plant</a></li>
         <li><a href="#seed">Seed</a></li>
-        <li><a href="#planter">Planter</a></li>
+        <li><a href="/planter-list">Planter</a></li>  
 
         <li class="float-end"><a href="#login">Login</a></li>
         <li class="float-end"><a href="#signup">Sign Up</a></li>
@@ -25,8 +25,11 @@
 
     <div id="content">
         <!-- PUT EVERYTHING OF BODY HERE -->
-      <app-planter-list id="planter"></app-planter-list>
+        <router-outlet></router-outlet>
+      <!-- <app-planter-list id="planter"></app-planter-list> -->
+      
     </div>
     
 </body>
 </html>
+

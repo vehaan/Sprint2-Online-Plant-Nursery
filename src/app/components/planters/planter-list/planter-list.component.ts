@@ -7,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlanterListComponent implements OnInit {
 
-  details = false;
+  details = true;
+
+
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
   toggleDetails(): void {

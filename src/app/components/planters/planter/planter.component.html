@@ -1,20 +1,26 @@
   <section>
     <div class="s-box-container">
-      <div class="s-box">
+      <div class="s-box" *ngFor = "let planter of planters">
+        <button class="btn button-small btn-danger" id="x"  (click) = "deletePlanter(planter)">X</button>
+        
         <img alt="1" src="https://ak.picdn.net/shutterstock/videos/1027610672/thumb/11.jpg" class="appIcon" />
-        <h1>Planter id: 1</h1>
+        <h1>Planter Id: {{planter.id}}</h1>
         <!--details------>
         <ul *ngIf = "showDetails">
-             <li>Height: 25cm</li>
-             <li>Shape: Circle</li>
-             <li>Capacity: 4"</li>
-             <li>Color: Red</li>
-             <li>Drainage Holes: 2</li>
-             <li>Stock Available: 28</li>
+             <li>Height: {{planter.height}} cm</li>
+             <li>Shape: {{planter.shape}}</li>
+             <li>Capacity: {{planter.capacity}}</li>
+             <li>Color: <span [style.color] = "planter.color">{{planter.color}}</span></li>
+             <li>Drainage Holes: {{planter.drainageHoles}}</li>
+             <li>Stock Available: {{planter.stock}}</li>
           </ul>
           <!-- <div> -->
-          <a class="btn btn-danger " href="#cart">Rs 200</a><hr width="100%">
-        <a class="btn btn-success float-sm-end" href="#cart">Add to Cart</a></div>
+            
+          <div class="blockquote" style="background-color:lightgreen; border-radius: 15px; width: 50%; text-align: center;">{{planter.cost | currency:'INR':'symbol':'1.2'}}</div><hr width="100%">
+          <button class="fa fa-edit btn btn-outline-primary" [routerLink] = "['/edit-planter/',planter.id]"> Edit</button><br>
+        <a class="btn btn-success float-sm-end" href="#cart">Add to Cart</a>
+        
+      </div>
       <!-- </div> -->
     </div>
   </section>
