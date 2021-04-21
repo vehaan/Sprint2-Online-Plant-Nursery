@@ -9,7 +9,7 @@ import { PlantComponent } from './plants/plant.component';
 import { PlantListComponent } from './plants/plant-list.component';
 import { AddPlantComponent } from './plants/add-plant.component';
 import { EditPlantComponent } from './plants/edit-plant.component';
-
+import{ FormsModule} from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +22,8 @@ import { EditPlantComponent } from './plants/edit-plant.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

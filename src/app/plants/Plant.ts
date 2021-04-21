@@ -8,7 +8,7 @@ export class Plant{
     bloomTime:string = "";
     medicinalOrCulinaryUse:string = "";
     difficultyLevel:string = "";
-    temperature:string ="";
+    temparature:string ="";
     typeOfPlant:string="";
     commonName:string="";
     description:string="";

@@ -22,17 +22,17 @@ export class EditPlantComponent implements OnInit {
         console.log(data); this.plant = data;
         this.editForm = this.formBuilder.group({
           id: this.plant.id,
-          cost: this.plant.cost,
-          stock: this.plant.stock,
+          cost: [this.plant.cost, Validators.required],
+          stock: [this.plant.stock, Validators.required],
           type: this.plant.type,
           height: this.plant.height,
           spread: this.plant.spread,
           bloomTime: this.plant.bloomTime,
           medicinalOrCulinaryUse: this.plant.medicinalOrCulinaryUse,
           difficultyLevel: this.plant.difficultyLevel,
-          temperature: this.plant.temperature,
+          temparature: this.plant.temparature,
           typeOfPlant: this.plant.typeOfPlant,
-          commonName: this.plant.commonName,
+          commonName: [this.plant.commonName,Validators.required],
           description: this.plant.description
 
         });
@@ -41,7 +41,7 @@ export class EditPlantComponent implements OnInit {
     );
   }
   onSubmit() {
-    console.log(this.editForm.value + "from onSubmit of edit plant component")
+    console.log("Updated values are:\n"+JSON.stringify(this.editForm.value))
     this.service.updatePlant(this.editForm.value)
       .pipe(first())
       .subscribe(

@@ -1,59 +1,108 @@
-<p>edit-plant works!</p>
-<div class="col-md-6 user-container">
-    <h2 class="text-center">Edit User</h2>
+<div class="col-lg-6 container">
+    <h2 class="text-center">Edit Plant</h2>
     <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
-        <div class="hidden">
-            <input type="text" formControlName="id" placeholder="id" name="id" class="form-control" id="id" readonly="true">
+        <div class="hidden row">
+            <div class="col-25"><label for="id">Id</label></div>
+            <div class="col-75">
+                <input type="text" formControlName="id" placeholder="id" name="id" class="form-control" id="id" readonly="true">
+            </div>
         </div>
-        <div class="form-group">
-            <label for="commonName">Common Name:</label>
-            <input type="text" formControlName="commonName" placeholder="commonName" name="commonName" class="form-control" id="commonName">
+        <br>
+        <div class="form-group row required">
+            <div class="col-25">
+                <label for="commonName">Common Name:</label> </div>
+            <div class="col-75">
+                <input type="text" formControlName="commonName" name="commonName" class="form-control" id="commonName" [ngClass]="{'is-invalid': (editForm.controls.commonName.touched ||editForm.controls.commonName.dirty) &&!editForm.controls.commonName.valid }" />
+                <span class="invalid-feedback">
+                            <span *ngIf="editForm.controls.commonName.errors?.required">Please enter 'Common name' of plant</span>
+                </span>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="cost">Cost</label>
-            <input formControlName="cost" type="cost" placeholder="cost" name="cost" class="form-control" id="cost">
+        <div class="form-group row required">
+            <div class="col-25"><label for="cost">Cost</label></div>
+            <div class="col-75">
+                <input formControlName="cost" type="cost" name="cost" class="form-control" id="cost" [ngClass]="{'is-invalid': (editForm.controls.cost.touched ||editForm.controls.cost.dirty) &&!editForm.controls.cost.valid }" />
+                <span class="invalid-feedback">
+                <span *ngIf="editForm.controls.cost.errors?.required">
+                  Please enter 'Cost' of plant
+                </span>
+                </span>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="stock">Stock</label>
-            <input type="text" formControlName="stock" placeholder="stock" name="stock" class="form-control" id="stock">
+        <div class="form-group row required">
+            <div class="col-25"><label for="stock ">Stock</label></div>
+            <div class="col-75">
+                <input type="text" formControlName="stock" name="stock" class="form-control" id="stock" [ngClass]="{'is-invalid': (editForm.controls.stock.touched ||editForm.controls.stock.dirty) &&!editForm.controls.stock.valid }" />
+                <span class="invalid-feedback">
+                    <span *ngIf="editForm.controls.stock.errors?.required">Please enter 'Stock' of plant</span>
+                </span>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label for="type">type</label>
-            <input type="text" formControlName="type" placeholder="type" name="type" class="form-control" id="type">
+        <div class="form-group row">
+            <div class="col-25"><label for="type">Type</label></div>
+            <div class="col-75"><input type="text" formControlName="type" name="type" class="form-control" id="type" readonly="true">
+            </div>
         </div>
-        <div class="form-group">
-            <label for="height">height</label>
-            <input type="text" formControlName="height" placeholder="height" name="height" class="form-control" id="height">
+        <div class="form-group row">
+            <div class="col-25"><label for="height ">Height</label></div>
+            <div class="col-75"><input type="text" formControlName="height" name="height" class="form-control" id="height">
+            </div>
         </div>
-        <div class="form-group">
-            <label for="spread">spread</label>
-            <input type="text" formControlName="spread" placeholder="spread" name="spread" class="form-control" id="spread">
+        <div class="form-group row">
+            <div class="col-25"><label for="spread">Spread</label></div>
+            <div class="col-75"><input type="text" formControlName="spread" name="spread" class="form-control" id="spread">
+            </div>
         </div>
-        <div class="form-group">
-            <label for="bloomTime">bloomTime</label>
-            <input type="text" formControlName="bloomTime" placeholder="bloomTime" name="bloomTime" class="form-control" id="bloomTime">
+        <div class="form-group row">
+            <div class="col-25"><label for="bloomTime">Bloom Time</label></div>
+            <div class="col-75"><select type="text" formControlName="bloomTime" name="bloomTime" class="form-control" id="bloomTime">
+                <option value="WINTER">Winter</option>
+                <option value="SUMMER">Summer</option>
+                <option value="MONSOON">Monsoon</option>
+                <option value="AUTUMN">Autumn</option>
+
+            </select>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="medicinalOrCulinaryUse">medicinalOrCulinaryUse</label>
-            <input type="text" formControlName="medicinalOrCulinaryUse" placeholder="medicinalOrCulinaryUse" name="medicinalOrCulinaryUse" class="form-control" id="medicinalOrCulinaryUse">
+        <div class="form-group row">
+            <div class="col-25"><label for="medicinalOrCulinaryUse ">Medicinal Or Culinary Use</label></div>
+            <div class="col-75">
+                <input type="text" formControlName="medicinalOrCulinaryUse" name="medicinalOrCulinaryUse" class="form-control" id="medicinalOrCulinaryUse">
+            </div>
         </div>
-        <div class="form-group">
-            <label for="difficultyLevel">difficultyLevel</label>
-            <input type="text" formControlName="difficultyLevel" placeholder="difficultyLevel" name="difficultyLevel" class="form-control" id="difficultyLevel">
+
+        <div class="form-group row">
+            <div class="col-25"><label for="difficultyLevel">Difficulty Level</label></div>
+            <div class="col-75"><select type="text" formControlName="difficultyLevel" name="difficultyLevel" class="form-control" id="difficultyLevel">
+                <option value="EASY">Easy</option>
+                <option value="MEDIUM">Medium</option>
+                <option value="HARD">Hard</option>
+            </select>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="temperature">temperature</label>
-            <input type="text" formControlName="temperature" placeholder="temperature" name="temperature" class="form-control" id="temperature">
+
+        <div class="form-group row">
+            <div class="col-25"><label for="temparature">Temperature</label></div>
+            <div class="col-75"><input type="text" formControlName="temparature" name="temparature" class="form-control" id="temparature">
+            </div>
         </div>
-        <div class="form-group">
-            <label for="typeOfPlant">typeOfPlant</label>
-            <input type="text" formControlName="typeOfPlant" placeholder="typeOfPlant" name="typeOfPlant" class="form-control" id="typeOfPlant">
+        <div class="form-group row">
+            <div class="col-25"><label for="typeOfPlant ">Type Of Plant</label></div>
+            <div class="col-75"><input type="text" formControlName="typeOfPlant" name="typeOfPlant" class="form-control" id="typeOfPlant">
+            </div>
         </div>
-        <div class="form-group">
-            <label for="description">Description</label>
-            <input type="text" formControlName="description" placeholder="description" name="description" class="form-control" id="description">
+        <div class="form-group row">
+            <div class="col-25"><label for="description">Description</label></div>
+            <div class="col-75">
+                <input type="text" formControlName="description" name="description" class="form-control" id="description">
+            </div>
         </div>
-        <input type="submit" value="Update" class="btn btn-success">
+        <div class="row">
+            <div id="add_button">
+                <input type="submit" value="Update" class="btn btn-success" [title]="editForm.valid ? 'The plant data is ready to add' : 'Disabled until the form data is valid'" [disabled]="!editForm.valid">
+            </div>
+        </div>
+
     </form>
 </div>

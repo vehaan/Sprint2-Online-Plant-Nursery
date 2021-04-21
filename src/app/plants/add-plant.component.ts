@@ -12,27 +12,30 @@ export class AddPlantComponent implements OnInit {
   plant!: Plant;
   addForm!: FormGroup;
   id: number = 0;
-  constructor(private formBuilder: FormBuilder, private router: Router, private service: PlantService) { }
+
+
+
+  constructor(private formBuilder: FormBuilder, private router: Router, private service: PlantService) {}
   ngOnInit() {
     this.addForm = this.formBuilder.group({
       cost: ['', Validators.required],
       stock: ['', Validators.required],
-      type: ['', Validators.required],
-      height:['',Validators.required],
-      spread:['',Validators.required],
-      bloomTime:['',Validators.required],
-      medicinalOrCulinaryUse:['',Validators.required],
-      difficultyLevel:['',Validators.required],
-      temperature:['',Validators.required],
-      typeOfPlant:['',Validators.required],
-      commonName:['',Validators.required],
-      description:['',Validators.required]
+      type: ['PLANT', Validators.required],
+      height:[''],
+      spread:[''],
+      bloomTime:[''],
+      medicinalOrCulinaryUse:[''],
+      difficultyLevel:[''],
+      temparature:[''],
+      typeOfPlant:[''],
+      commonName:['', Validators.required],
+      description:['']
     })
   }
   onSubmit() {
-    console.log(this.addForm.value + "from onSubmit of add plant component")
+    console.log("added following plant\n"+JSON.stringify(this.addForm.value))
     this.service.addPlant(this.addForm.value).subscribe(
-      data => this.plant = data,
+      data => {this.plant = data; this.router.navigate(['plants'])},
       err => console.log(err)
     )
   }
