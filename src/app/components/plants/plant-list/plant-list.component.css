@@ -1,0 +1,94 @@
+/*
+.td1 {
+    border-collapse: collapse;
+}
+.add_button {
+    float: right;
+}
+.heading {
+    float: left;
+}
+.col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+}
+.col-75 {
+    float: right;
+    width: 75%;
+    margin-top: 6px;
+}
+*/
+
+a {
+    text-decoration: none;
+}
+
+.s-box {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    width: 295px;
+    padding: 20px 25px;
+    height: auto;
+    box-sizing: border-box;
+    margin: 30px;
+    position: relative;
+    box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.08);
+    transition: transform 1s;
+}
+
+#x {
+    position: relative;
+    float: right;
+    /* background: red; */
+    /* color: white; */
+    top: -10px;
+    right: -50%;
+    border-radius: 10px;
+}
+
+.s-box img {
+    height: 150px;
+}
+
+.s-box h1 {
+    color: #576975;
+    letter-spacing: 1px;
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+}
+
+.s-box p {
+    color: rgba(87, 105, 117, 0.90);
+    text-align: center;
+}
+
+@media(max-width:1050px) {
+    .s-box-container {
+        flex-wrap: wrap;
+    }
+    .header {
+        margin: 15px;
+    }
+    .s-box {
+        flex-grow: 1;
+    }
+}
+
+.appIcon {
+    border-radius: 10%;
+}
+
+.text {
+    margin-top: 10px;
+    position: absolute;
+    text-transform: uppercase;
+    font-family: verdana;
+    font-size: 25px;
+    font-weight: 700;
+    color: #03fc94;
+    text-shadow: 1px 1px 1px #919191, 1px 30px 60px rgba(16, 16, 16, 0.4);
+}

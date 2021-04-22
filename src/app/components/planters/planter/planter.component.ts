@@ -10,16 +10,17 @@ import { IPlanter } from './IPlanter';
 })
 export class PlanterComponent implements OnInit {
 
-  private error! : string
+  // private error! : string
   @Input() showDetails!: boolean;
-  planters!: IPlanter[];
+  @Input() planters!: IPlanter[];
+  @Input() private searchFilter!:number;
+  public filteredSeeds:IPlanter[] = [];
   
   constructor(private service:PlanterServiceService,private router:Router) {  }
 
-  ngOnInit(): void {    this.service.getAllPlanters().subscribe(
-    (data)=>this.planters = data,
-    (err)=>this.error = err
-  ) 
+  ngOnInit(): void {    
+    console.log(this.planters);
+
   }
 
   deletePlanter(planter: IPlanter): void{
@@ -27,5 +28,20 @@ export class PlanterComponent implements OnInit {
       this.planters = this.planters.filter(p => p !== planter);
     })
   }
+
+  // get listFilter(): number {
+  //   return this.searchFilter;
+  // }
+
+  // set listFilter(value: number) {
+  //   this.searchFilter = value;
+  //   console.log('In setter:', value);
+  //   this.filteredSeeds = this.performFilter(value);
+  // }
+
+  // performFilter(filterBy:number): IPlanter[] {
+  //   return this.service.planters.filter((planter: IPlanter) =>
+  //     (planter.id == filterBy))
+  // }
 
 }

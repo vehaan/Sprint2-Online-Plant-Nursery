@@ -9,6 +9,23 @@ import { IPlanter } from '../components/planters/planter/IPlanter';
 })
 export class PlanterServiceService {
 
+  planters!:IPlanter[];
+  private error! : string
+
+  dataFill(){
+    this.getAllPlanters().subscribe(
+      (data)=>this.planters = data,
+      (err)=>this.error = err
+    )
+  //  return this.planters;
+  }
+  
+  logg(){
+    console.log(this.planters);
+  }
+  
+  
+
   public  baseUrl:string = "http://localhost:9191/onlineplantnursery/products/admin"
 
   constructor(private http:HttpClient) { }

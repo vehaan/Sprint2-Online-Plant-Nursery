@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PlanterServiceService } from 'src/app/services/planter-service.service';
-import { IPlanter } from '../planters/planter/IPlanter';
+import { IPlanter } from '../planter/IPlanter';
 import {first} from "rxjs/operators";
 
 @Component({
@@ -44,7 +44,7 @@ export class EditPlanterComponent implements OnInit {
     this.service.updatePlanter(this.editForm.value)
       .pipe(first())
       .subscribe(
-        data => {this.planter =data;this.router.navigate([''])},
+        data => {this.planter =data;this.router.navigate(['/planters'])},
         (err)=>{console.log(err)}
          
       )}

@@ -1,11 +1,22 @@
 <div> 
     <button style="margin-left: 42%;" class="btn btn-primary" routerLink = "/addPlanter">Add Planter</button>
 </div><br>
-<h1 class="container-fluid btn-warning text-center">PLANTERS 
-    <span class="float-end">
-        <button class="btn btn-secondary" (click) = "toggleDetails()">{{details? 'Hide' : 'Show'}} Details</button>
-    </span>
-    
-</h1>
-<app-planter [showDetails] = "details"></app-planter>
+<h1 class="container-fluid btn-warning text-center">PLANTERS </h1>
+
+<!-- <div class="col-6">
+    <label for="price">Sort By:</label>
+    <select [(ngModel)]="sortBy" (change)="selected()">
+        <option *ngFor="let item of sortOptions" [ngValue]="item">{{item}}</option>
+    </select>
+</div> -->
+<div class="s-box-container">
+    <div class='col-md-2'>Search:</div>
+  <div class='col-md-4'>
+    <input type='text' [(ngModel)]='listFilter'/>
+  </div>
+</div>
+<div class="col-6">
+    <button style="margin-left: 100%;" class="btn btn-secondary" (click) = "toggleDetails()">{{details? 'Hide' : 'Show'}} Details</button>
+</div>
+<app-planter [showDetails] = "details" [planters] = "tempPlanters"></app-planter>
 

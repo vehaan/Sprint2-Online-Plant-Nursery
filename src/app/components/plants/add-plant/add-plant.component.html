@@ -1,0 +1,103 @@
+<div class="col-lg-6 container">
+    <h2 class="text-center">Add New Plant</h2>
+    <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+        <div class="form-group row required">
+            <div class="col-25">
+                <label for="commonName">Common Name:</label> 
+            </div>
+            <div class="col-75">
+                <input type="text" formControlName="commonName" name="commonName" class="form-control" id="commonName" [ngClass]="{'is-invalid': (addForm.controls.commonName.touched ||addForm.controls.commonName.dirty) &&!addForm.controls.commonName.valid }" />
+                <span class="invalid-feedback">
+                <span *ngIf="addForm.controls.commonName.errors?.required">
+                  Please enter 'Common name' of plant
+                </span>
+                </span>
+            </div>
+        </div>
+        <div class="form-group row required">
+            <div class="col-25"><label for="cost">Cost</label></div>
+            <div class="col-75">
+                <input formControlName="cost" type="cost" name="cost" class="form-control" id="cost" [ngClass]="{'is-invalid': (addForm.controls.cost.touched ||addForm.controls.cost.dirty) &&!addForm.controls.cost.valid }" />
+                <span class="invalid-feedback">
+                <span *ngIf="addForm.controls.cost.errors?.required">
+                  Please enter 'Cost' of plant
+                </span>
+                </span>
+            </div>
+        </div>
+        <div class="form-group row required">
+            <div class="col-25"><label for="stock ">Stock</label></div>
+            <div class="col-75">
+                <input type="text" formControlName="stock" name="stock" class="form-control" id="stock" [ngClass]="{'is-invalid': (addForm.controls.stock.touched ||addForm.controls.stock.dirty) &&!addForm.controls.stock.valid }" />
+                <span class="invalid-feedback">
+                    <span *ngIf="addForm.controls.stock.errors?.required">Please enter 'Stock' of plant</span>
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-25"><label for="type">Type</label></div>
+            <div class="col-75"><input type="text" formControlName="type" name="type" class="form-control" id="type" readonly="true">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-25"><label for="height ">Height</label></div>
+            <div class="col-75"><input type="text" formControlName="height" name="height" class="form-control" id="height">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-25"><label for="spread">Spread</label></div>
+            <div class="col-75"><input type="text" formControlName="spread" name="spread" class="form-control" id="spread">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-25"><label for="bloomTime">Bloom Time</label></div>
+            <div class="col-75"><select type="text" formControlName="bloomTime" name="bloomTime" class="form-control" id="bloomTime">
+                <option value="WINTER">Winter</option>
+                <option value="SUMMER">Summer</option>
+                <option value="MONSOON">Monsoon</option>
+                <option value="AUTUMN">Autumn</option>
+
+            </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-25"><label for="medicinalOrCulinaryUse ">Medicinal Or Culinary Use</label></div>
+            <div class="col-75">
+                <input type="text" formControlName="medicinalOrCulinaryUse" name="medicinalOrCulinaryUse" class="form-control" id="medicinalOrCulinaryUse">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-25"><label for="difficultyLevel">Difficulty Level</label></div>
+            <div class="col-75"><select type="text" formControlName="difficultyLevel" name="difficultyLevel" class="form-control" id="difficultyLevel">
+                <option value="EASY">Easy</option>
+                <option value="MEDIUM">Medium</option>
+                <option value="HARD">Hard</option>
+            </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-25"><label for="temparature">Temperature</label></div>
+            <div class="col-75"><input type="text" formControlName="temparature" name="temparature" class="form-control" id="temparature">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-25"><label for="typeOfPlant ">Type Of Plant</label></div>
+            <div class="col-75"><input type="text" formControlName="typeOfPlant" name="typeOfPlant" class="form-control" id="typeOfPlant">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-25"><label for="description">Description</label></div>
+            <div class="col-75">
+                <input type="text" formControlName="description" name="description" class="form-control" id="description">
+            </div>
+        </div>
+        <div class="row">
+            <div id="add_button">
+                <input type="submit" value="Add" class="btn btn-success" [title]="addForm.valid ? 'The plant data is ready to add' : 'Disabled until the form data is valid'" [disabled]="!addForm.valid">
+            </div>
+        </div>
+    </form>
+</div>

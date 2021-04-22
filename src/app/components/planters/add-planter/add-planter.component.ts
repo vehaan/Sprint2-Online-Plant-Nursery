@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PlanterServiceService } from 'src/app/services/planter-service.service';
-import { IPlanter } from '../planters/planter/IPlanter';
+import { IPlanter } from '../planter/IPlanter';
 
 @Component({
   selector: 'app-add-planter',
@@ -31,7 +31,7 @@ export class AddPlanterComponent implements OnInit {
     this.service.createPlanter(this.planter)
         .subscribe( data => {
           console.log(data);
-          this.router.navigate([''])
+          this.router.navigate(['/planters'])
           
         });
 

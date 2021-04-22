@@ -1,0 +1,74 @@
+<section>
+    <button class = "btn btn-primary" (click)='toggleDetails()'>Details</button>
+
+    <div class="s-box-container">
+        <div class='col-md-2'>Search:</div>
+      <div class='col-md-4'>
+        <input type='text' [(ngModel)]='listFilter'/>
+      </div>
+    </div>
+        <button class="btn btn-danger"  (click)="addSeed()"> Add Seed</button><br><br>
+        <button class="btn btn-outline-success" (click)="onSortLowToHigh()"> Cost low to high</button>
+        <button class="btn btn-outline-danger" (click)="onSortHighToLow()"> Cost High to low</button>
+    <div *ngIf =  "!sort && !sortHighToLow">
+      <div  class="s-box" *ngFor = "let seed of filteredSeeds">
+        <button class="btn button-small btn-danger" id="x"  (click) = "onDelete(seed)">X</button>     
+        <img alt="1" src="https://ak.picdn.net/shutterstock/videos/1027610672/thumb/11.jpg" class="appIcon" />
+        <h1><a [routerLink]="['/seed/',seed.id]">{{seed.commonName}}</a></h1>
+        <ul *ngIf = "showDetails">
+             <li>Stock: {{seed.stock}} cm</li>
+             <li>Temperature: {{seed.temperature}}</li>
+             <li>Watering: {{seed.watering}}</li>
+             <li>{{seed.typeOfSeed}}</li>
+             <li>{{seed.description}}</li>
+             <li>Bloom time: {{seed.bloomTime}}</li>
+
+          </ul>
+            
+          <div class="blockquote" style="background-color:lightgreen; border-radius: 15px; width: 50%; text-align: center;">{{seed.cost | currency:'INR':'symbol':'1.2'}}</div><hr width="100%">
+          <button class="fa fa-edit btn btn-outline-primary" [routerLink] = "['/edit-seed/',seed.id]"> Edit</button><br>
+        <a class="btn btn-success float-sm-end" href="#cart">Add to Cart</a>
+    </div>
+      </div>
+<div *ngIf = "sort">
+      <div class="s-box" *ngFor = "let seed of seedsCostLowToHigh">
+        <button class="btn button-small btn-danger" id="x"  (click) = "onDelete(seed)">X</button>     
+        <img alt="1" src="https://ak.picdn.net/shutterstock/videos/1027610672/thumb/11.jpg" class="appIcon" />
+        <h1><a [routerLink]="['/seed/',seed.id]">{{seed.commonName}}</a></h1>
+        <ul *ngIf = "showDetails">
+             <li>Stock: {{seed.stock}} cm</li>
+             <li>Temperature: {{seed.temperature}}</li>
+             <li>Watering: {{seed.watering}}</li>
+             <li>{{seed.typeOfSeed}}</li>
+             <li>{{seed.description}}</li>
+             <li>Bloom time: {{seed.bloomTime}}</li>
+
+          </ul>
+            
+          <div class="blockquote" style="background-color:lightgreen; border-radius: 15px; width: 50%; text-align: center;">{{seed.cost | currency:'INR':'symbol':'1.2'}}</div><hr width="100%">
+          <button class="fa fa-edit btn btn-outline-primary" [routerLink] = "['/edit-seed/',seed.id]"> Edit</button><br>
+        <a class="btn btn-success float-sm-end" href="#cart">Add to Cart</a>
+        
+      </div>
+    </div>
+      <div *ngIf = "sortHighToLow" >
+      <div class="s-box" *ngFor = "let seed of seedsCostHighToLow">
+        <button class="btn button-small btn-danger" id="x"  (click) = "onDelete(seed)">X</button>     
+        <img alt="1" src="https://ak.picdn.net/shutterstock/videos/1027610672/thumb/11.jpg" class="appIcon" />
+        <h1><a [routerLink]="['/seed/',seed.id]">{{seed.commonName}}</a></h1>
+        <ul *ngIf = "showDetails">
+             <li>Stock: {{seed.stock}} cm</li>
+             <li>Temperature: {{seed.temperature}}</li>
+             <li>Watering: {{seed.watering}}</li>
+             <li>{{seed.typeOfSeed}}</li>
+             <li>{{seed.description}}</li>
+             <li>Bloom time: {{seed.bloomTime}}</li>
+
+          </ul>
+            
+          <div class="blockquote" style="background-color:lightgreen; border-radius: 15px; width: 50%; text-align: center;">{{seed.cost | currency:'INR':'symbol':'1.2'}}</div><hr width="100%">
+          <button class="fa fa-edit btn btn-outline-primary" [routerLink] = "['/edit-seed/',seed.id]"> Edit</button><br>
+        <a class="btn btn-success float-sm-end" href="#cart">Add to Cart</a>
+        
+      </div>
+    </div>
