@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { OrderListComponent } from './order/order-list.component';
-import { OrderComponent } from './order/order.component';
-import { AddOrderComponent } from './order/add-order.component';
-import { EditOrderComponent } from './order/edit-order.component';
+import { CartComponent } from './components/cart/cart.component';
+import { AddPlanterComponent } from './components/planter/add-planter.component';
+import { EditPlanterComponent } from './components/planter/edit-planter.component';
+import { PlanterListComponent } from './components/planter/planter-list.component';
+import { PlanterComponent } from './components/planter/planter.component';
 
 const routes: Routes = [
-  {path:'plants',component: OrderListComponent},
-{path:'plants/:id',component: OrderComponent},
-{path:'edit-order/:id',component: EditOrderComponent},
-{path:'add-plant',component: AddOrderComponent}
-
+  { path: 'addPlanter',component: AddPlanterComponent},
+  {path:'edit-planter/:id',component:EditPlanterComponent},
+  {path:'planter-list',component:PlanterListComponent},
+  {path: 'cart', component: CartComponent}
 ];
 
 @NgModule({

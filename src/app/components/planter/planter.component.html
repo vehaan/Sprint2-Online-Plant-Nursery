@@ -1,0 +1,67 @@
+<section>
+    <div class="s-box-container">
+
+        <!-- For Cart -->
+        <div class="container row">
+            <div class="col-md-2">
+                <h2>Your Cart</h2>
+            </div>
+            <div class="col-md-10 custom-products-cart-container">
+                <div class="offset-md-8">
+                    <ul class="nav navbar-nav navbar-right">
+        
+                        <li class="dropdown">
+                            <br>
+                            <a href="#" class="btn btn-info btn-lg" data-toggle="dropdown" role="button" aria-expanded="false">
+                                <span class="fa fa-shopping-cart"></span>
+                                <a [routerLink]="['/cart']">Product Added In Cart:</a>  
+                                
+                                <span class="caret">{{cartProducts.length}}</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-cart" role="menu">
+                                <li *ngFor="let item of planters">
+                                    <div class="item product-cart-item row">
+                                        <div class="col-md-8" *ngIf="item">{{item.type}}</div>
+                                        <div class="col-md-4" *ngIf="item"><strong>Rs.{{item.cost}}</strong></div>
+                                    </div>
+                                </li>
+                                <hr>
+                                <li><a class="btn btn-small btn-success" role="button" (click)="goToCart()">View Cart</a></li>
+                                <br>
+                                <li *ngIf="cartProducts.length > 0">
+                                    <a class="btn btn-small btn-warning" role="button" (click)="emptyCart()">Empty Cart</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="s-box" *ngFor = "let planter of planters">
+            <button class="btn button-small btn-danger" id="x"  (click) = "deletePlanter(planter)">X</button>
+        
+            <img alt="1" src="https://ak.picdn.net/shutterstock/videos/1027610672/thumb/11.jpg" class="appIcon" />
+            <h1>Planter Id: {{planter.id}}</h1>
+            <!--details------>
+            <ul *ngIf = "showDetails">
+             <li>Height: {{planter.height}} cm</li>
+             <li>Shape: {{planter.shape}}</li>
+             <li>Capacity: {{planter.capacity}}</li>
+             <li>Color: <span [style.color] = "planter.color">{{planter.color}}</span></li>
+             <li>Drainage Holes: {{planter.drainageHoles}}</li>
+             <li>Stock Available: {{planter.stock}}</li>
+            </ul>
+            <!-- <div> -->
+            
+            <div class="blockquote" style="background-color:lightgreen; border-radius: 15px; width: 50%; text-align: center;">{{planter.cost | currency:'INR':'symbol':'1.2'}}</div>
+            <hr width="100%">
+            <button class="fa fa-edit btn btn-outline-primary" [routerLink] = "['/edit-planter/',planter.id]"> Edit</button>
+            <br>
+            <!-- <app-add-cart></app-add-cart> -->
+            <a class="btn btn-success float-sm-end" (click) = "addToCart(planter.id)">Add to Cart</a>
+            <!-- <a class="btn btn-success float-sm-end" (click) = "addToCart(planter.id)" href="#cart">Add to Cart</a> -->
+        </div>
+      <!-- </div> -->
+    </div>
+  </section>
