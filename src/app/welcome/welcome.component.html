@@ -1,0 +1,78 @@
+<!--<header>
+    <nav class ="navbar navbar-expand-md navbar-dark bg-dark">
+
+    
+    <ul class="navbar-nav">
+      
+      <li class="float-end"><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/add-customer" class="nav-link">Register</a></li>
+      <li class="float-end"><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/login" class="nav-link">Login</a></li>
+      <li class="float-end"><a *ngIf="loginService.isUserLoggedIn()" routerLink="/logout" class="nav-link">LogOut</a></li>
+    
+    
+    </ul>
+    
+    </nav>
+    
+
+     <h1>Hey I am welcome page</h1>
+
+
+
+ </header>
+-->
+
+
+
+<!--
+
+
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Online Plant Nursery</title>
+    <link rel="stylesheet" type="text/css" href="./welcome.component.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div id="header-img">
+        <img src="https://i.pinimg.com/originals/e8/88/d4/e888d4feff8fd5ff63a965471a94b874.gif">
+        <h1>Online Plant Nursery</h1>
+    </div>
+
+    <ul id="nav-bar">
+        <li><a href="#">Home</a></li>
+      
+        <li><a href="#plant">Plant</a></li>
+        <li><a href="#seed">Seed</a></li>
+        <li><a href="#planter">Planter</a></li>
+        <li ><a *ngIf="loginService.isUserLoggedIn() && customer.role==='ADMIN'" routerLink="/customer-list" class="nav-link"> Customer-List</a></li>
+
+        <li class="float-right"><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/add-customer" class="nav-link">Register</a></li>
+        <li class="float-right"><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/login" >  <span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li class="float-right"><a *ngIf="loginService.isUserLoggedIn()" routerLink="/logout" class="nav-link"><span class="glyphicon glyphicon-log-out"></span> LogOut</a></li>
+        <li class="float-right"><a *ngIf="loginService.isUserLoggedIn()"  routerLink="/account" class="nav-link"> <span class="glyphicon glyphicon-user"></span>  My Account</a></li>
+        
+    </ul>
+
+  
+        <div class="container " id="content">
+           
+          
+            <router-outlet></router-outlet>
+      
+      
+         </div> 
+
+
+</body>
+</html>
+
+-->
+
+
+
+<button *ngIf="loginService.isUserLoggedIn() && customer.role==='ADMIN'" routerLink="/customer-list" class="nav-link">Customer-List</button>
+
+

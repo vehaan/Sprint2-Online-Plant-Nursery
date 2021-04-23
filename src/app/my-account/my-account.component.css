@@ -1,0 +1,11 @@
+.col-sm{
+
+    margin : 10px;
+    
+}
+.img{
+    height:100px;
+    width:100px;
+    object-fit:contain;
+
+}

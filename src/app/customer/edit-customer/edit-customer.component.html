@@ -1,0 +1,61 @@
+<p>edit-customer works!</p>
+<div class="col-md-6 user-container">
+    <h2 class="text-center">Edit User</h2>
+    <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="id">Id</label>
+        <input type="text" formControlName="id" placeholder="id" name="id" class="form-control" id="id" readonly="true">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" formControlName="email" placeholder="email"  name="email" class="form-control" id="username" >
+      </div>
+      
+      <div class="form-group">
+        <label for="Password">Password</label>
+        <input formControlName="password" placeholder="password" name="password" class="form-control" id="password">
+      </div>
+  
+  
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" formControlName="name" placeholder="name" name="name" class="form-control" id="name">
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="text" formControlName="phone" placeholder="phone" name="phone" class="form-control" id="phone">
+      </div>
+
+      <div formGroupName="address" class="form-group">
+        <label for="houseNo">HouseNo</label>
+        <input type="text" formControlName="houseNo" placeholder="houseNo" name="houseNo" class="form-control" id="houseNo">
+      </div>
+
+      <div formGroupName="address" class="form-group">
+        <label for="colony">Colony</label>
+        <input type="text" formControlName="colony" placeholder="colony" name="colony" class="form-control" id="colony">
+      </div>
+
+      <div formGroupName="address" class="form-group">
+        <label for="city">City</label>
+        <input type="text" formControlName="city" placeholder="city" name="city" class="form-control" id="city">
+      </div>
+
+      <div formGroupName="address" class="form-group">
+        <label for="state">State</label>
+        <input type="text" formControlName="state" placeholder="state" name="state" class="form-control" id="state">
+      </div>
+
+      <div formGroupName="address" class="form-group">
+        <label for="pincode">Pincode</label>
+        <input type="text" formControlName="pincode" placeholder="pincode" name="pincode" class="form-control" id="pincode">
+      </div>
+      <div  class="form-group">
+        <button class="btn btn-dark" type="submit" routerLink="/account" >Back</button>
+        <input type="submit" value="Update" class="btn btn-success float-right">
+      </div>
+      
+     
+    </form>
+  </div>
