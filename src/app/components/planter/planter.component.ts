@@ -17,9 +17,6 @@ export class PlanterComponent implements OnInit {
   planters!: IPlanter[];
 
   //Cart Elements ---------------------------------------------
-  //cartProducts = new Map();
-  // prodId: number[] = [];
-  // prodQuan:number[] = [];
   cartProducts:Cart[] = [];
 
   constructor(private service:PlanterService, private cartService: CartService, private router:Router) {  }
@@ -29,6 +26,8 @@ export class PlanterComponent implements OnInit {
       (data)=>this.planters = data,
       (err)=>this.error = err
     );
+
+    console.log('In ng' + localStorage.getItem('cart'));
     
   }
 
@@ -39,40 +38,57 @@ export class PlanterComponent implements OnInit {
   }
 
   //Cart methods--------------------------------------------
+  saveCart() {
+    //Get the data from cart(localstorage) and save it before calling AddtoCart
+    let prevData = localStorage.getItem('cart');
+    console.log('prevdata'+prevData);
+
+    if(prevData){
+      let prodInCart: Cart[] = JSON.parse(prevData);
+      console.log('saved in prodInCart'+prodInCart);
+      // for(let i=0; i<prodInCart.length; i++){
+      //   localStorage.setItem('cart', JSON.stringify(this.cartProducts));
+      // }
+      return prodInCart;
+    }
+    return null;
+
+  }
   addToCart(id: number) {
+
+    let prodInCart = this.saveCart();
+    if(prodInCart){
+      for(let i=0; i<prodInCart.length; i++){
+           localStorage.setItem('cart', JSON.stringify(prodInCart[i]));
+      }
+    
+    }
+
     let planter = this.planters.find(planter=> {
       return planter.id === id;
     });
 
     if(planter){
-      // this.prodId.push(planter?.id);
-      // this.prodQuan.push(1);
       this.cartProducts.push({
         "id" :planter?.id, 
         "quantity": 1
       })
     }
+
     localStorage.setItem('cart', JSON.stringify(this.cartProducts));
-    //localStorage.setItem('id', JSON.stringify(this.prodId));
-    //localStorage.setItem('quan', JSON.stringify(this.prodQuan));
-
-    //console.log(localStorage.getItem('id'));
-    //console.log(localStorage.getItem('quan'));
-
+    
   }
 
-  // updateCartData(cartData: Map<number, number>) {
-  //   this.cartProducts = cartData;
-  // }
+  deleteFromCart(id: number){
+    localStorage.removeItem('cart'); //Problem Again :(
+  }
 
   goToCart() {
     this.router.navigate(['/cart']);
   }
 
+
   emptyCart() {
-    // this.prodId = [];
-    // this.prodQuan = [];
-    this.cartProducts = [];
     localStorage.clear();
   }
 
