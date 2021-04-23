@@ -18,7 +18,7 @@ export class PlanterComponent implements OnInit {
 
   //Cart Elements ---------------------------------------------
   cartProducts:Cart[] = [];
-
+  glob:number = 0;
   constructor(private service:PlanterService, private cartService: CartService, private router:Router) {  }
 
   ngOnInit(): void {
@@ -46,22 +46,17 @@ export class PlanterComponent implements OnInit {
     if(prevData){
       let prodInCart: Cart[] = JSON.parse(prevData);
       console.log('saved in prodInCart'+prodInCart);
-      // for(let i=0; i<prodInCart.length; i++){
-      //   localStorage.setItem('cart', JSON.stringify(this.cartProducts));
-      // }
+      
       return prodInCart;
     }
     return null;
 
   }
   addToCart(id: number) {
-
+     
     let prodInCart = this.saveCart();
     if(prodInCart){
-      for(let i=0; i<prodInCart.length; i++){
-           localStorage.setItem('cart', JSON.stringify(prodInCart[i]));
-      }
-    
+      this.cartProducts = prodInCart;
     }
 
     let planter = this.planters.find(planter=> {
@@ -70,7 +65,7 @@ export class PlanterComponent implements OnInit {
 
     if(planter){
       this.cartProducts.push({
-        "id" :planter?.id, 
+        "id" :planter?.id,
         "quantity": 1
       })
     }
@@ -80,6 +75,20 @@ export class PlanterComponent implements OnInit {
   }
 
   deleteFromCart(id: number){
+    let prodInCart = this.saveCart();
+    if(prodInCart){
+      this.cartProducts = prodInCart;
+
+      let planter = this.planters.find(planter=> {
+        return planter.id === id;
+      });
+  
+      if(planter){
+        //let deletePlanter = this.cartProducts.findIndex() //
+          //Need to write LOGIC
+      }
+
+    }
     localStorage.removeItem('cart'); //Problem Again :(
   }
 

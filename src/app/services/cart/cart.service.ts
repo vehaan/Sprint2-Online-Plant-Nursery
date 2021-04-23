@@ -21,12 +21,13 @@ export class CartService {
   
   constructor() { }
 
-  addToCart(): void { //Add to Cart
-    this.cartProducts.set(this.planter.id, 1);
-  }
+  // addToCart(): void { //Add to Cart
+  //   this.cartProducts.set(this.planter.id, 1);
+  // }
 
-  addToOrder(): Map<number, number> { //For Checkout Button
-    return this.cartProducts;
-  }
+  // addToOrder(): Map<number, number> { //For Checkout Button
+  //   return this.cartProducts;
+  // }
 
+  
 }

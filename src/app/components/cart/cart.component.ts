@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Cart } from 'src/app/models/Cart';
 import { IPlanter } from 'src/app/models/IPlanter';
+import { CartService } from 'src/app/services/cart/cart.service';
+import { OrderService } from 'src/app/services/order/order.service';
 import { PlanterService } from 'src/app/services/planter/planter.service';
 
 @Component({
@@ -17,7 +21,10 @@ export class CartComponent implements OnInit {
   sub!: Subscription;
   error!: string;
 
-  constructor(private planterService: PlanterService) { }
+  //Add Order
+  addForm!: FormGroup;
+
+  constructor(private planterService: PlanterService, private cartService: CartService, private _route: Router, private orderService: OrderService) { }
 
   ngOnInit(): void {
 
@@ -36,16 +43,34 @@ export class CartComponent implements OnInit {
       }
     }
 
+
+    //this.addForm =
+
   }
 
+  onSubmit(){
+    
+  }
   viewCart() {
 
   }
-  checkOut(){
-
+  checkOut(cartPlantersToOrder: IPlanter[]){
+    this.orderService
+    //this._route.navigate(['/order']);
   }
 
-  deleteItem(){
-
+  deleteItem(id: number){
+    
+    // this.cartPlanters.splice(id, 1);
+    // console.log( this.cartPlanters);
+    // if(this.temp){
+    // this.temp.splice(id, 1);
+    // localStorage.setItem('cart', JSON.stringify(this.temp));
+    // console.log(this.temp);
+    // }
+    console.log('deleted');
+    //localStorage.setItem('cart', JSON.stringify(this.cartPlanters[] ))
   }
 }
+
+

@@ -16,15 +16,18 @@ export class OrderComponent implements OnInit {
   constructor(private _ActivatedRoute: ActivatedRoute, private _router: Router, private _service: OrderService) { }
 
   ngOnInit(): void {
-    this.id = Number(this._ActivatedRoute.snapshot.paramMap.get("id"));
-    console.log(this.id + " " + this._ActivatedRoute)
-    this._service.getOrderById(this.id).subscribe(
-      (data) => { console.log(data); this.order = data },
-      (err) => console.log(err)
-    );
+    // this.id = Number(this._ActivatedRoute.snapshot.paramMap.get("id"));
+    // console.log(this.id + " " + this._ActivatedRoute)
+    // this._service.getOrderById(this.id).subscribe(
+    //   (data) => { console.log(data); this.order = data },
+    //   (err) => console.log(err)
+    // );
   }
 
-  onBack(): void {
-    this._router.navigate(['orders'])
+  onSubmit(): void{
+    
   }
+  // onBack(): void {
+  //   this._router.navigate(['/orders'])
+  // }
 }

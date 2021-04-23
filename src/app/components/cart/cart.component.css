@@ -1,0 +1,29 @@
+.s-box {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    width: 295px;
+    padding: 20px 25px;
+    height: auto;
+    box-sizing: border-box;
+    margin: 30px;
+    position: relative;
+    box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.08);
+    transition: transform 1s;
+}
+
+.s-box img {
+    height: 150px;
+}
+
+#x{
+    position: relative;
+    float: right;
+    /* background: red; */
+	/* color: white; */
+    top: -10px;
+    right: -50%;
+    border-radius: 10px;
+}

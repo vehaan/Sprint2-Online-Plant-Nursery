@@ -1,19 +1,23 @@
-<div>
-    <h1>In Cart</h1>
-    <div class="s-box" *ngFor = "let planter of cartPlanters">
-        <button class="btn button-small btn-danger" id="x"  (click) = "deleteItem()">X</button>
+<section>
+    <div>
+        <h1>In Cart</h1>
+        <div class="s-box" *ngFor = "let planter of cartPlanters">
+            <button class="btn button-small btn-danger" id="x"  (click) = "deleteItem(planter.id)">X</button>
     
-        <img alt="1" src="https://ak.picdn.net/shutterstock/videos/1027610672/thumb/11.jpg" class="appIcon" />
-        <h1>Planter Id: {{planter.id}}</h1>
+            <img alt="1" src="https://ak.picdn.net/shutterstock/videos/1027610672/thumb/11.jpg" class="appIcon" />
+            <h1>Planter Id: {{planter.id}}</h1>
         
-        <div class="blockquote" style="background-color:lightgreen; border-radius: 15px; width: 50%; text-align: center;">{{planter.cost | currency:'INR':'symbol':'1.2'}}</div>
-        <hr width="100%">
+            <div class="blockquote" style="background-color:lightgreen; border-radius: 15px; width: 50%; text-align: center;">{{planter.cost | currency:'INR':'symbol':'1.2'}}</div>
+            <hr width="100%">
         
-        <br>
+            <br>
         
-    </div>
+        </div>
 
-    <!-- Checkout Button -->
-    <!-- <button class="fa fa-edit btn btn-outline-primary" [routerLink] = "['/addOrder/']"></button>
-    <a class="btn btn-success float-sm-end" (click) = "checkOut()">Checkout Cart</a> -->
-</div>
+        <!-- Checkout Button -->
+        <!-- <button class="fa fa-edit btn btn-outline-primary" [routerLink] = "['/addOrder/']"></button> -->
+    </div>
+       
+    <input class="btn btn-success float-sm-end" (ngSubmit) = "onSubmit()" value="Place Order">
+    
+</section>
