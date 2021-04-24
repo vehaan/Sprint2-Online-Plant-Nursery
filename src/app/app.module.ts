@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AddCartComponent } from './components/cart/add-cart.component';
 import { CartComponent } from './components/cart/cart.component';
 import { AddOrderComponent } from './components/order/add-order.component';
 import { OrderListComponent } from './components/order/order-list.component';
@@ -26,8 +25,7 @@ import { PlanterService } from './services/planter/planter.service';
     PlanterListComponent,
     AddPlanterComponent,
     EditPlanterComponent,
-    CartComponent,
-    AddCartComponent
+    CartComponent
   ],
   imports: [
     BrowserModule,

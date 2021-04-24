@@ -17,7 +17,7 @@ export class PlanterService {
   }
 
   getPlanterById(id:number):Observable<IPlanter>{
-    console.log("in service class")
+    //console.log("in service class")
     return <Observable<IPlanter>>this.http.get(this.baseUrl+"/planter/id/"+id);
  
   }

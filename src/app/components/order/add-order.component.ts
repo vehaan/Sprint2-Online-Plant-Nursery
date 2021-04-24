@@ -16,7 +16,16 @@ export class AddOrderComponent implements OnInit {
   prodId: number[] = [];
   sub!: Subscription;
   error!: string;
+  order: string = `{"transactionMode": "CARD", 
+        "products" :
+        {
+            "2" : 5,
+            "8" : 1  
+        }
+    }`;
   
+  
+
   constructor(private planterService: PlanterService ) { }
 
   ngOnInit(): void {
@@ -33,6 +42,8 @@ export class AddOrderComponent implements OnInit {
           (err) => this.error = err
         )
       }
+
+      console.log(JSON.stringify(this.order));
     }
 
     

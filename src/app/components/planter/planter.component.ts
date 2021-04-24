@@ -12,17 +12,17 @@ import { Cart } from 'src/app/models/Cart';
 })
 export class PlanterComponent implements OnInit {
 
-  private error!: string
+  private error!: string;
   @Input() showDetails!: boolean;
   planters!: IPlanter[];
 
   //Cart Elements ---------------------------------------------
   cartProducts:Cart[] = [];
-  glob:number = 0;
+
   constructor(private service:PlanterService, private cartService: CartService, private router:Router) {  }
 
   ngOnInit(): void {
-     this.service.getAllPlanters().subscribe(
+    this.service.getAllPlanters().subscribe(
       (data)=>this.planters = data,
       (err)=>this.error = err
     );
@@ -31,7 +31,7 @@ export class PlanterComponent implements OnInit {
     
   }
 
-  deletePlanter(planter: IPlanter): void{
+  deletePlanter(planter: IPlanter): void {
     this.service.deletePlanter(planter).subscribe( data => {
       this.planters = this.planters.filter(p => p !== planter);
     })
@@ -52,7 +52,8 @@ export class PlanterComponent implements OnInit {
     return null;
 
   }
-  addToCart(id: number) {
+
+  addToCart(planterId: number) {
      
     let prodInCart = this.saveCart();
     if(prodInCart){
@@ -60,49 +61,41 @@ export class PlanterComponent implements OnInit {
     }
 
     let planter = this.planters.find(planter=> {
-      return planter.id === id;
+      return planter.id === planterId;
     });
+    let flag = true;
 
     if(planter){
-      this.cartProducts.push({
-        "id" :planter?.id,
-        "quantity": 1
+      this.cartProducts.forEach((value, index)=>{
+          
+        if(value.id === planterId) {
+
+          let cart = this.cartProducts[index];
+          cart.quantity++;
+          console.log(cart.id+" Quan: "+cart.quantity);
+          this.cartProducts.splice(index, 1, cart);
+          flag = false;
+        }
+
+        
       })
+
+      if(flag) {
+        this.cartProducts.push({
+          "id" : planter.id,
+          "quantity": 1
+        })
+      }
+      
+      
     }
 
     localStorage.setItem('cart', JSON.stringify(this.cartProducts));
     
   }
 
-  deleteFromCart(id: number){
-    let prodInCart = this.saveCart();
-    if(prodInCart){
-      this.cartProducts = prodInCart;
-
-      let planter = this.planters.find(planter=> {
-        return planter.id === id;
-      });
-  
-      if(planter){
-        //let deletePlanter = this.cartProducts.findIndex() //
-          //Need to write LOGIC
-      }
-
-    }
-    localStorage.removeItem('cart'); //Problem Again :(
-  }
-
-  goToCart() {
-    this.router.navigate(['/cart']);
-  }
-
-
-  emptyCart() {
-    localStorage.clear();
-  }
-
-  // addToOrder(): Map<number, number> { //For Checkout Button
-  //  return this.cartProducts;
+  // goToCart() {
+  //   this.router.navigate(['/cart']);
   // }
 
 }
