@@ -31,4 +31,7 @@ export class PlantService {
     costHighToLow():Observable<Plant[]>{
         return <Observable<Plant[]>>this.http.get(this.baseUrl+"/admin/plants/costHighToLow");
     }
+    FilterByDifficulty(difficulty:string):Observable<Plant[]>{
+        return <Observable<Plant[]>>this.http.get(this.baseUrl+"/admin/plants/filterByDifficulty/"+difficulty)
+    }
 }
