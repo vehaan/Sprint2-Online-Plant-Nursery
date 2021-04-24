@@ -55,7 +55,7 @@ export class CartComponent implements OnInit {
 
   onSubmit(){
     let cartArray = localStorage.getItem('cart')
-    //console.log('Cart Items'+cartArray)
+    
     let cartArrayParsed: Cart[]
 
     if(cartArray){
@@ -67,10 +67,6 @@ export class CartComponent implements OnInit {
         productsMap.set(cartArrayParsed[i].id, cartArrayParsed[i].quantity)
         
       }
-
-      //console.log(productsMap);
-      // this.id = cartArrayParsed[0].id
-      // this.quantity = cartArrayParsed[0].quantity
 
       let productObj = Array.from(productsMap).reduce((obj,[key,value])=>(
         Object.assign(obj,{[key]:value})
@@ -100,6 +96,105 @@ export class CartComponent implements OnInit {
     
   }
   
+  saveCart() {
+    //Get the data from cart(localstorage) and save it before calling AddtoCart
+    let prevData = localStorage.getItem('cart');
+    console.log('prevdata'+prevData);
+
+    if(prevData){
+      let prodInCart: Cart[] = JSON.parse(prevData);
+      console.log('saved in prodInCart'+prodInCart);
+      
+      return prodInCart;
+    }
+    return null;
+
+  }
+
+  decQuantity(planterId: number) {
+    let prodInCart = this.saveCart();
+    if(prodInCart){
+      this.cartProducts = prodInCart;
+    }
+
+    let planter = this.cartPlanters.find(planter=> {
+      return planter.id === planterId;
+    });
+    let flag = true;
+
+    if(planter){
+      this.cartProducts.forEach((value, index)=>{
+          
+        if(value.id === planterId) {
+
+          let cart = this.cartProducts[index];
+          cart.quantity--;
+          console.log(cart.id+" Quan: "+cart.quantity);
+          this.cartProducts.splice(index, 1, cart);
+          flag = false;
+
+          if(cart.quantity === 0) {
+            this.deleteFromCart(planterId);
+          }
+        }
+
+        
+        
+      })
+
+      if(flag) {
+        this.cartProducts.push({
+          "id" : planter.id,
+          "quantity": 1
+        })
+      }
+      
+      
+    }
+
+    localStorage.setItem('cart', JSON.stringify(this.cartProducts));
+  }
+  incQuantity(planterId: number) {
+     
+    let prodInCart = this.saveCart();
+    if(prodInCart){
+      this.cartProducts = prodInCart;
+    }
+
+    let planter = this.cartPlanters.find(planter=> {
+      return planter.id === planterId;
+    });
+    let flag = true;
+
+    if(planter){
+      this.cartProducts.forEach((value, index)=>{
+          
+        if(value.id === planterId) {
+
+          let cart = this.cartProducts[index];
+          cart.quantity++;
+          console.log(cart.id+" Quan: "+cart.quantity);
+          this.cartProducts.splice(index, 1, cart);
+          flag = false;
+        }
+
+        
+      })
+
+      if(flag) {
+        this.cartProducts.push({
+          "id" : planter.id,
+          "quantity": 1
+        })
+      }
+      
+      
+    }
+
+    localStorage.setItem('cart', JSON.stringify(this.cartProducts));
+    
+  }
+
   deleteFromCart(planterId: number) {
 
     let data = localStorage.getItem('cart');

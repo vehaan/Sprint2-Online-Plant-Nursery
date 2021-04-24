@@ -1,43 +1,6 @@
 <section>
     <div class="s-box-container">
-
-        <!-- For Cart -->
-        <!-- <div class="container row">
-            <div class="col-md-2">
-                <h2>Your Cart</h2>
-            </div>
-            <div class="col-md-10 custom-products-cart-container">
-                <div class="offset-md-8">
-                    <ul class="nav navbar-nav navbar-right">
         
-                        <li class="dropdown">
-                            <br>
-                            <a href="#" class="btn btn-info btn-lg" data-toggle="dropdown" role="button" aria-expanded="false">
-                                <span class="fa fa-shopping-cart"></span>
-                                <a [routerLink]="['/cart']">Product Added In Cart:</a>  
-                                
-                                <span class="caret">{{cartProducts.length}}</span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-cart" role="menu">
-                                <li *ngFor="let item of planters">
-                                    <div class="item product-cart-item row">
-                                        <div class="col-md-8" *ngIf="item">{{item.type}}</div>
-                                        <div class="col-md-4" *ngIf="item"><strong>Rs.{{item.cost}}</strong></div>
-                                    </div>
-                                </li>
-                                <hr>
-                                <li><a class="btn btn-small btn-success" role="button" (click)="goToCart()">View Cart</a></li>
-                                <br>
-                                <li *ngIf="cartProducts.length > 0">
-                                    <a class="btn btn-small btn-warning" role="button" (click)="emptyCart()">Empty Cart</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div> -->
-
-
         <div class="s-box" *ngFor = "let planter of planters">
             <button class="btn button-small btn-danger" id="x"  (click) = "deletePlanter(planter)">X</button>
         

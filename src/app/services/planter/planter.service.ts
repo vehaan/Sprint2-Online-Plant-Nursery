@@ -17,9 +17,7 @@ export class PlanterService {
   }
 
   getPlanterById(id:number):Observable<IPlanter>{
-    //console.log("in service class")
     return <Observable<IPlanter>>this.http.get(this.baseUrl+"/planter/id/"+id);
- 
   }
 
   updatePlanter(planter:IPlanter):Observable<IPlanter>{
@@ -29,16 +27,9 @@ export class PlanterService {
   deletePlanter(planter: IPlanter) {
     return this.http.delete<IPlanter>(this.baseUrl+ "/deletePlanter/id/" + planter.id);
   }
-
-
-
-  public createPlanter(planter: IPlanter) {
-    /* let username='javainuse'
-    let password='password'
   
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(username + ':' + password) });
-   */
-       return this.http.post<IPlanter>(this.baseUrl + "/planter",planter);
+  public createPlanter(planter: IPlanter) {
+    return this.http.post<IPlanter>(this.baseUrl + "/planter",planter);
   }
 
 }

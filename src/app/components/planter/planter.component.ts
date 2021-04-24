@@ -26,8 +26,6 @@ export class PlanterComponent implements OnInit {
       (data)=>this.planters = data,
       (err)=>this.error = err
     );
-
-    console.log('In ng' + localStorage.getItem('cart'));
     
   }
 
@@ -39,7 +37,6 @@ export class PlanterComponent implements OnInit {
 
   //Cart methods--------------------------------------------
   saveCart() {
-    //Get the data from cart(localstorage) and save it before calling AddtoCart
     let prevData = localStorage.getItem('cart');
     console.log('prevdata'+prevData);
 
@@ -69,15 +66,14 @@ export class PlanterComponent implements OnInit {
       this.cartProducts.forEach((value, index)=>{
           
         if(value.id === planterId) {
-
           let cart = this.cartProducts[index];
           cart.quantity++;
           console.log(cart.id+" Quan: "+cart.quantity);
           this.cartProducts.splice(index, 1, cart);
           flag = false;
+
         }
 
-        
       })
 
       if(flag) {
@@ -86,7 +82,6 @@ export class PlanterComponent implements OnInit {
           "quantity": 1
         })
       }
-      
       
     }
 
