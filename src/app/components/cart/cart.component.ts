@@ -22,23 +22,21 @@ export class CartComponent implements OnInit {
 
   cartProductQuantity: number[] = [];
   index: number = 0;
-  //order!: Order;
-
-  //Add Order
-  //addForm!: FormGroup;
-  
+  order!: Order;
+  quantity!: number;
+  id!: number;
 
   constructor(private formBuilder: FormBuilder, private planterService: PlanterService, private _route: Router, private orderService: OrderService) { }
 
   ngOnInit(): void {
-    //this.index = 0;
+ 
     let data = localStorage.getItem('cart');
     if(data) {
       let temp: Cart[] = JSON.parse(data);
 
       for(let i=0; i<temp.length; i++) {
         this.cartProductQuantity.push(temp[i].quantity);
-        this.index++;
+        this.index = i;
 
         this.planterService.getPlanterById(temp[i].id).subscribe(
           (next) =>  this.cartPlanters.push(next),
@@ -46,13 +44,6 @@ export class CartComponent implements OnInit {
         )
       }
     }
-
-
-    // this.addForm = this.formBuilder.group({
-    //   transactionMode: ['', Validators.required],
-
-    // })
-
 
     let k = 0;
 
@@ -62,11 +53,53 @@ export class CartComponent implements OnInit {
 
   }
 
-  showQuantity() : void{
+  onSubmit(){
+    let cartArray = localStorage.getItem('cart')
+    //console.log('Cart Items'+cartArray)
+    let cartArrayParsed: Cart[]
+
+    if(cartArray){
+      var productsMap = new Map()
+     
+      cartArrayParsed = JSON.parse(cartArray)
+
+      for(let i=0; i<cartArrayParsed.length; i++){
+        productsMap.set(cartArrayParsed[i].id, cartArrayParsed[i].quantity)
+        
+      }
+
+      //console.log(productsMap);
+      // this.id = cartArrayParsed[0].id
+      // this.quantity = cartArrayParsed[0].quantity
+
+      let productObj = Array.from(productsMap).reduce((obj,[key,value])=>(
+        Object.assign(obj,{[key]:value})
+      ),{})
+
+      console.log(productObj);
+
+      var obj = {
+        transactionMode: "CARD",
+        products:productObj,
+        customer :
+          {
+              id:202            
+          }
+      } 
+
+      var json = JSON.stringify(obj);
+      console.log(obj)
+      this.orderService.addOrder(JSON.parse(json))
+      .subscribe(
+        data => this.order = data,
+        err => console.log(err)
+      ) 
+    }
+
+    //localStorage.removeItem('cart');
     
   }
-
-//To delete item from cart
+  
   deleteFromCart(planterId: number) {
 
     let data = localStorage.getItem('cart');
@@ -83,38 +116,9 @@ export class CartComponent implements OnInit {
         }
     }
     localStorage.setItem('cart', JSON.stringify(this.cartProducts));
-  }
 
-  onAddOrder(){
-    // var obj = {
-    // "transactionMode": "CARD",
-    //       "products" :
-    //         {
-
-    //             "21" : 2   
-    //         },
-    //         "customer" :
-    //         {
-    //             "id":202        
-    //         }
-    //     }  
-        
-    //   var json = JSON.stringify(obj);
-    //   console.log(json)
-    //   this.orderService.addOrder(JSON.parse(json))
-    //   .subscribe(
-    //     data => this.order = data,
-    //     err => console.log(err)
-    //   )
-      //return this.http.post('http://localhost:9191/onlineplantnursery/products/admin/order',JSON.parse(json));
-  }
-
-  viewCart() {
-
-  }
-  checkOut(cartPlantersToOrder: IPlanter[]){
-    //this.orderService
-    //this._route.navigate(['/order']);
+    //Need to do refresh
+    //this._route.navigate(['cart']);
   }
 
 }

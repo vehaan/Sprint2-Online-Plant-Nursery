@@ -2,13 +2,13 @@
     <div>
         <h1>In Cart</h1>
         <div class="s-box" *ngFor = "let planter of cartPlanters">
-            <button class="btn button-small btn-danger" id="x"  (click) = "deleteFromCart(planter.id)">X</button>
+            <button class="btn button-small btn-danger" id="x" [routerLink] = "['/cart']" (click) = "deleteFromCart(planter.id)">X</button>
 
     
             <img alt="1" src="https://ak.picdn.net/shutterstock/videos/1027610672/thumb/11.jpg" class="appIcon" />
             <h1>Planter Id: {{planter.id}}</h1>
-           <!-- <h1>Quantity: {{cartProductQuantity}}</h1> -->
-           <h1>Quantity: {{cartProductQuantity[index]}}</h1>
+            <h1>Quantity: {{cartProductQuantity[cartPlanters.indexOf(planter)]}}</h1>
+          
             <div class="blockquote" style="background-color:lightgreen; border-radius: 15px; width: 50%; text-align: center;">{{planter.cost | currency:'INR':'symbol':'1.2'}}</div>
             <hr width="100%">
             
@@ -20,6 +20,6 @@
         <!-- <button class="fa fa-edit btn btn-outline-primary" [routerLink] = "['/addOrder/']"></button> -->
     </div>
        
-    <button  (click) = "onAddOrder()">Place Order</button>
+    <button  (click) = "onSubmit()">Place Order</button>
     
 </section>
