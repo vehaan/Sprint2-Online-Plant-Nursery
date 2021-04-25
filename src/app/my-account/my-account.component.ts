@@ -10,8 +10,7 @@ import { AuthenticationService } from '../service/authentication.service';
   styleUrls: ['./my-account.component.css']
 })
 export class MyAccountComponent implements OnInit {
-  id!:number;
-  flag!:boolean;
+  
   customer!:Customer;
   email!:any ;
  
@@ -31,34 +30,34 @@ export class MyAccountComponent implements OnInit {
             (data)=> {console.log(data);
                 this.customer=data},
             (err)=>console.log(err))
-    
-        console.log(this.email)
-
-        console.log(this.customer)
 
     }
 
+    ngAfterViewChecked(): void {
 
+      this.customer=this.authService.customer;
+     
+  
+    }
+    
 
 
     onEdit(){
-      this.flag=true;
-      this.router.navigate(['edit-customer/',this.customer.id])
+      this.router.navigate(['edit-customer'])
     }
 
-delete(){
+  delete(){
 
-  console.log("***************In side thetop of delete****************");
-  this.service.deleteCustomerById(this.customer.id).subscribe(
+  
+     this.service.deleteCustomerById(this.customer.id).subscribe(
     (data)=> {console.log(data);
      
-      this.authService.logOut();
-      console.log("*******************************");
-      this.router.navigate(['welcome']); },
+      },
       (err)=>console.log(err)
 
   )
-  
+  this.authService.logOut();
+ 
 
 }
 

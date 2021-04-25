@@ -12,35 +12,45 @@ export class AppComponent {
   title = 'Sprint2-OnlinePlantNursery';
   
   customer!:Customer;
-  role!:string;
-  id!: number;
+  onlyToCustomer!:boolean;
+  onlyToAdmin!:boolean;
   email!: any;
 
-  constructor(public loginService:AuthenticationService,private service:CustomerService ){ }
+  constructor(public loginService:AuthenticationService,private service:CustomerService,private authService:AuthenticationService ){ }
   ngOnInit() {
+
        
+    this.email= sessionStorage.getItem('email')
+    this.service.getCustomerByMail(this.email).subscribe(
+      (data)=> {console.log(data);
+          
+          this.customer=data
+        this.checkRole(this.customer.role)
+        },
+      (err)=>console.log(err))
    
-
-      this.email = sessionStorage.getItem('email');
-
-      this.service.getCustomerByMail(this.email).subscribe(
-            (data)=> {console.log(data);
-                this.customer=data
-                console.log(this.customer.role);
-             this.role =this.customer.role},
-            (err)=>console.log(err))
-    
-        console.log(this.email,'I am in app comonent ts')
-
-        console.log(this.customer)
-
-    
   }
 
+  ngAfterViewChecked(): void {
 
+    this.customer=this.authService.customer;
+    this.checkRole(this.customer.role);
 
+  }
+  
 
+  checkRole(status:string){
+    if(status=='ADMIN'){
+      this.onlyToCustomer=false;
+      this.onlyToAdmin=true;
+    }
+      
+    else{
+      this.onlyToCustomer=true;
+      this.onlyToAdmin=false;
+    }
+   
 
-
+  }
 
 }

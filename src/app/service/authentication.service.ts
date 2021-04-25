@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { CustomerService } from '../customer/customerService';
+import { Customer } from '../customer/customer';
 
 export class User{
 
@@ -19,26 +21,33 @@ export class User{
 })
 export class AuthenticationService {
 user!:User;
+customer!:Customer;
+email!:any;
+
 private baseUrl='http://localhost:9999/OnlinePlantNursery'
 
   constructor(
-    private httpClient:HttpClient
+    private httpClient:HttpClient,
+    private service:CustomerService
   ) { 
+    this.getCustomer();
      }
 
      authenticate(email: string, password: any):Observable<any>{
-       
-       
-     // const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(email + ':' + password) });
       return this.httpClient.post<any>(`${this.baseUrl}/authenticate`,{email,password} )
       .pipe(map(
         userData => {
          sessionStorage.setItem('email',email);
          let tokenStr= 'Bearer '+ userData.token;
          sessionStorage.setItem('token', tokenStr);
+        this.getCustomer();
          return userData;
         }
-      ));}
+    ) 
+    
+    
+    
+    );}
   
 
   isUserLoggedIn() {
@@ -50,4 +59,20 @@ private baseUrl='http://localhost:9999/OnlinePlantNursery'
     sessionStorage.removeItem('email')
     sessionStorage.removeItem('token')
   }
+
+
+
+
+  getCustomer(){  
+   this.email= sessionStorage.getItem('email')
+    this.service.getCustomerByMail(this.email).subscribe(
+      (data)=> {
+          this.customer=data},
+      (err)=>console.log(err))
+
+      return this.customer;
+  }
+
+
+
 }

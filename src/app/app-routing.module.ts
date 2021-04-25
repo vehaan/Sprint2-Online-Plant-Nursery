@@ -9,6 +9,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { MyAccountComponent } from './my-account/my-account.component';
+import { AdminGaurd } from './service/admin-gaurd.service';
 import { AuthGaurdService } from './service/auth-gaurd.service';
 import { CustomerDetailGuard } from './service/customer-details.gaurd';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -19,7 +20,7 @@ const routes: Routes = [
   {path:'account',component:MyAccountComponent,
   canActivate:[AuthGaurdService]},
   {path:'add-customer',component:AddCustomerComponent },
-  {path:'edit-customer/:id',component:EditCustomerComponent,
+  {path:'edit-customer',component:EditCustomerComponent,
   canActivate:[AuthGaurdService]},
   {path:'view-customer/:id',component:ViewCustomerComponent,
   canActivate: [CustomerDetailGuard]},
@@ -27,7 +28,7 @@ const routes: Routes = [
   { path: 'change-password', component: ForgotPasswordComponent },
   { path: 'logout', component: LogoutComponent},
 {path:"customer-list",component:CustomerListComponent,
-canActivate:[AuthGaurdService]}
+canActivate:[AuthGaurdService,AdminGaurd]}
  
 ];
 

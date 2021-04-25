@@ -12,6 +12,8 @@ export class ViewCustomerComponent implements OnInit {
   pageTitle = 'Customer Detail';
   customer!:Customer;
   errorMessage = '';
+  show:boolean=true;
+updatedName!:string;
   constructor(private route: ActivatedRoute,
     private router: Router,
     private service: CustomerService){ }
@@ -34,5 +36,36 @@ export class ViewCustomerComponent implements OnInit {
 
   onBack(): void {
     this.router.navigate(['/customer-list']);
+  }
+
+
+
+
+  onToggle(customer:Customer):void{
+
+    this.service.setStatus(customer.id).subscribe(
+      data=>{
+        console.log(data);    
+        this.show=false;
+        if(data.status.valueOf()=='BLOCK') 
+           this.updatedName='UNBLOCK';
+        else
+           this.updatedName="BlOCK";  
+
+           
+      
+      }
+    )
+
+  }
+
+  buttonName(name:string):string{
+
+      if(name.valueOf()=='BLOCK')
+         name='UNBLOCK';
+      else
+         name='BlOCK';
+
+   return this.show ? name : this.updatedName;
   }
 }

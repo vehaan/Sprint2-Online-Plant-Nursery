@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MustMatch } from '../forgot-password/forgot-password.component';
 import { AuthenticationService } from '../service/authentication.service';
 
-export class JwtResponse{
+export class JwtResponse {
 
   jwtToken!: string;
 }
@@ -13,30 +15,45 @@ export class JwtResponse{
 })
 export class LoginComponent implements OnInit {
 
-  email = ''
-  password = ''
+
   invalidLogin = false
-  response!:JwtResponse
+  loginForm!: FormGroup;
+  submitted = false;
+  errMsg: string = 'Invalid Credentials';
 
   constructor(private router: Router,
-    private loginservice: AuthenticationService) { }
+    private loginservice: AuthenticationService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    
+
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
+
+    });
+
   }
 
+
+  get f() { return this.loginForm.controls; }
+
   checkLogin() {
-    (this.loginservice.authenticate(this.email, this.password).subscribe(
+    this.submitted = true;
+    if (this.loginForm.invalid) {
+      return;
+    }
+    (this.loginservice.authenticate(this.loginForm.value.email, this.loginForm.value.password).subscribe(
       data => {
         console.log(data)
-        /* this.response=data.jwtToken;
-        console.log("Rseponse" ,this.response,"response ") */
-        //this.setValues(data);
-       this.router.navigate(['welcome'])
+
+        this.router.navigate(['welcome'])
+
         this.invalidLogin = false
       },
       error => {
         this.invalidLogin = true
+
+
 
       }
     )
@@ -44,14 +61,7 @@ export class LoginComponent implements OnInit {
 
   }
 
-  setValues(data:any){
-    console.log("in set values",data)
-    sessionStorage.setItem('email',this.email);
-        sessionStorage.setItem('token',data.token)
-
-      console.log('data set')
 
 
 
-  }
 }

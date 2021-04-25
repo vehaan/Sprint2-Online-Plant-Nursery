@@ -4,6 +4,7 @@
  <head>
      <title>Online Plant Nursery</title>
      <link rel="stylesheet" type="text/css" href="./app.component.css">
+    
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
@@ -13,22 +14,25 @@
          <img src="https://i.pinimg.com/originals/e8/88/d4/e888d4feff8fd5ff63a965471a94b874.gif">
          <h1>Online Plant Nursery</h1>
      </div>
- 
-     <ul id="nav-bar">
+
+      <ul id="nav-bar">
          <li><a  routerLink="/welcome" class="nav-link">Home</a></li>
         
          <li><a href="#plant">Plant</a></li>
          <li><a href="#seed">Seed</a></li>
          <li><a href="#planter">Planter</a></li>
+         <li ><a *ngIf="loginService.isUserLoggedIn() && onlyToAdmin " routerLink="/customer-list" class="nav-link"> Customers</a></li>
          
  
          <li class="float-right"><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/add-customer" class="nav-link">Register</a></li>
          <li class="float-right"><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/login" >  <span class="glyphicon glyphicon-log-in"></span> Login</a></li>
          <li class="float-right"><a *ngIf="loginService.isUserLoggedIn()" routerLink="/logout" class="nav-link"><span class="glyphicon glyphicon-log-out"></span> LogOut</a></li>
-         <li class="float-right"><a *ngIf="loginService.isUserLoggedIn() "  routerLink="/account" class="nav-link"> <span class="glyphicon glyphicon-user"></span>  My Account</a></li>
+         <li class="float-right"><a *ngIf="loginService.isUserLoggedIn() && onlyToCustomer " routerLink="/account" class="nav-link"> <span class="glyphicon glyphicon-user"></span>  My Account</a></li>
+         <li class="float-right"><a *ngIf="loginService.isUserLoggedIn() && onlyToCustomer " routerLink="/account" class="nav-link"> <i class="bi bi-cart"></i>Cart</a></li>
          
      </ul>
- 
+  
+
    
          <div class="container " id="content">
             

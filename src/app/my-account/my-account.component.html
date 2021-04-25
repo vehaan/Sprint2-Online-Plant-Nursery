@@ -1,20 +1,9 @@
-<p>my-account works!</p>
-
-
-
-<!--
-<div class="container ">
-    <button type="button" class="btn btn-warning" (click)="onEdit()">Edit my details</button>
-
-    <app-edit-customer *ngIf="flag"></app-edit-customer>
-
-</div>-->
 
 <div class="container">
 
 <div class="row">
 
-<div class="card col-sm" style="width: 18rem;">
+<div class="card col-2" style="width: 18rem;">
     <img style='height: 100%; width: 100%; object-fit: contain'
      src="./assets/login.jpg" alt="Login image">
     <div class="card-body">
@@ -24,7 +13,7 @@
     </div>
   </div>
 
-  <div class="card col-sm" style="width: 18rem;">
+  <div class="card col-2" style="width: 18rem;">
     <img style='height: 100%; width: 100%; object-fit: contain'
     class="card-img-top" src="./assets/order.png" alt="Orders image">
     <div class="card-body">
@@ -34,7 +23,7 @@
     </div>
   </div>
 
-  <div class="card col-sm" style="width: 18rem;">
+  <div class="card col-2" style="width: 18rem;">
     <img style='height: 100%; width: 100%; object-fit: contain'
     class="card-img-top" src="./assets/delete.png" alt="Delete image">
     <div class="card-body">
@@ -44,7 +33,16 @@
     </div>
   </div>
 
-  <a  routerLink="/change-password">Forgot Password</a>
+  <div class="card col-2" style="width: 18rem;">
+    <img style='height: 100%; width: 100%; object-fit: contain'
+    class="card-img-top" src="./assets/change-password.png" alt="Change Password">
+    <div class="card-body">
+      <h5 class="card-title">Change Password</h5>
+      <p class="card-text">Click below to change password</p>
+      <a  class="btn btn-primary" routerLink="/change-password">Change Password</a>
+    </div>
+  </div>
+
 </div>
 
 </div>
