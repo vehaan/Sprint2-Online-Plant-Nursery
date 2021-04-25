@@ -1,7 +1,7 @@
 import { Customer } from "./customer";
 
 export interface Order {
-    id: number;
+    bookingId: number;
     bookingDate: Date; //= new Date(); //Had to check String or Date
     transactionMode: string ; //Enum in back end
     quantity: number;

@@ -1,1 +1,43 @@
-<p>order-list works!</p>
+<section>
+    <div class="s-box-container">
+        <div class="s-box" *ngFor = "let order of orders">
+            <li>OrderId: {{order.bookingId}}</li>
+            <li>Ordered Date: {{order.bookingDate}}</li>
+            <li>Payment Mode used: {{order.transactionMode}}</li>
+            <!-- <li>Ordered Products: <JSON class="stringify" value ></JSON></li> -->
+            <li>Order: {{order.products | json}} </li>
+            <!-- <p id="demo"></p>
+                <script>
+                   var arr = [ "John", "Peter", "Sally", "Jane" ];
+                    var myJSON = JSON.stringify(arr);
+                    document.getElementById("demo").innerHTML = myJSON;
+                </script>
+            
+
+            <li>Order: <p id="demo1"></p>
+                <script>
+                   var arr = [ "John", "Peter", "Sally", "Jane" ];
+                    var myJSON = JSON.stringify(arr);
+                    document.getElementById("demo1").innerHTML = myJSON;
+                </script></li> -->
+
+
+            <li>Order Quantity: {{order.quantity}}</li>
+            <li>Order Cost: {{order.totalCost}}</li>
+            
+        </div>
+
+        
+
+        <!-- <div class= "s-box" *ngFor = "let cost of orderedPlantersCost">
+            <li>Cost: {{cost}}</li>
+        </div> -->
+
+        <!-- <div>
+            <h1>{{objArray}}</h1>
+        </div> -->
+        <div class= "s-box" *ngFor = "let cost of orderedPlantersCost">
+            <li>Cost: {{cost}}</li>
+        </div>
+    </div>
+</section>

@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IPlanter } from 'src/app/models/IPlanter';
 import { PlanterService } from 'src/app/services/planter/planter.service';
-import { CartService } from 'src/app/services/cart/cart.service';
 import { Cart } from 'src/app/models/Cart';
 
 @Component({
@@ -19,7 +18,7 @@ export class PlanterComponent implements OnInit {
   //Cart Elements ---------------------------------------------
   cartProducts:Cart[] = [];
 
-  constructor(private service:PlanterService, private cartService: CartService, private router:Router) {  }
+  constructor(private service:PlanterService, private router:Router) {  }
 
   ngOnInit(): void {
     this.service.getAllPlanters().subscribe(

@@ -19,7 +19,7 @@
             
             <div class="blockquote" style="background-color:lightgreen; border-radius: 15px; width: 50%; text-align: center;">{{planter.cost | currency:'INR':'symbol':'1.2'}}</div>
             <hr width="100%">
-            <button class="fa fa-edit btn btn-outline-primary" [routerLink] = "['/edit-planter/',planter.id]"> Edit</button>
+            <button class="fa fa-edit btn btn-outline-primary" [routerLink] = "['/edit-planter/', planter.id]"> Edit</button>
             <br>
             
             <a class="btn btn-success float-sm-end" (click) = "addToCart(planter.id)">Add to Cart</a>

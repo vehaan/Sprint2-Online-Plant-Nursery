@@ -12,7 +12,6 @@ import { AddPlanterComponent } from './components/planter/add-planter.component'
 import { EditPlanterComponent } from './components/planter/edit-planter.component';
 import { PlanterListComponent } from './components/planter/planter-list.component';
 import { PlanterComponent } from './components/planter/planter.component';
-import { PlanterService } from './services/planter/planter.service';
 
 
 @NgModule({
@@ -21,8 +20,8 @@ import { PlanterService } from './services/planter/planter.service';
     AddOrderComponent,
     OrderListComponent,
     OrderComponent,
-    PlanterComponent,
     PlanterListComponent,
+    PlanterComponent,
     AddPlanterComponent,
     EditPlanterComponent,
     CartComponent

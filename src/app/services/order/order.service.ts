@@ -11,13 +11,20 @@ export class OrderService {
   
   constructor(private http: HttpClient) { }
 
-  getAllOrders(): Observable<Order[]> {
+  getAllOrders(): Observable<Order[]> { //admin
     return <Observable<Order[]>>this.http.get(this.baseUrl + "/admin/orders");
   }
 
-  getOrderById(id: number): Observable<Order> {
-    console.log("From service, order by id is viewed"); //Just for Checking
+  getOrderById(id: number): Observable<Order> { //admin
     return <Observable<Order>>this.http.get(this.baseUrl + "/admin/order/id/" + id); //Can use backticks also 
+  }
+
+  getAllCustomerOrders(id: number): Observable<Order[]> {  //customer
+    return <Observable<Order[]>>this.http.get(this.baseUrl + "/customer/orders/" + id);
+  }
+
+  getCustomerOrderById(custId: number, orderId:number): Observable<Order> { //customer
+    return <Observable<Order>>this.http.get(this.baseUrl + "/customer/order/id/" + custId + "/" + orderId);
   }
 
   deleteOrder(id: number): Observable<string> {
@@ -25,10 +32,10 @@ export class OrderService {
     return <Observable<string>>this.http.delete(this.baseUrl + "/admin/order/id/" + id);
   }
 
-  updateOrder(order: Order): Observable<Order> {
-    console.log("From service, order is updated");
-    return <Observable<Order>>this.http.put(this.baseUrl + "/admin/order", order);
-  }
+  // updateOrder(order: Order): Observable<Order> {
+  //   console.log("From service, order is updated");
+  //   return <Observable<Order>>this.http.put(this.baseUrl + "/admin/order", order);
+  // }
 
   addOrder(order: Order): Observable<Order> {
     console.log("From service, order is added");

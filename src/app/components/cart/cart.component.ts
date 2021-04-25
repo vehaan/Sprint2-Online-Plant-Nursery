@@ -19,12 +19,16 @@ export class CartComponent implements OnInit {
   cartProducts: Cart[] = [];
   cartPlanters: IPlanter[] = [];
   error!: string;
+  flag: boolean = false;
 
   cartProductQuantity: number[] = [];
   index: number = 0;
   order!: Order;
   quantity!: number;
   id!: number;
+  totalCost : number = 0
+  totalQuantity: number = 0
+  paymentMode!: string
 
   constructor(private formBuilder: FormBuilder, private planterService: PlanterService, private _route: Router, private orderService: OrderService) { }
 
@@ -37,19 +41,24 @@ export class CartComponent implements OnInit {
       for(let i=0; i<temp.length; i++) {
         this.cartProductQuantity.push(temp[i].quantity);
         this.index = i;
-
+        this.totalQuantity += temp[i].quantity
         this.planterService.getPlanterById(temp[i].id).subscribe(
           (next) =>  this.cartPlanters.push(next),
           (err) => this.error = err
         )
+        
       }
+
+      
     }
 
-    let k = 0;
-
-    for(let i=0; i<this.cartProductQuantity.length; i++){
-      console.log(this.cartProductQuantity[i]);
-    }
+    if(this.cartPlanters){
+      for(let i=0; i<this.cartProductQuantity.length; i++){
+        console.log(this.cartProductQuantity[i]);
+        
+      }
+      console.log(this.cartPlanters)
+      }
 
   }
 
@@ -67,7 +76,6 @@ export class CartComponent implements OnInit {
         productsMap.set(cartArrayParsed[i].id, cartArrayParsed[i].quantity)
         
       }
-
       let productObj = Array.from(productsMap).reduce((obj,[key,value])=>(
         Object.assign(obj,{[key]:value})
       ),{})
@@ -75,27 +83,37 @@ export class CartComponent implements OnInit {
       console.log(productObj);
 
       var obj = {
-        transactionMode: "CARD",
+        transactionMode: this.paymentMode,
         products:productObj,
         customer :
           {
-              id:202            
+              id:202          
           }
       } 
-
+      
       var json = JSON.stringify(obj);
-      console.log(obj)
-      this.orderService.addOrder(JSON.parse(json))
-      .subscribe(
+      this.orderService.addOrder(JSON.parse(json)).subscribe(
         data => this.order = data,
         err => console.log(err)
       ) 
     }
 
-    //localStorage.removeItem('cart');
+    localStorage.removeItem('cart');
     
   }
-  
+
+  getSum():number{
+    let sum = 0
+    for(let i = 0; i < this.cartPlanters.length; i++){
+      sum += (this.cartPlanters[i].cost * this.cartProductQuantity[i])
+    }
+    return sum
+  }
+
+  paymentMethod(mode: string):void{
+    this.paymentMode = mode
+  }
+
   saveCart() {
     //Get the data from cart(localstorage) and save it before calling AddtoCart
     let prevData = localStorage.getItem('cart');
@@ -154,6 +172,7 @@ export class CartComponent implements OnInit {
 
     localStorage.setItem('cart', JSON.stringify(this.cartProducts));
   }
+  
   incQuantity(planterId: number) {
      
     let prodInCart = this.saveCart();
@@ -187,12 +206,8 @@ export class CartComponent implements OnInit {
           "quantity": 1
         })
       }
-      
-      
     }
-
     localStorage.setItem('cart', JSON.stringify(this.cartProducts));
-    
   }
 
   deleteFromCart(planterId: number) {
@@ -212,10 +227,6 @@ export class CartComponent implements OnInit {
     }
     localStorage.setItem('cart', JSON.stringify(this.cartProducts));
 
-    //Need to do refresh
-    //this._route.navigate(['cart']);
   }
 
 }
-
-
