@@ -13,8 +13,6 @@ export class CustomerDetailGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const id = +next.url[1].path;
-    // const id2 = next.paramMap.get('id');
-    // console.log(id2);
     if (isNaN(id) || id < 1) {
       alert('Invalid customer Id');
       this.router.navigate(['/customer-list']);

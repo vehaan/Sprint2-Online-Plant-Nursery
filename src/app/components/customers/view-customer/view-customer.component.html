@@ -1,5 +1,3 @@
-<p>view-customer works!</p>
-
 <div class='card'>
     <div class='card-header'>
       {{pageTitle + ': ' + customer?.name}}
@@ -59,10 +57,12 @@
     </div>
   
     <div class='card-footer'>
-      <button class='btn btn-dark'
+      <button  class="btn btn-dark"  (click)='onBack()'>Back</button>
+      &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;  &nbsp;
+      <button class='btn btn-danger '
               style='width:80px'
-              (click)='onBack()'>
-              <i class="bi bi-arrow-90deg-left"></i> Back
+              (click)='onBack();onToggle(customer)'>
+              <i class="bi bi-arrow-90deg-left"></i> {{buttonName(customer.status)}}
       </button>
     </div>
   </div>

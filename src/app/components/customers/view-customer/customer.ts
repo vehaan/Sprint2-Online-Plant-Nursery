@@ -1,3 +1,5 @@
+import { Order } from "../../order-list/order";
+
 export interface Address{
 
     houseNo:string;
@@ -17,7 +19,7 @@ export interface Customer{
     role:string;
     phone:string;
     address:Address;
-
+    // order:Order[];
     status:string;
     
 }

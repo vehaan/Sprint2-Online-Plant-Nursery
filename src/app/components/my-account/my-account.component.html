@@ -1,48 +1,47 @@
-<p>my-account works!</p>
-
-
-
-<!--
-<div class="container ">
-    <button type="button" class="btn btn-warning" (click)="onEdit()">Edit my details</button>
-    <app-edit-customer *ngIf="flag"></app-edit-customer>
-</div>-->
-
 <div class="container">
 
-<div class="row">
-
-<div class="card col-sm" style="width: 18rem;">
-    <img style='height: 100%; width: 100%; object-fit: contain'
-     src="./assets/login.jpg" alt="Login image">
-    <div class="card-body">
-      <h5 class="card-title">Login & Security</h5>
-      <p class="card-text">Edit login,name and mobile number  </p>
-      <a  class="btn btn-primary" (click)="onEdit()" >Edit</a>
+  <div class="row">
+  
+  <div class="card col-2" style="width: 18rem;">
+      <img style='height: 100%; width: 100%; object-fit: contain'
+       src="../../images/login.jpg" alt="Login image">
+      <div class="card-body">
+        <h5 class="card-title">Login & Security</h5>
+        <p class="card-text">Edit login,name and mobile number  </p>
+        <a  class="btn btn-primary" (click)="onEdit()" >Edit</a>
+      </div>
     </div>
-  </div>
-
-  <div class="card col-sm" style="width: 18rem;">
-    <img style='height: 100%; width: 100%; object-fit: contain'
-    class="card-img-top" src="./assets/order.png" alt="Orders image">
-    <div class="card-body">
-      <h5 class="card-title">My Orders</h5>
-      <p class="card-text">View orders &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-      <a href="#" class="btn btn-warning">Show</a>
+  
+    <div class="card col-2" style="width: 18rem;">
+      <img style='height: 100%; width: 100%; object-fit: contain'
+      class="card-img-top" src="../../images/order.png" alt="Orders image">
+      <div class="card-body">
+        <h5 class="card-title">My Orders</h5>
+        <p class="card-text">View orders &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+        <a href="/orders" class="btn btn-warning">Show</a>
+      </div>
     </div>
-  </div>
-
-  <div class="card col-sm" style="width: 18rem;">
-    <img style='height: 100%; width: 100%; object-fit: contain'
-    class="card-img-top" src="./assets/delete.png" alt="Delete image">
-    <div class="card-body">
-      <h5 class="card-title">Delete Account</h5>
-      <p class="card-text">Click below to delete the account</p>
-      <a href="#" class="btn btn-danger"  (click)="delete()">Delete</a>
+  
+    <div class="card col-2" style="width: 18rem;">
+      <img style='height: 100%; width: 100%; object-fit: contain'
+      class="card-img-top" src="../../images/delete.png" alt="Delete image">
+      <div class="card-body">
+        <h5 class="card-title">Delete Account</h5>
+        <p class="card-text">Click below to delete the account</p>
+        <a href="#" class="btn btn-danger"  (click)="delete()">Delete</a>
+      </div>
     </div>
+  
+    <div class="card col-2" style="width: 18rem;">
+      <img style='height: 100%; width: 100%; object-fit: contain'
+      class="card-img-top" src="../../images/change-password.png" alt="Change Password">
+      <div class="card-body">
+        <h5 class="card-title">Change Password</h5>
+        <p class="card-text">Click below to change password</p>
+        <a  class="btn btn-primary" routerLink="/change-password">Change Password</a>
+      </div>
+    </div>
+  
   </div>
-
-  <a  routerLink="/change-password">Forgot Password</a>
-</div>
-
-</div>
+  
+  </div>

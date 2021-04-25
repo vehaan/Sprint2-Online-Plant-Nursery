@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from 'src/app/services/Auth/authentication.service';
 import { OrderService } from 'src/app/services/order.service';
 import { PlanterServiceService } from 'src/app/services/planter-service.service';
 import { IPlanter } from '../planters/planter/IPlanter';
@@ -19,11 +20,14 @@ export class OrderListComponent implements OnInit {
   // orderedProductsMap!: Map<number, number>;
   orderedPlantersId!: number[];
   orderedPlantersCost!: number[];
+  custId !: number;
+  
 
-  constructor(private orderService: OrderService, private planterService: PlanterServiceService ) { }
+  constructor(private orderService: OrderService, private planterService: PlanterServiceService, private authentication: AuthenticationService ) { }
 
   ngOnInit(): void {
-    this.orderService.getAllCustomerOrders(205).subscribe(
+    this.custId = this.authentication.customer.id;
+    this.orderService.getAllCustomerOrders(this.custId).subscribe(
       (data) => {
         this.orders = data;
         this.objArray = JSON.parse(JSON.stringify(this.orders)) 
@@ -34,6 +38,7 @@ export class OrderListComponent implements OnInit {
       (err) => this.error = err
     );
     
+    console.log(this.custId)
     console.log(this.orders)
 
     if(this.orders){

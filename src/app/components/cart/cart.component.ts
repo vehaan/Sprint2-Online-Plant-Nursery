@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/Auth/authentication.service';
 import { OrderService } from 'src/app/services/order.service';
 import { ProductService } from 'src/app/services/product.service';
 import { Order } from '../order-list/order';
@@ -29,7 +30,7 @@ export class CartComponent implements OnInit {
   totalQuantity: number = 0
   paymentMode!: string
 
-  constructor(private formBuilder: FormBuilder, private planterService: ProductService, private _route: Router, private orderService: OrderService) { }
+  constructor(private formBuilder: FormBuilder, private planterService: ProductService, private _route: Router, private orderService: OrderService, private authentication: AuthenticationService) { }
 
   ngOnInit(): void {
  
@@ -86,7 +87,7 @@ export class CartComponent implements OnInit {
         products:productObj,
         customer :
           {
-              id:205        
+              id:this.authentication.customer.id        
           }
       } 
       

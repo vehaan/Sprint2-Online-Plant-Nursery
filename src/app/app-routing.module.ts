@@ -24,8 +24,10 @@ import { EditSeedComponent } from './components/seeds/edit-seed/edit-seed.compon
 import { SeedListComponent } from './components/seeds/seed-list/seed-list.component';
 import { SeedComponent } from './components/seeds/seed/seed.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
-import { AuthGaurdService } from './services/Auth/auth-guard.service';
-import { CustomerDetailGuard } from './services/Auth/customer-details.service';
+import { AdminGuard } from './services/Auth/admin-guard.service';
+import { AuthGuardService } from './services/Auth/auth-guard.service';
+import { CustomerDetailGuard } from './services/Auth/customer-details.guard';
+
 
 const routes: Routes = [
   { path: 'add-planter',component: AddPlanterComponent},
@@ -44,24 +46,24 @@ const routes: Routes = [
 {path:'add-plant',component:AddPlantComponent},
 
 {path: 'cart', component: CartComponent},
-{ path: 'orders', component: OrderListComponent},
+{ path: 'order-list', component: OrderListComponent},
 
 
 
 {path:"app-com",component:AppComponent},
 { path: 'welcome', component: WelcomeComponent},
 {path:'account',component:MyAccountComponent,
-canActivate:[AuthGaurdService]},
+canActivate:[AuthGuardService]},
 {path:'add-customer',component:AddCustomerComponent },
-{path:'edit-customer/:id',component:EditCustomerComponent,
-canActivate:[AuthGaurdService]},
+{path:'edit-customer',component:EditCustomerComponent,
+canActivate:[AuthGuardService]},
 {path:'view-customer/:id',component:ViewCustomerComponent,
 canActivate: [CustomerDetailGuard]},
 { path: 'login', component: LoginComponent },
 { path: 'change-password', component: ForgotPasswordComponent },
 { path: 'logout', component: LogoutComponent},
 {path:"customer-list",component:CustomerListComponent,
-canActivate:[AuthGaurdService]}
+canActivate:[AuthGuardService,AdminGuard]}
 ];
 
 @NgModule({

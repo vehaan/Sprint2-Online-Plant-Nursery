@@ -31,18 +31,8 @@ export class WelcomeComponent implements OnInit {
 
   constructor(public loginService:AuthenticationService,private service:CustomerService, private router:Router, private planterService: PlanterServiceService, private plantService: PlantService, private seedService: SeedService ){ }
   ngOnInit() {
-    if(this.loginService.isUserLoggedIn()){
-      this.email = sessionStorage.getItem('email');
-
-      this.service.getCustomerByMail(this.email).subscribe(
-            (data)=> {console.log(data);
-                this.customer=data},
-            (err)=>console.log(err))
+      
     
-        console.log(this.email)
-
-        console.log(this.customer)
-    }
 
 
     let sub1 = this.planterService.getAllPlanters();
@@ -62,7 +52,31 @@ export class WelcomeComponent implements OnInit {
       this.shuffle(this.seeds);
      })
 
+     this.email= sessionStorage.getItem('email')
+    this.service.getCustomerByMail(this.email).subscribe(
+      (data)=> {console.log(data);
+          this.customer=data},
+      (err)=>console.log(err))
+ 
+     this.checkStatus(this.customer.status);
+
   
+  }
+
+  // ngAfterViewChecked(): void {
+  //   this.customer=this.loginService.customer;
+  //   this.checkStatus(this.customer.status);
+  //   console.log(this.customer)
+  // }
+
+  
+  checkStatus(status:string){
+
+    if(status == 'BLOCK'){
+      alert("Your account is blocked for 10 days");
+      this.router.navigate(['/logout']);
+    }
+
   }
 
   addPlanter() {
