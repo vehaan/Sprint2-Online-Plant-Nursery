@@ -31,7 +31,7 @@ export class EditSeedComponent implements OnInit {
           difficultyLevel: this.seed.difficultyLevel,
           temperature: this.seed.temperature,
           typeOfSeed: this.seed.typeOfSeed,
-          commonName: this.seed.commonName,
+          name: this.seed.name,
           description: this.seed.description,
           seedsPerPacket: this.seed.seedsPerPacket
         });

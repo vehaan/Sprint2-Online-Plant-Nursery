@@ -9,20 +9,20 @@ import { IPlanter } from '../components/planters/planter/IPlanter';
 })
 export class PlanterServiceService {
 
-  planters!:IPlanter[];
+  // planters!:IPlanter[];
   private error! : string
 
-  dataFill(){
-    this.getAllPlanters().subscribe(
-      (data)=>this.planters = data,
-      (err)=>this.error = err
-    )
+  // dataFill(){
+  //   this.getAllPlanters().subscribe(
+  //     (data)=>this.planters = data,
+  //     (err)=>this.error = err
+  //   )
   //  return this.planters;
-  }
+  // }
   
-  logg(){
-    console.log(this.planters);
-  }
+  // logg(){
+  //   console.log(this.planters);
+  // }
   
   
 
@@ -58,5 +58,12 @@ export class PlanterServiceService {
    */
        return this.http.post<IPlanter>(this.baseUrl + "/planter",planter);
   }
+
+  costLowToHigh():Observable<IPlanter[]>{
+    return <Observable<IPlanter[]>>this.http.get(this.baseUrl+"/planters/costLowToHigh");
+}
+costHighToLow():Observable<IPlanter[]>{
+    return <Observable<IPlanter[]>>this.http.get(this.baseUrl+"/planters/costHighToLow");
+}
 
 }

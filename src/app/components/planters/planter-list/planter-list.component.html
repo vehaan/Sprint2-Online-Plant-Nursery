@@ -1,14 +1,7 @@
-<div> 
+<!-- <div> 
     <button style="margin-left: 42%;" class="btn btn-primary" routerLink = "/addPlanter">Add Planter</button>
 </div><br>
 <h1 class="container-fluid btn-warning text-center">PLANTERS </h1>
-
-<!-- <div class="col-6">
-    <label for="price">Sort By:</label>
-    <select [(ngModel)]="sortBy" (change)="selected()">
-        <option *ngFor="let item of sortOptions" [ngValue]="item">{{item}}</option>
-    </select>
-</div> -->
 <div class="s-box-container">
     <div class='col-md-2'>Search:</div>
   <div class='col-md-4'>
@@ -19,4 +12,154 @@
     <button style="margin-left: 100%;" class="btn btn-secondary" (click) = "toggleDetails()">{{details? 'Hide' : 'Show'}} Details</button>
 </div>
 <app-planter [showDetails] = "details" [planters] = "tempPlanters"></app-planter>
+ -->
 
+ <div>
+ <section><button class="btn btn-primary" (click)='toggleDetails()'>Details</button>
+    <div class="s-box-container">
+        <div class='col-md-2'>Search:</div>
+        <div class='col-md-4'>
+            <input type='text' [(ngModel)]='listFilter' />
+        </div>
+        <button class="btn btn-danger" (click)="addPlanter()"> Add planter</button><br><br>
+        <button class="btn btn-outline-success" (click)="ascendingSort()"> Cost low to high</button>
+        <button class="btn btn-outline-danger" (click)="descendingSort()"> Cost High to low</button>
+
+        <div *ngIf="!sort && !sortHighToLow">
+            <div class="s-box" *ngFor="let planter of filteredPlanters">
+                <button class="btn button-small btn-danger" id="x" (click)="onDelete(planter)">X</button>
+                <img alt="1" src="https://ak.picdn.net/shutterstock/videos/1027610672/thumb/11.jpg" class="appIcon" />
+                <h1><a [routerLink]="['/planters/',planter.id]">{{planter.name}}</a></h1>
+                <ul *ngIf="showDetails">
+                    <li>Height: {{planter.height}}</li>
+                    <li>Shape: {{planter.shape}}</li>
+                    <li>Capacity: {{planter.capacity}}</li>
+                    <li>Drainage Holes: {{planter.drainageHoles}}</li>
+                    <li>Color: {{planter.color}}</li>
+                    <li>Stock: {{planter.stock}}</li>
+                </ul>
+
+                <div class="blockquote" style="background-color:lightgreen; border-radius: 15px; width: 50%; text-align: center;">{{planter.cost | currency:'INR':'symbol':'1.2'}}</div>
+                <hr width="100%">
+                <button class="fa fa-edit btn btn-outline-primary" [routerLink]="['/edit-planter/',planter.id]"> Edit</button><br>
+                <a class="btn btn-success float-sm-end" (click) = "addToCart(planter.id)">Add to Cart</a>
+            </div>
+        </div>
+
+        <div *ngIf="sort">
+            <div class="s-box" *ngFor="let planter of costLowToHighPlanters">
+                <button class="btn button-small btn-danger" id="x" (click)="onDelete(planter)">X</button>
+                <img alt="1" src="https://ak.picdn.net/shutterstock/videos/1027610672/thumb/11.jpg" class="appIcon" />
+                <h1><a [routerLink]="['/planters/',planter.id]">{{planter.name}}</a></h1>
+                <ul *ngIf="showDetails">
+                    <li>Height: {{planter.height}}</li>
+                    <li>Shape: {{planter.shape}}</li>
+                    <li>Capacity: {{planter.capacity}}</li>
+                    <li>Drainage Holes: {{planter.drainageHoles}}</li>
+                    <li>Color: {{planter.color}}</li>
+                    <li>Stock: {{planter.stock}}</li>
+
+                </ul>
+
+                <div class="blockquote" style="background-color:lightgreen; border-radius: 15px; width: 50%; text-align: center;">{{planter.cost | currency:'INR':'symbol':'1.2'}}</div>
+                <hr width="100%">
+                <button class="fa fa-edit btn btn-outline-primary" [routerLink]="['/edit-planter/',planter.id]"> Edit</button><br>
+                <a class="btn btn-success float-sm-end" (click) = "addToCart(planter.id)">Add to Cart</a>
+
+            </div>
+        </div>
+
+        <div *ngIf="sortHighToLow">
+            <div class="s-box" *ngFor="let planter of costHighToLowPlanters">
+                <button class="btn button-small btn-danger" id="x" (click)="onDelete(planter)">X</button>
+                <img alt="1" src="https://ak.picdn.net/shutterstock/videos/1027610672/thumb/11.jpg" class="appIcon" />
+                <h1><a [routerLink]="['/planters/',planter.id]">{{planter.name}}</a></h1>
+                <ul *ngIf="showDetails">
+                    <li>Height: {{planter.height}}</li>
+                    <li>Shape: {{planter.shape}}</li>
+                    <li>Capacity: {{planter.capacity}}</li>
+                    <li>Drainage Holes: {{planter.drainageHoles}}</li>
+                    <li>Color: {{planter.color}}</li>
+                    <li>Stock: {{planter.stock}}</li>
+
+                </ul>
+
+                <div class="blockquote" style="background-color:lightgreen; border-radius: 15px; width: 50%; text-align: center;">{{planter.cost | currency:'INR':'symbol':'1.2'}}</div>
+                <hr width="100%">
+                <button class="fa fa-edit btn btn-outline-primary" [routerLink]="['/edit-planter/',planter.id]"> Edit</button><br>
+                <a class="btn btn-success float-sm-end" (click) = "addToCart(planter.id)">Add to Cart</a>
+
+            </div>
+        </div>
+        
+
+        <!--
+        <br>
+        <div class="container">
+            <div class="row">
+                <br>
+                <h2 class="heading col-25">Plants List</h2>
+                <button class="btn btn-primary add_button col-75" style="width:100px" (click)="addPlant()"> Add Plant</button>
+            </div>
+            <div class="row">
+                <div class="col-md-3">Search plant:</div>
+                <div class="col-md-4">
+                    <input type='text' [(ngModel)]="listFilter" />
+                </div>
+            </div>
+            <div class='row'>
+                <div class='col-md-6'>
+                    <h4>Searched by: {{listFilter}}</h4>
+                </div>
+            </div>
+            <div>
+                <br>
+                <button type="button" class="btn btn-outline-success btn-sm" (click)="ascendingSort()">cost Low To High</button>
+                <button type="button" class="btn btn-outline-danger btn-sm" (click)="descendingSort()">cost High To Low</button>
+            </div>
+            <div>
+                <br>
+                <table *ngIf="!sort && !sortHighToLow" class="table table-striped table-bordered">
+                    <tr>
+                        <th colspan="1">Plants</th>
+                        <th colspan="1">Price</th>
+                    </tr>
+                    <tr *ngFor="let c of filteredPlants">
+                        <td><a [routerLink]="['/plants/',c.id]">{{c.name}}</a></td>
+                        <td>{{c.cost}}</td>
+                        <td> <button (click)="onEdit(c)">Edit</button></td>
+                        <td><button (click)="onDelete(c)">Delete</button></td>
+                    </tr>
+                </table>
+            </div>
+            <div *ngIf="sort">
+                <h6>(Sorted low to high by Price)</h6>
+                <table class="table table-striped table-bordered">
+                    <tr>
+                        <th colspan="1">Plants</th>
+                        <th colspan="1">Price</th>
+                    </tr>
+                    <tr *ngFor="let c2 of costLowToHighPlants">
+                        <td><a [routerLink]="['/plants/',c2.id]">{{c2.name}}</a></td>
+                        <td>{{c2.cost}}</td>
+                        <td><button (click)="onEdit(c2)">Edit</button></td>
+                        <td><button (click)="onDelete(c2)">Delete</button></td>
+                    </tr>
+                </table>
+            </div>
+            <div *ngIf="sortHighToLow">
+                <h6>(Sorted high to low by Price)</h6>
+                <table class="table table-striped table-bordered">
+                    <tr>
+                        <th colspan="1">Plants</th>
+                        <th colspan="1">Price</th>
+                    </tr>
+                    <tr *ngFor="let c2 of costHighToLowPlants">
+                        <td><a [routerLink]="['/plants/',c2.id]">{{c2.name}}</a></td>
+                        <td>{{c2.cost}}</td>
+                        <td><button (click)="onEdit(c2)">Edit</button></td>
+                        <td><button (click)="onDelete(c2)">Delete</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>-->

@@ -10,6 +10,6 @@ export class Plant{
     difficultyLevel:string = "";
     temparature:string ="";
     typeOfPlant:string="";
-    commonName:string="";
+    name:string="";
     description:string="";
 }

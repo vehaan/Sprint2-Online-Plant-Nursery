@@ -3,6 +3,7 @@ import { PlantService } from '../../../services/plant.service';
 import { Plant } from '../plant/Plant'
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Cart } from '../../cart/cart';
 
 @Component({
   selector: 'app-plant-list',
@@ -19,6 +20,7 @@ export class PlantListComponent implements OnInit {
   public showDetails:boolean = false;
   filteredPlants:Plant[]=[];
   sub!: Subscription;
+  cartProducts:Cart[] = [];
 
   get listFilter():string{
     return this._listFilter;
@@ -48,7 +50,7 @@ export class PlantListComponent implements OnInit {
   performFilter(filterBy:string):Plant[]{
     filterBy=filterBy.toLocaleLowerCase();
     return this.plants.filter((plant:Plant)=>
-    plant.commonName.toLocaleLowerCase().includes(filterBy));
+    plant.name.toLocaleLowerCase().includes(filterBy));
 
   }
 
@@ -87,4 +89,62 @@ export class PlantListComponent implements OnInit {
   toggleDetails(){
     this.showDetails = ! this.showDetails
   }
+
+   //Cart methods--------------------------------------------
+   saveCart() {
+    let prevData = localStorage.getItem('cart');
+    console.log('prevdata'+prevData);
+
+    if(prevData){
+      let prodInCart: Cart[] = JSON.parse(prevData);
+      console.log('saved in prodInCart'+prodInCart);
+      
+      return prodInCart;
+    }
+    return null;
+
+  }
+
+  addToCart(plantId: number) {
+     
+    let prodInCart = this.saveCart();
+    if(prodInCart){
+      this.cartProducts = prodInCart;
+    }
+
+    let plant = this.plants.find(plant=> {
+      return plant.id === plantId;
+    });
+    let flag = true;
+
+    if(plant){
+      this.cartProducts.forEach((value, index)=>{
+          
+        if(value.id === plantId) {
+          let cart = this.cartProducts[index];
+          cart.quantity++;
+          console.log(cart.id+" Quan: "+cart.quantity);
+          this.cartProducts.splice(index, 1, cart);
+          flag = false;
+
+        }
+
+      })
+
+      if(flag) {
+        this.cartProducts.push({
+          "id" : plant.id,
+          "quantity": 1
+        })
+      }
+      
+    }
+
+    localStorage.setItem('cart', JSON.stringify(this.cartProducts));
+    
+  }
+
+  // goToCart() {
+  //   this.router.navigate(['/cart']);
+  // }
 }

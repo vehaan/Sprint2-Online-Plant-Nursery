@@ -32,7 +32,7 @@ export class EditPlantComponent implements OnInit {
           difficultyLevel: this.plant.difficultyLevel,
           temparature: this.plant.temparature,
           typeOfPlant: this.plant.typeOfPlant,
-          commonName: [this.plant.commonName,Validators.required],
+          name: [this.plant.name,Validators.required],
           description: this.plant.description
 
         });

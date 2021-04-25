@@ -3,12 +3,12 @@
     <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
         <div class="form-group row required">
             <div class="col-25">
-                <label for="commonName">Common Name:</label> 
+                <label for="name">Common Name:</label> 
             </div>
             <div class="col-75">
-                <input type="text" formControlName="commonName" name="commonName" class="form-control" id="commonName" [ngClass]="{'is-invalid': (addForm.controls.commonName.touched ||addForm.controls.commonName.dirty) &&!addForm.controls.commonName.valid }" />
+                <input type="text" formControlName="name" name="name" class="form-control" id="name" [ngClass]="{'is-invalid': (addForm.controls.name.touched ||addForm.controls.name.dirty) &&!addForm.controls.name.valid }" />
                 <span class="invalid-feedback">
-                <span *ngIf="addForm.controls.commonName.errors?.required">
+                <span *ngIf="addForm.controls.name.errors?.required">
                   Please enter 'Common name' of plant
                 </span>
                 </span>

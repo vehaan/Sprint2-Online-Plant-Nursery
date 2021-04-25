@@ -8,7 +8,7 @@ export class Seed{
     difficultyLevel:string = "";
     temperature:string ="";
     typeOfSeed:string = "";
-    commonName:string = "";
+    name:string = "";
     description:string = "";
     seedsPerPacket:string = "";
 }

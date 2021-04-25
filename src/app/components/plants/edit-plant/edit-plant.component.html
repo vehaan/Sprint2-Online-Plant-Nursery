@@ -10,11 +10,11 @@
         <br>
         <div class="form-group row required">
             <div class="col-25">
-                <label for="commonName">Common Name:</label> </div>
+                <label for="name">Common Name:</label> </div>
             <div class="col-75">
-                <input type="text" formControlName="commonName" name="commonName" class="form-control" id="commonName" [ngClass]="{'is-invalid': (editForm.controls.commonName.touched ||editForm.controls.commonName.dirty) &&!editForm.controls.commonName.valid }" />
+                <input type="text" formControlName="name" name="name" class="form-control" id="name" [ngClass]="{'is-invalid': (editForm.controls.name.touched ||editForm.controls.name.dirty) &&!editForm.controls.name.valid }" />
                 <span class="invalid-feedback">
-                            <span *ngIf="editForm.controls.commonName.errors?.required">Please enter 'Common name' of plant</span>
+                            <span *ngIf="editForm.controls.name.errors?.required">Please enter 'Common name' of plant</span>
                 </span>
             </div>
         </div>

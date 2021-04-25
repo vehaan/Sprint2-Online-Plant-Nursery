@@ -25,6 +25,7 @@ export class EditPlanterComponent implements OnInit {
       (data)=>{console.log(data);this.planter=data;
         this.editForm = this.formBuilder.group({
         id : this.planter.id,
+        name: this.planter.name,
         cost: this.planter.cost,
         stock: this.planter.stock,
         type: this.planter.type,

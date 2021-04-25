@@ -11,6 +11,7 @@ import { IPlanter } from '../planter/IPlanter';
 export class AddPlanterComponent implements OnInit {
 
   planter:IPlanter = {id: 0,
+    name: '',
     cost: 0,
     stock: 0,
     type: 'PLANTER',

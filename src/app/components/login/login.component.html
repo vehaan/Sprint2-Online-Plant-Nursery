@@ -1,0 +1,12 @@
+<div class="container">
+    <div>
+      User Name : <input type="text" name="email"
+       [(ngModel)]="email">
+      Password : <input type="password"
+       name="password" [(ngModel)]="password">
+    </div>
+    <button (click)=checkLogin() class="btn btn-success">
+      Login
+    </button>
+    <a  routerLink="/change-password">Forgot Password</a>
+  </div>

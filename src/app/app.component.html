@@ -1,4 +1,4 @@
-
+<!-- 
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,8 +13,7 @@
 
     <ul id="nav-bar">
         <li><a href="#">Home</a></li>
-        <!-- <li><a href="#">Contact</a></li>
-        <li><a href="#">About</a></li> -->
+        
         <li><a href="/plants">Plant</a></li>
         <li><a href="/seeds">Seed</a></li>
         <li><a href="/planters">Planter</a></li>  
@@ -24,12 +23,70 @@
     </ul>
 
     <div id="content">
-        <!-- PUT EVERYTHING OF BODY HERE -->
+        
         <router-outlet></router-outlet>
-      <!-- <app-planter-list id="planter"></app-planter-list> -->
+      
       
     </div>
     
 </body>
 </html>
+ -->
 
+ <!DOCTYPE html>
+ <html>
+ <head>
+     <title>Online Plant Nursery</title>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> --> -->
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> -->
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+<!------ Include the above in your HEAD tag ---------->
+ </head>
+ <body>
+     <!-- <div id="header-img">
+         <img src="https://i.pinimg.com/originals/e8/88/d4/e888d4feff8fd5ff63a965471a94b874.gif">
+         <h1>Online Plant Nursery</h1>
+     </div> -->
+ 
+     <ul id="nav-bar">
+         <li><a  routerLink="/welcome" class="nav-link"> <span class="glyphicon glyphicon-home"></span>  Home</a></li>
+        
+         <li><a routerLink="/plants">Plant</a></li>
+         <li><a routerLink="/seeds">Seed</a></li>
+         <li><a routerLink="/planters">Planter</a></li>
+         
+ 
+         <li class="float-end"><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/add-customer" class="nav-link">Register</a></li>
+         <li class="float-end"><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/login" >  <span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+         <li class="float-end"><a *ngIf="loginService.isUserLoggedIn()" routerLink="/logout" class="nav-link"><span class="glyphicon glyphicon-log-out"></span> LogOut</a></li>
+         <li class="float-end"><a href="/cart"><i class="glyphicon glyphicon-shopping-cart">Cart</i></a></li>
+         <li class="float-end"><a href="/orders">My Orders</a></li>
+         <li class="float-end"><a *ngIf="loginService.isUserLoggedIn() "  routerLink="/account" class="nav-link"> <span class="glyphicon glyphicon-user"></span>  My Account</a></li>
+         
+     </ul>
+ 
+   
+         <!-- <div class="container " id="content"> -->
+            
+
+             <router-outlet></router-outlet>
+       
+       
+          <!-- </div>  -->
+          
+
+        
+          <!-- <app-footer></app-footer> -->
+ 
+ </body>
+ </html>
+ 
+ 

@@ -1,0 +1,49 @@
+  
+<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
+
+<section>
+    <div>
+        <h1>In Cart</h1>
+        <div class="s-box" *ngFor = "let planter of cartProduct">
+            <button class="btn button-small btn-danger" id="x" [routerLink] = "['/cart']" (click) = "deleteFromCart(planter.id)">X</button>
+
+    
+            <img alt="1" src="https://ak.picdn.net/shutterstock/videos/1027610672/thumb/11.jpg" class="appIcon" />
+            <h1>Product Id: {{planter.id}}</h1>
+            <h2>Product name: {{planter.name}}</h2>
+            <h1>Quantity: {{cartProductQuantity[cartProduct.indexOf(planter)]}}</h1>
+          
+            <div class="blockquote" style="background-color:lightgreen; border-radius: 15px; width: 0%; text-align: center;">{{planter.cost | currency:'INR':'symbol':'1.2'}}</div>
+            <hr width="100%">
+            <!-- <button class="btn button-small btn-danger" id="add" [routerLink] = "['/cart']" (click) = "incQuantity(planter.id)">+</button> -->
+            <div>
+                <button type="button" class="btn btn-default btn-lg" id = "add" (click) = "incQuantity(planter.id)">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </button>
+            
+                <button type="button" class="btn btn-default btn-lg" id = "minus" (click) = "decQuantity(planter.id)">
+                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                </button>
+            </div>
+            <br>
+        
+        </div>
+    </div>
+   
+    <h2>Total quantity:{{totalQuantity}}</h2>
+    <h2>Total cost:{{getSum()}}</h2><br>
+    <h3>Select payment mode:</h3>
+    <form action="/action_page.php">
+    <input type="radio"  name="payment" (click)="paymentMethod('CASH')">
+    <label>CASH</label><br>
+    <input type="radio"  name="payment" (click)="paymentMethod('CARD')">
+    <label>CARD</label><br>
+    <input type="radio"  name="payment" (click)="paymentMethod('UPI')">
+    <label>UPI</label> 
+    </form>
+    <br>
+    <button  (click) = "onSubmit()">Place Order</button>
+    
+</section>

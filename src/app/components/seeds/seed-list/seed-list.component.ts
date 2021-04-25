@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Seed } from '../seed/Seed';
 import { SeedService } from '../../../services/seed.service';
+import { Cart } from '../../cart/cart';
 
 @Component({
   selector: 'app-seed-list',
@@ -23,6 +24,7 @@ export class SeedListComponent implements OnInit {
   public filteredSeeds:Seed[] = [];
   sub!: Subscription;
   errorMessage:string ='';
+  cartProducts:Cart[] = [];
 
   get listFilter(): string {
     return this._listFilter;
@@ -37,7 +39,7 @@ export class SeedListComponent implements OnInit {
   performFilter(filterBy: string): Seed[] {
     filterBy = filterBy.toLocaleLowerCase();
     return this.seeds.filter((seed: Seed) =>
-      seed.commonName.toLocaleLowerCase().includes(filterBy));
+      seed.name.toLocaleLowerCase().includes(filterBy));
   }
 
   constructor(private service:SeedService, private router:Router) { }
@@ -88,4 +90,61 @@ toggleDetails(){
     this.router.navigate(['add-seed'])
   }
 
+    //Cart methods--------------------------------------------
+    saveCart() {
+      let prevData = localStorage.getItem('cart');
+      console.log('prevdata'+prevData);
+  
+      if(prevData){
+        let prodInCart: Cart[] = JSON.parse(prevData);
+        console.log('saved in prodInCart'+prodInCart);
+        
+        return prodInCart;
+      }
+      return null;
+  
+    }
+  
+    addToCart(seedId: number) {
+       
+      let prodInCart = this.saveCart();
+      if(prodInCart){
+        this.cartProducts = prodInCart;
+      }
+  
+      let seed = this.seeds.find(seed=> {
+        return seed.id === seedId;
+      });
+      let flag = true;
+  
+      if(seed){
+        this.cartProducts.forEach((value, index)=>{
+            
+          if(value.id === seedId) {
+            let cart = this.cartProducts[index];
+            cart.quantity++;
+            console.log(cart.id+" Quan: "+cart.quantity);
+            this.cartProducts.splice(index, 1, cart);
+            flag = false;
+  
+          }
+  
+        })
+  
+        if(flag) {
+          this.cartProducts.push({
+            "id" : seed.id,
+            "quantity": 1
+          })
+        }
+        
+      }
+  
+      localStorage.setItem('cart', JSON.stringify(this.cartProducts));
+      
+    }
+  
+    // goToCart() {
+    //   this.router.navigate(['/cart']);
+    // }
 }

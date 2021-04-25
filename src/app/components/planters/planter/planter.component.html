@@ -1,26 +1,103 @@
-  <section>
-    <div class="s-box-container">
-      <div class="s-box" *ngFor = "let planter of planters">
-        <button class="btn button-small btn-danger" id="x"  (click) = "deletePlanter(planter)">X</button>
-        
-        <img alt="1" src="https://ak.picdn.net/shutterstock/videos/1027610672/thumb/11.jpg" class="appIcon" />
-        <h1>Planter Id: {{planter.id}}</h1>
-        <!--details------>
-        <ul *ngIf = "showDetails">
-             <li>Height: {{planter.height}} cm</li>
-             <li>Shape: {{planter.shape}}</li>
-             <li>Capacity: {{planter.capacity}}</li>
-             <li>Color: <span [style.color] = "planter.color">{{planter.color}}</span></li>
-             <li>Drainage Holes: {{planter.drainageHoles}}</li>
-             <li>Stock Available: {{planter.stock}}</li>
-          </ul>
-          <!-- <div> -->
-            
-          <div class="blockquote" style="background-color:lightgreen; border-radius: 15px; width: 50%; text-align: center;">{{planter.cost | currency:'INR':'symbol':'1.2'}}</div><hr width="100%">
-          <button class="fa fa-edit btn btn-outline-primary" [routerLink] = "['/edit-planter/',planter.id]"> Edit</button><br>
-        <a class="btn btn-success float-sm-end" href="#cart">Add to Cart</a>
-        
-      </div>
-      <!-- </div> -->
+  <!-- <div class="container">
+    <div class="col">
+        <div class="card">
+            <h5 class="card-header">{{planter.id}}</h5>
+            <div class="card-body">
+
+                <h5 class="card-title">Details</h5>
+                <table>
+                    <tr>
+                        <th>Cost</th>
+                        <td>{{planter.cost}}</td>
+                    </tr>
+                    <tr>
+                        <th>Stock left</th>
+                        <td>{{planter.stock}}</td>
+                    </tr>
+                    <tr>
+                        <th>Height</th>
+                        <td>{{planter.height}}</td>
+                    </tr>
+                    <tr>
+                      <th>Shape</th>
+                      <td>{{planter.shape}}</td>
+                  </tr>
+                  <tr>
+                    <th>Capacity</th>
+                    <td>{{planter.capacity}}</td>
+                </tr>
+                <tr>
+                  <th>Drainage Holes</th>
+                  <td>{{planter.drainageHoles}}</td>
+              </tr>
+              <tr>
+                <th>Color</th>
+                <td>{{planter.color}}</td>
+            </tr>
+                </table>
+            </div>
+            <div class="card-footer">
+                <button (click)="onBack()">Back</button>
+            </div>
+        </div>
     </div>
-  </section>
+</div> -->
+
+
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>eCommerce Product Detail</title>
+    
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+
+  </head>
+
+  <body>
+	
+	<div class="container">
+		<div class="card">
+			<div class="container-fliud">
+				<div class="wrapper row">
+					<div class="preview col-md-6">
+						
+						<div class="preview-pic tab-content">
+						  <div class="tab-pane active" id="pic-1"><img src="https://ak.picdn.net/shutterstock/videos/1027610672/thumb/11.jpg" /></div>
+						</div>
+
+						
+					</div>
+					<div class="details col-md-6">
+						<h3 class="product-title">{{planter.name}}</h3>
+						
+              <ul>
+                <li>Available Stock: {{planter.stock}}</li>
+                <li>Height: {{planter.height}} inches</li>
+                <li>Shape: {{planter.shape}}</li>
+                <li>Color: {{planter.color}}</li>
+                <li title="Number of plants this planter can hold">Capacity: {{planter.capacity}}</li>
+                <li>Drainage Holes: {{planter.drainageHoles}}</li>
+              </ul>
+            
+						<h4 class="price">current price: <span>{{planter.cost | currency: 'INR':true}}</span></h4>
+
+
+						<div class="action">
+              <button class=" btn btn-warning" type="button" routerLink = "/welcome"><span class="glyphicon glyphicon-arrow-left" ></span > Back to HomePage</button>
+							<button style="margin-left: 1%;" class=" btn btn-danger btn-lg" type="button"><span class="glyphicon glyphicon-shopping-cart"></span> Add to cart</button>
+              <button style="margin-left: 1%;" class=" btn btn-warning" type="button" routerLink = "/planters">View all Planters <span class="glyphicon glyphicon-arrow-right" ></span ></button>
+							<!-- <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+  </body>
+</html>

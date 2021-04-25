@@ -23,7 +23,7 @@ export class AddSeedComponent implements OnInit {
       difficultyLevel:['',Validators.required],
       temperature:['',Validators.required],
       typeOfSeed:['',Validators.required],
-      commonName:['',Validators.required],
+      name:['',Validators.required],
       description:['',Validators.required],
       seedsPerPacket:['',Validators.required]
     })

@@ -28,7 +28,7 @@ export class AddPlantComponent implements OnInit {
       difficultyLevel:[''],
       temparature:[''],
       typeOfPlant:[''],
-      commonName:['', Validators.required],
+      name:['', Validators.required],
       description:['']
     })
   }
