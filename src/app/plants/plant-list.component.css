@@ -8,7 +8,7 @@
   
   .column {
       float: left;
-      padding: 15px;
+      padding: 2px;
   }
   /* Clear floats after the columns */
   
@@ -23,7 +23,7 @@
   }
   
   .column2 {
-      width: 75%;
+      width: 85%;
       border-left-style: solid;
       border-left-color: gainsboro;
   }
@@ -52,12 +52,13 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      width: 250px;
-      padding: 5px 5px;
+      /*width: 250px;*/
+      width: 24%;
+      padding: 10px 10px;
       height: auto;
       box-sizing: border-box;
-      margin: 5px;
-      position: relative;
+      margin: 3px;
+      /*position: relative;*/
       box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.08);
       transition: transform 1s;
   }
@@ -75,7 +76,8 @@
   */
   
   .s-box img {
-      height: 220px;
+      /*height: 220px;*/
+      width: 100%
   }
   
   .s-box h1 {
@@ -89,7 +91,7 @@
       color: rgba(87, 105, 117, 0.90);
       text-align: center;
   }
-  
+  /* 
   @media(max-width:1050px) {
       .s-box-container {
           flex-wrap: wrap;
@@ -100,7 +102,7 @@
       .s-box {
           flex-grow: 1;
       }
-  }
+  }*/
   /*
   .appIcon {
       border-radius: 10%;

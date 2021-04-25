@@ -8,16 +8,33 @@
     <div class="row">
 
         <div class="column column1">
-
-            Difficulty Level
-            <form action="/action_page.php">
+            <div>
+                <strong>Difficulty Level</strong>
+                <br>
+                <!-- <form action="/action_page.php">-->
                 <input type="checkbox" name="Difficulty" (click)=difficultyEasy()>
-                <label for="male">Easy</label><br>
+                <label>Easy</label><br>
                 <input type="checkbox" name="Difficulty" (click)=difficultyMedium()>
-                <label for="female">Medium</label><br>
+                <label>Medium</label><br>
                 <input type="checkbox" name="Difficulty" (click)=difficultyHard()>
-                <label for="other">Hard</label><br><br>
-            </form>
+                <label>Hard</label><br><br>
+                <!-- </form>-->
+            </div>
+            <div>
+
+                <strong>Blooming Time</strong>
+                <br>
+                <!-- <form action="/action_page.php">-->
+                <input type="checkbox" name="BloomTime" (click)=autumn()>
+                <label>AUTUMN</label><br>
+                <input type="checkbox" name="BloomTime" (click)=summer()>
+                <label>SUMMER</label><br>
+                <input type="checkbox" name="BloomTime" (click)=winter()>
+                <label>WINTER</label><br>
+                <input type="checkbox" name="BloomTime" (click)=monsoon()>
+                <label>MONSOON</label><br><br>
+                <!-- </form>-->
+            </div>
         </div>
 
         <div class="s-box-container column column2">
@@ -46,16 +63,6 @@
 
                     <img alt="1" src="https://cdn.shopify.com/s/files/1/0047/9730/0847/products/nurserylive-plants-areca-palm-small-plant-16968600322188_295x295.jpg?v=1601347566" class="appIcon" />
                     <p><a [routerLink]="['/plants/',plant.id]">{{plant.commonName}} ({{plant.height}} feet, {{plant.typeOfPlant}})</a></p>
-                    <!--
-                    <h1><a [routerLink]="['/plants/',plant.id]">{{plant.commonName}}</a></h1>
-                    <ul class="sboxtext">
-                        <li>Height: {{plant.height}}</li>
-                        <li>Temperature: {{plant.temparature | titlecase}}</li>
-                        <li>Type Of Plant: {{plant.typeOfPlant}}</li>
-                        <li>Description: {{plant.description}}</li>
-                        <li>Bloom time: {{plant.bloomTime | titlecase}}</li>
-
-                    </ul>-->
                     <div class="blockquote" style="background-color:lightgreen; border-radius: 15px; width: 50%; text-align: center;">{{plant.cost | currency:'INR':'symbol':'1.2'}}</div>
                     <!--<a class="btn btn-success float-sm-end" (click)="addToCart(plant.id)">Add to Cart</a> -->
                     <hr width="100%">
@@ -65,55 +72,10 @@
                     </div>
                 </div>
             </div>
-            <!--   *ngIf="!sort && !sortHighToLow"
-            <div *ngIf="sort">
-                <div class="s-box" *ngFor="let plant of costLowToHighPlants">
-                    <button class="btn button-small btn-danger" id="x" (click)="onDelete(plant)">X</button>
-                    <img alt="1" src="https://cdn.shopify.com/s/files/1/0047/9730/0847/products/nurserylive-plants-areca-palm-small-plant-16968600322188_295x295.jpg?v=1601347566" class="appIcon" />
-
-                    <h1><a [routerLink]="['/plants/',plant.id]">{{plant.commonName}}</a></h1>
-                    <ul>
-                        <li>Height: {{plant.height}}</li>
-                        <li>Temperature: {{plant.temparature}}</li>
-                        <li>Type Of Plant: {{plant.typeOfPlant}}</li>
-                        <li>Description: {{plant.description}}</li>
-                        <li>Bloom time: {{plant.difficultyLevel | titlecase}}</li>
-
-                    </ul>
-
-                    <div class="blockquote" style="background-color:lightgreen; border-radius: 15px; width: 50%; text-align: center;">{{plant.cost | currency:'INR':'symbol':'1.2'}}</div>
-                    <a class="btn btn-success float-sm-end" href="#cart">Add to Cart</a>
-                    <hr width="100%">
-                    <button class="fa fa-edit btn btn-outline-primary" [routerLink]="['/edit-plant/',plant.id]"> Edit</button><br>
-
-
-                </div>
+            <div *ngIf="noPlant">
+                Sorry NO Plant matches this criteria
             </div>
-           <div *ngIf="sortHighToLow">
-                <div class="s-box" *ngFor="let plant of costHighToLowPlants">
-                    <button class="btn button-small btn-danger" id="x" (click)="onDelete(plant)">X</button>
-                    <img alt="1" src="https://cdn.shopify.com/s/files/1/0047/9730/0847/products/nurserylive-plants-areca-palm-small-plant-16968600322188_295x295.jpg?v=1601347566" class="appIcon" />
-                    <h1><a [routerLink]="['/plants/',plant.id]">{{plant.commonName}}</a></h1>
-                    <ul>
-                        <li>Height: {{plant.height}}</li>
-                        <li>Temperature: {{plant.temparature}}</li>
-                        <li>Type Of Plant: {{plant.typeOfPlant}}</li>
-                        <li>Description: {{plant.description}}</li>
-                        <li>Bloom time: {{plant.bloomTime | titlecase}}</li>
-
-                    </ul>
-
-                    <div class="blockquote" style="background-color:lightgreen; border-radius: 15px; width: 50%; text-align: center;">{{plant.cost | currency:'INR':'symbol':'1.2'}}</div>
-                    <hr width="100%">
-                    <button class="fa fa-edit btn btn-outline-primary" [routerLink]="['/edit-plant/',plant.id]"> Edit</button><br>
-                    <a class="btn btn-success float-sm-end" href="#cart">Add to Cart</a>
-
-                </div>
-            </div>-->
         </div>
-
-
-
 
     </div>
 </section>

@@ -12,36 +12,37 @@ import { PlantComponent } from './plant.component';
 })
 export class PlantListComponent implements OnInit {
   public plants!: Plant[];
-  public costLowToHighPlants!: Plant[];
-  public costHighToLowPlants!: Plant[];
   private error!: string
-  private id: number = 0;
   private _listFilter: string = '';
-  public showDetails: boolean = true;
   filteredPlants: Plant[] = [];
+  searchedPlants:Plant[]=[];
   sub!: Subscription;
-  qty: number = 0;
+  //qty: number = 0;
+  public sortLowToHigh: boolean = false;
+  public sortHighToLow: boolean = false;
   difficultyEasyBool: boolean = false;
   difficultyMediumBool: boolean = false;
   difficultyHardBool: boolean = false;
-
-  cartMap = new Map();
+  autumnBool: boolean = false;
+  winterBool: boolean = false;
+  summerBool: boolean = false;
+  monsoonBool: boolean = false;
+  autumnPlants!: Plant[];
+  winterPlants!: Plant[];
+  summerPlants!: Plant[];
+  monsoonPlants!: Plant[];
   DifficultyEasyPlants!: Plant[];
   DifficultyMediumPlants!: Plant[];
   DifficultyHardPlants!: Plant[];
-
+  noPlant:boolean=false;
   get listFilter(): string {
     return this._listFilter;
   }
   set listFilter(value: string) {
     this._listFilter = value;
     console.log("in setter:", value);
-    this.filteredPlants = this.performFilter(value);
+    this.searchedPlants = this.performFilter(value);
   }
-
-
-  public sort: boolean = false;
-  public sortHighToLow: boolean = false;
 
   constructor(private service: PlantService, private router: Router) { }
 
@@ -49,60 +50,66 @@ export class PlantListComponent implements OnInit {
     this.sub = this.service.getAllPlants().subscribe({
       next: plants => {
         this.plants = plants;
-        this.filteredPlants = this.plants;
+        this.searchedPlants = this.plants;
       },
       error: err => this.error = err
     });
   }
   ngDoCheck(): void {
+    let tempPlants: (any | Plant)[] = [];
+    let bloomPlants:(any | Plant)[] = [];
     if (this.difficultyEasyBool) {
-      this.filteredPlants = this.DifficultyEasyPlants;
+      tempPlants = [...this.DifficultyEasyPlants]
     }
     if (this.difficultyMediumBool) {
-      this.filteredPlants = this.DifficultyMediumPlants;
+      tempPlants = [...tempPlants, ...this.DifficultyMediumPlants]
     }
     if (this.difficultyHardBool) {
-      this.filteredPlants = this.DifficultyHardPlants;
+      tempPlants = [...tempPlants, ...this.DifficultyHardPlants]
     }
-    if (this.difficultyEasyBool && this.difficultyMediumBool) {
-      this.filteredPlants = [...this.DifficultyEasyPlants, ...this.DifficultyMediumPlants];
+    if (this.autumnBool) {
+      bloomPlants = [...this.autumnPlants]
     }
-    if (this.difficultyEasyBool && this.difficultyHardBool) {
-      this.filteredPlants = [...this.DifficultyEasyPlants, ...this.DifficultyHardPlants];
+    if (this.winterBool) {
+      bloomPlants = [...bloomPlants, ...this.winterPlants]
     }
-    if (this.difficultyMediumBool && this.difficultyHardBool) {
-      this.filteredPlants = [...this.DifficultyMediumPlants, ...this.DifficultyHardPlants];
+    if (this.summerBool) {
+      bloomPlants = [...bloomPlants, ...this.summerPlants]
     }
-    if (this.difficultyMediumBool && this.difficultyEasyBool && this.difficultyHardBool) {
-      this.filteredPlants = this.plants;
+    if (this.monsoonBool) {
+      bloomPlants = [...bloomPlants, ...this.monsoonPlants]
     }
-
-    if (!this.difficultyMediumBool && !this.difficultyEasyBool && !this.difficultyHardBool) {
-      this.filteredPlants = this.plants;
+    if((this.difficultyEasyBool || this.difficultyMediumBool || this.difficultyHardBool) && (this.autumnBool || this.winterBool || this.summerBool || this.monsoonBool)){
+      let result = tempPlants.filter(o => bloomPlants.some(({id,name,}) => o.id === id && o.name === name));
+      this.filteredPlants=result;
     }
-    if(this.sort){
-      this.filteredPlants.sort((a,b)=>(a.cost>b.cost)?1:-1)
+    else if(this.difficultyEasyBool || this.difficultyMediumBool || this.difficultyHardBool){
+      this.filteredPlants=tempPlants;
     }
-    if(this.sortHighToLow){
-      this.filteredPlants.sort((a,b)=>(a.cost<b.cost)?1:-1)
+    else if(this.autumnBool || this.winterBool || this.summerBool || this.monsoonBool){
+      this.filteredPlants=bloomPlants;
     }
-
+    else{
+      //this.filteredPlants=this.plants;
+      this.filteredPlants=this.searchedPlants;
+    }
+    if (this.sortLowToHigh) {
+      this.filteredPlants.sort((a, b) => (a.cost > b.cost) ? 1 : -1)
+    }
+    if (this.sortHighToLow) {
+      this.filteredPlants.sort((a, b) => (a.cost < b.cost) ? 1 : -1)
+    }
+    if(this.filteredPlants.length==0){
+      console.log(this.filteredPlants.length)
+      this.noPlant=true;
+    }
+    else this.noPlant=false;
 
     console.log("inside do check")
   }
 
 
   performFilter(filterBy: string): Plant[] {
-    if (this.sort == true) {
-      filterBy = filterBy.toLocaleLowerCase();
-      return this.costLowToHighPlants.filter((plant: Plant) =>
-        plant.commonName.toLocaleLowerCase().includes(filterBy));
-    }
-    else if (this.sortHighToLow == true) {
-      filterBy = filterBy.toLocaleLowerCase();
-      return this.costHighToLowPlants.filter((plant: Plant) =>
-        plant.commonName.toLocaleLowerCase().includes(filterBy));
-    }
     filterBy = filterBy.toLocaleLowerCase();
     return this.plants.filter((plant: Plant) =>
       plant.commonName.toLocaleLowerCase().includes(filterBy));
@@ -125,62 +132,57 @@ export class PlantListComponent implements OnInit {
     this.router.navigate(['add-plant'])
   }
   ascendingSort() {
-    this.sort = !this.sort;
+    this.sortLowToHigh = !this.sortLowToHigh;
     this.sortHighToLow = false;
-    /*console.log(this.sort);
-    this.service.costLowToHigh().subscribe(
-      (data) => this.costLowToHighPlants = data,
-      (err) => this.error = err
-    )*/
   }
 
   descendingSort() {
-    this.sort = false;
+    this.sortLowToHigh = false;
     this.sortHighToLow = !this.sortHighToLow;
-    /*console.log(this.sortHighToLow);
-    this.service.costHighToLow().subscribe(
-      (data) => this.costHighToLowPlants = data,
-      (err) => this.error = err
-    )*/
   }
-  toggleDetails() {
-    this.showDetails = !this.showDetails
-  }
-  addToCart(id2: number) {
-    this.qty = this.qty + 1
-    this.cartMap.set(id2, this.qty);
-    console.log(id2, this.cartMap.get(id2))
 
-  }
+
   difficultyEasy() {
-
-
     this.difficultyEasyBool = !this.difficultyEasyBool;
     console.log(this.difficultyEasyBool);
     this.service.FilterByDifficulty("EASY").subscribe(
       (data) => this.DifficultyEasyPlants = data,
-      (err) => this.error = err
-    )
-
+      (err) => this.error = err)
   }
   difficultyMedium() {
-
-    console.log("Medium chosen");
     this.difficultyMediumBool = !this.difficultyMediumBool;
     this.service.FilterByDifficulty("MEDIUM").subscribe(
       (data) => this.DifficultyMediumPlants = data,
-      (err) => this.error = err
-    )
-
+      (err) => this.error = err)
   }
   difficultyHard() {
-
-    console.log("Hard chosen");
     this.difficultyHardBool = !this.difficultyHardBool;
     this.service.FilterByDifficulty("HARD").subscribe(
       (data) => this.DifficultyHardPlants = data,
-      (err) => this.error = err
-    )
-
+      (err) => this.error = err)
+  }
+  autumn() {
+    this.autumnBool = !this.autumnBool;
+    this.service.FilterByBloomTime("AUTUMN").subscribe(
+      (data) => this.autumnPlants = data,
+      (err) => this.error = err)
+  }
+  winter() {
+    this.winterBool = !this.winterBool;
+    this.service.FilterByBloomTime("WINTER").subscribe(
+      (data) => this.winterPlants = data,
+      (err) => this.error = err)
+  }
+  summer() {
+    this.summerBool = !this.summerBool;
+    this.service.FilterByBloomTime("SUMMER").subscribe(
+      (data) => this.summerPlants = data,
+      (err) => this.error = err)
+  }
+  monsoon() {
+    this.monsoonBool = !this.monsoonBool;
+    this.service.FilterByBloomTime("MONSOON").subscribe(
+      (data) => this.monsoonPlants = data,
+      (err) => this.error = err)
   }
 }

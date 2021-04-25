@@ -34,4 +34,7 @@ export class PlantService {
     FilterByDifficulty(difficulty:string):Observable<Plant[]>{
         return <Observable<Plant[]>>this.http.get(this.baseUrl+"/admin/plants/filterByDifficulty/"+difficulty)
     }
+    FilterByBloomTime(bloomTime:string):Observable<Plant[]>{
+        return <Observable<Plant[]>>this.http.get(this.baseUrl+"/admin/plants/filterByBloomTime/"+bloomTime)
+    }
 }
