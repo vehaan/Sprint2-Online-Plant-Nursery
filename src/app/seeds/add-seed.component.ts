@@ -17,7 +17,7 @@ export class AddSeedComponent implements OnInit {
     this.addForm = this.formBuilder.group({
       cost: ['', Validators.required],
       stock: ['', Validators.required],
-      type: ['', Validators.required],
+      type: ['SEED', Validators.required],
       watering:['',Validators.required],
       bloomTime:['',Validators.required], 
       difficultyLevel:['',Validators.required],

@@ -16,6 +16,12 @@ export class SeedService {
         return <Observable<Seed[]>>this.http.get(this.baseUrl + "/admin/seeds")
     }
 
+    FilterByBloomTime(bloomTime:string) {
+        return <Observable<Seed[]>>this.http.get(this.baseUrl+"/admin/seeds/filterbybloomtime/"+bloomTime)
+    }
+    FilterByDifficulty(difficulty:string) {
+        return <Observable<Seed[]>>this.http.get(this.baseUrl+"/admin/seeds/filterbydifficulty/"+difficulty)
+    }
 
     getSeedById(id: number): Observable<Seed> {
         console.log("in service class")
@@ -32,7 +38,7 @@ export class SeedService {
     }
     
     addSeed(seed: Seed): Observable<Seed> {
-        return <Observable<Seed>>this.http.post(this.baseUrl + "/admin/seeds", seed);
+        return <Observable<Seed>>this.http.post(this.baseUrl + "/admin/seed", seed);
     }
 
     getAllSeedsLowToHigh(): Observable<Seed[]> {

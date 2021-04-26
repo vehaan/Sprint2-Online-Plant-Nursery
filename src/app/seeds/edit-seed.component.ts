@@ -23,15 +23,15 @@ export class EditSeedComponent implements OnInit {
           this.seed = data;
           this.editForm = this.formBuilder.group({
           id: this.seed.id,
-          cost: this.seed.cost,
-          stock: this.seed.stock,
+          cost: [this.seed.cost,[ Validators.min(1), Validators.required]],
+          stock: [this.seed.stock,[ Validators.min(1), Validators.required]],
           type: this.seed.type,
           watering: this.seed.watering,
           bloomTime: this.seed.bloomTime,
           difficultyLevel: this.seed.difficultyLevel,
           temperature: this.seed.temperature,
           typeOfSeed: this.seed.typeOfSeed,
-          commonName: this.seed.commonName,
+          commonName: [this.seed.commonName,Validators.required],
           description: this.seed.description,
           seedsPerPacket: this.seed.seedsPerPacket
         });

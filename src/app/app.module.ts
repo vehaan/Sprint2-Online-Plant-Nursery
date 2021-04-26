@@ -8,6 +8,7 @@ import { SeedListComponent } from './seeds/seed-list.component';
 import { SeedComponent } from './seeds/seed.component';
 import { AddSeedComponent } from './seeds/add-seed.component';
 import { EditSeedComponent } from './seeds/edit-seed.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 @NgModule({
   declarations: [
@@ -15,14 +16,16 @@ import { EditSeedComponent } from './seeds/edit-seed.component';
     SeedListComponent,
     SeedComponent,
     AddSeedComponent,
-    EditSeedComponent
+    EditSeedComponent,
+    HomepageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

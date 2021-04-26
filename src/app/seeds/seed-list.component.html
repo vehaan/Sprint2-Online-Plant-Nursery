@@ -1,20 +1,133 @@
-<section>
-    <button class = "btn btn-primary" (click)='toggleDetails()'>Details</button>
 
-    <div class="s-box-container">
-        <div class='col-md-2'>Search:</div>
+<section>
+  <div>
+      <button class="btn btn-primary" (click)="addSeed()">Add Seed</button>
+  </div><br>
+  
+  <div class="row">
+
+      <div class="s-box-container column column1">
+          <div>
+              <strong>Difficulty Level</strong>
+              <br>
+              <!-- <form action="/action_page.php">-->
+              <input type="checkbox" name="Difficulty" (click)=difficultyEasy()>
+              <label>Easy</label><br>
+              <input type="checkbox" name="Difficulty" (click)=difficultyMedium()>
+              <label>Medium</label><br>
+              <input type="checkbox" name="Difficulty" (click)=difficultyHard()>
+              <label>Hard</label><br><br>
+              <!-- </form>-->
+          </div>
+          <div>
+
+              <strong>Blooming Time</strong>
+              <br>
+              <!-- <form action="/action_page.php">-->
+              <input type="checkbox" name="BloomTime" (click)=autumn()>
+              <label>AUTUMN</label><br>
+              <input type="checkbox" name="BloomTime" (click)=summer()>
+              <label>SUMMER</label><br>
+              <input type="checkbox" name="BloomTime" (click)=winter()>
+              <label>WINTER</label><br>
+              <input type="checkbox" name="BloomTime" (click)=monsoon()>
+              <label>MONSOON</label><br><br>
+              <!-- </form>-->
+          </div>
+      </div>
+
+      <div class="s-box-container column column2">
+          <div class="row">
+              <div class='col-md-1'>Search:</div>
+              <div class='col-md-3'>
+                  <input type='text' [(ngModel)]='listFilter' />
+              </div>
+              <div class="col-md-6"></div>
+              <div class="btn-group col-md-1">
+                  <button type="button" class="btn btn-secondary">Sort</button>
+                  <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+                  <span class="caret"></span>
+                </button>
+                  <div class="dropdown-menu">
+                      <a class="dropdown-item" (click)="ascendingSort()"> Cost low to high</a>
+                      <a class="dropdown-item" (click)="descendingSort()"> Cost High to low</a>
+                  </div>
+
+              </div>
+              <div class="col-md-1"></div>
+          </div>
+          <br>
+          <div>
+              <div class="s-box" *ngFor="let seed of filteredSeeds">
+
+                  <img alt="1" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHCBURFRESEhISERESERESERERERERERERGBgZGRgYGBgcIS4lHB4rIRgYJjgmKy8xNTU1GiQ7QDs0Py40NTEBDAwMEA8QHhISGjQhISE0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NP/AABEIALcBEwMBIgACEQEDEQH/xAAbAAACAwEBAQAAAAAAAAAAAAAAAgEDBAUGB//EADoQAAIBAgQEBAQEBQMFAQAAAAABAgMRBBIhMUFRYXEFIjKBE5GhsRRCYtEGI1Jy8FOCkmOiweHxQ//EABoBAAMBAQEBAAAAAAAAAAAAAAABAgMEBQb/xAAwEQACAQMDAgQEBgMBAAAAAAAAAQIDESEEEjEFQVFhsdETIoGhFHGRweHwM0JSFf/aAAwDAQACEQMRAD8A44pLIJMiGQADAgZEAKwDAKh0AEhcgAQWIFkyZMVsY1G4Nj0aEp3yrbqlfsLSpOb6cWdSksqsid2T1endNeovOpdQX3fl5LucqpRlD1Ra+wljsurujHN05PWNusdAckjsq9DlzSnfyfuvYwOIrR03govab/4pivAf9T/s/wDYbkcn/k6n/m/1XucxoRo6z8Pjxm/+KIjg6a3vLu7L6C3o1j0fUN8JfU5DIOzKEP8ATj9TLXw9Nu6bhfhvESqIup0WvFXTT8uPUwAXVcO46pqS5r9ihl3POqaedN7ZqzIbFAVjMnFoGwIIbAkGyAAAAi5BIANcm4gDAe4CXAAO6yGSxZEmdhQbAUYWDMMKhgCxJMSEhkIVgIbJGp0ZS6LmwvY2pUJ1ZbYK78ipsto4Zy1flj82+xqp0Yw1erXF6fJFdfEN7Myc/A9/S9Gzes/ov3fsakoxXJIrliOCMMqnUlT0I3HvRgoqy4Ra6u/UpkiFO5XOYmUiyFdxe+hp/FX0SOW3cshKWyv2RG4djf8AEfJ/IVVDG5tb39yfjX39h7h2ZpciqoiFUvoFwApmmldaCU6OaPKa1XKXNGmauiaFOyuyotpmFajCrHbNHLfUiSNWIlxsvmVd4+8TVVUeJU6RPO2Sf2M5DRfUpaXWq58UVWNE78HjVqM6Uts1ZiEFlhco7GArJJsFhgQAWCwAABYAA78kVstkhJIRBUyLDNAkAEJDJExiOkAC2GUWxjNia7p7cV+5LdkdOj0/x60abdk+fyRuiox3s5c+Q/xkziLFNmzBzvmly09zDdm7PtKNKnRhspqy/v6mnEVL6GKUhqs7lCbbSWrZDN+OBmyyEZPZNrmNBRhq/NPlwX7lNXESe7DgFksacd2l7kNJ6t6PYqoxzay2+5Xj6q8q2tsuSFfAuDUsq3X1ZY61vS9OSsjixr30L6UXLZ68OoJ+AtyZ0vxF9/k9QhSjK/B2dmnx7HJp4pPR7mmFZxab1XMal4iumsFbqtOz3TNNOrm7lHiVO2WcfTLf+4xxqtbMjh2F8Q7KmWPYwUa2ZdeJqp1DRFCziVSjc1ONytxEUslVPTho+fEpxFHLqvTL09OhsyE5LpxfG1u/AuE7M4dfo1XpOy+Zce31/vBzMpBZlCx1HxrEAfKRlAQgWHsQ0ACZQHsAAd6SK5FjEYjNFdiUhiUFhkJDpAkSAiGc7xB30669zoVNPqjn1+ZjUfY+i6HQxOq/yXq/2OedOh5YL9Tb9v8AEc6RvqPyw5ZVb5GR765K5zLqTUVdayfH+lGNSV1fa5qW77iK5CXFmGvWL8RPguJzMQ2nZkWJq1NiudpSSyxvZaL3OXj5NSdy3F1OPZlfi8HOnCtDVO1+j6jSuZ16loO3ZHOhVd9DqeH1rSV9G02lzsY8NGLa07vY1U455wstlLbgmrFYOWgprN7mTGLT4i9LtJ/7lcuwOKT8stmXV2rKC1hFWOR8CalaMZy5WQRsya0p0JqUcp828T00aDdOvB7Ryyi+5xIy4HpI5oUIRnpUluuNl/iPO4yOWV+D+4SXY6Kt1FTRbSnY30ql7HIjI1UaliUXTqXO7QlcecOJhw1TY6cdUi3k2TsyiMB3HbQsUQnoFi7nMq07Nrrp2K8prxGr9o/ZFOU61lI+G1UFCtOK7N+pTYLFziQ4lWOcqykOJblIcQsBVYgtsArAdZiMZsRsdiUgJIuSFgaGAEyLiELVe5zMQzfiJWXdr6GXD0HJ55LyLV9eiOeeZH2XTobNJDzu/wBW36WMDi+T+TsbKs2oQi1a0fcMRi227aLglshMRK9v7UQ0dq5MrZ0sM1OKs/MlZ+xzmTTbT0dvci4yzxC8bcGjPSrRq3+JFNrirp+9jZKLrRlG6zJXjfeVt0cSg3Gcou8Wt097g13RzVqm2pFPhncnh4TjazWlrpk0MO4LKpJx/VfVGahXsaVXHfB0pRb3Ih+Hwlssj5xat8hlhMqyqSjHjZNyZLrFcq7JbLVOK4RZGhCOyu+cv2NeFpZm5S0px1k+HYy4Og6jcpSy04+uT+y6k4/HqX8umstOOy4y6sErZYXthDYzEqTb9kuSOViFmTGlMqlILmVRpqxii7OxfFj/AIOpUf8ALhKT42WnzNsfBnFXrTjD9K80h2vk4acZp7bCYaod7CzvFHBm6dO2Ryl3tFHR8Gr51K/P5FRZ2RfZ8nStqJiNi6IlZDNrmG2nsvsiLD2+y+yBo64cHxmvt+JqW8WV5SLFjQrRRxiNEWLLENABVYCywABrbFuQ5C3ABhlIruFwAtuDkV3IzCYJF8cPGUc07vV2V7IpxVTSyVlwSNbbUIro2Yq+u5yyeWfb6eDhRhF9kvQ5Uy6Urxi/b5FeIjbYmlrFrk/oyGaJ5KZBFkSQspWjJkMbdsi06/n00sdGdKGI3tGqtpcJ9zgUJ63OrTmmupa8DmozVRO5XWoTpu0lbk+DIhM6dLH/AJZrNH6iz8Pp1PNSkk/6GTt8Dfa1wYlUL6VNNZpvLHhzl0RS8PKm/wCZHtyfuVzrOT1E3Ye59zRiMU5WivLBemC2X7szWb0WprwuAlPzPyw3cny6G5V4UVanFSlxnLcai3mQcmSh4RUnq0oR5y0+hshQw9D1v4s+S9JhxGNlPeTty2RkbKVlwv1FZHUxHjMmssEqcf0rU5NWo3q22+b3IkymUjOTbeSJyshZyOv/AA/tLucSbPQ+D08tNc5alRRlR+aodeJVWewIoqO7t8zWPJ1VZqnBzfCRCJaAY6kfDSk5O75ZWQM0QMgVogYVoAFAmxIAS5BcLBYkVwuFwsCQBclMEr27gW0Fr/bd/QTdlc309P4laMPFr+fsaKstfcyVY3Lpu5XKFzlPupHMrx3M9GeWVns9GdHEQObiIWAxlgerGxOFqxhLzrNFq0unUinLPHqt+xRIi9sobyrmnHeDf/pQ88HraL+xhg3HRpprg0LgcbOl6JNdOHyOzHxiT9cIzXVIvDOSkoy+aOPI52e40ZtPRtPhY6scfQfqpJPokyZeJU4+inbraKFZeJ1JeZGFlWlpKKcP16aF1TD0YPPZJ/03ur9jFX8TlLReUwzqt7sLoptI6OKxjkrLSJhlIq+IyM4hb0M2K2RmIbAlyFkyiTLJMpkyTlqSGpQzyjHmz1FCNkrcDi+E09XN9l/5O1RRaN9LHDl4mnhqUW4/Ieo7+27EOinG2WeP1fWqb+DB4XPt9PUAADY8ICGSEgEKyAJABLEjAABYMoyJJuZ3K7AO0LYQXIGUrZu1hbBUWj6akyV0dWiqqlqITfCf8DQdzQkYKNa10jZCVznPuSurC5ixFO61OtlKKtK4yWjzNebpSUuGzXNF05JpSWz2NmPweaLORhKlrwl/8ZLRx7nCptfEvUpqK0n8zXQnczYxWafsFGYI5oS+HVaNxJVGdyxMbR3xlckglMCSrkNEMZsUBMRg2MyuoxESwVyZVIabL8BTzTXKOr78ARyu8pbUdTC08kYx6a9zUqttFzKI6asWnO8l3NIK7uddaapwsjfBjiIc7D4oUAJYAQDBsgAIAAAQAQAAWIZIEhkiDnuRYVotsK0AXKrDDWIYh3MVanl1W32L6D03GqRumv8AEZoXTt1MZxtk+u6PrPjUvhyfzQ+67ex0qci2ULopoSNUdRI9cy1KXQ4vifhDbz01rxjz6o9N8MScEu49plUpxmrM8HiLuLurSjuno0Z6cj2mMwMKqaas9k1o0eaxXhFSlqk5w5paruibYPOr0ZxkpLPiVQmXKZii7F0ZCKp1DQpk5ijMTcTN1ULswXKswXEyt48pFcmDkJJiM5yEkzqeG0bRvxk7+3A51GnnlGPN69jrYisorKt+PRFJBQWXN9vUmvV1yrZb9WWYSN32MEDrYWFo9WbwWTg6hqLQfi8F8RhUMbnz4NigAAAAAADAAAZAAACLUx4sqQ6ZBzFpDITJKsIQWRY4itEtAKU1o2s/bu1cvsS6d1Z8RNXOnSal6esqi7c/l3KqEzdQmcmpmi7fXmjRTxOXfUxs1g+7p1Y1IqUHdM62dIqlK5ljik9iY1r3E2apFjQjGVQiUiLjaM9bCwn6oRb521+ZgqeCU36XKP1R1LkKQXM5UIS5RwpeCTXpnF900Uy8Lqr8qfZo9HcmQ8GT0sTy7wNT+h/NEPB1FvTkemlIW5OA/C+Z5v8ACT/05fIX8DUf5H9D0twbHgl6W/c4mC8PnFybSTyWV2i9eFye80uybOhWrxh6pLtxOXifEnK6h5Vz4soThCEdrZdQw0M8YKTcteVs1tEboo4NCo4yjJPW6afVHevffR8jemzweqQtKM1w8f36DokVDI1PJFYD2IsACgNYLAAoDWDKACgTYAAEOmVoYyTOexYh0VRHTLTExgIJAkLDRQg0QAapSU1Z+z4pnKxOHlHhdc0m9OvI7ER7Ckk1k7dH1CrpnaOV4Hno1bcl7F0Kvc6lWpBaZUwwWRSj/Ljq98qOa8ZP5cnsQ6/ZfNT/AEZXHDVHB1IwckrXai27c7cTDDG3PqOBSypJJK2x5f8Air+FFJurhllnvOmtIzfNcmbSo4wzSh13dNqpGy7W7fmeXli7kKucavUnTk4zi1JbpppifjWYumz1462m1hnejiCHiOpxVjCJYwW1mn4qHidiWJF/FnGljCqWJkGwylrYI7c8Wlx0MWI8Se0X7nNlJvcelh5z9MXLqlp8ylE5auub4wiJTb1buPBN7IvpYJ/mdui3N1GnGOy92UoNnnT19OHD3Py9yPCowjViqqcuidteF+h18X6pNbN3R5+pLzprgzsxnms+hdN5cTyquonWneb+ngOh0KkMjUzAAAYAAAAAAAAAAAACIdABgYE3GTAC0TIZMkkCiWSgQAAiyIxID7CZHw1yLsLC849AAmSSWB9z2vhz09i2otb8EAGqNOx57+I/D8PWg3Vh5knllFWkvc+e1vAl+SWnC6ACGrstV6lPEWZJ+DVFtlfvYil4RUk7Wiv9wAZSw7HZHWVWjXS8Al+aaXZG2h/D0OMpP6EgZSbMnqasv9jdR8How/In31N1WCjTkoRUfLslYALgzKUm+Xc8/wDDElEANjKPJgnDze51MPLREgc9P/IzVcl6GQAdRoAwAAAAAAAKAAIAAAA//9k="
+                      class="appIcon" />
+                  <p><a [routerLink]="['/seeds/',seed.id]">{{seed.commonName}}</a></p>
+                  <div class="blockquote" style="background-color:lightgreen; border-radius: 15px; width: 50%; text-align: center;">{{seed.cost | currency:'INR':'symbol':'1.2'}}</div>
+                  <!--<a class="btn btn-success float-sm-end" (click)="addToCart(seed.id)">Add to Cart</a> -->
+                  <hr width="100%">
+                  <div class="row">
+                      <button class="fa fa-edit btn btn-outline-primary" style="float: left;" [routerLink]="['/edit-seed/',seed.id]"> Edit</button><br>
+                      <button class="btn button-small btn-danger" style="float: right;" (click)="onDelete(seed)">Delete</button>
+                  </div>
+              </div>
+          </div>
+          <div *ngIf="noSeed">
+              Sorry NO Seed matches this criteria
+          </div>
+      </div>
+
+  </div>
+</section>
+
+<!-- <section>
+    <button class = "btn btn-primary float-right" (click)='toggleDetails()'>Details</button>
+    <div class="row">
+    <div class="s-box-container ">
+      <div class="column column1">
+        <div>
+            <strong>Difficulty Level</strong>
+            <br>
+            <form action="/action_page.php">
+            <!-- <input type="checkbox" name="Difficulty" (click)=difficultyEasy()>
+            <label>Easy</label><br>
+            <input type="checkbox" name="Difficulty" (click)=difficultyMedium()>
+            <label>Medium</label><br>
+            <input type="checkbox" name="Difficulty" (click)=difficultyHard()>
+            <label>Hard</label><br><br> -->
+            <!-- </form>-->
+        <!-- </div>
+        <div>
+
+            <strong>Blooming Time</strong>
+            <br> -->
+            <!-- <form action="/action_page.php">-->
+            <!-- <input type="checkbox" name="BloomTime" (click)=autumn()>
+            <label>AUTUMN</label><br>
+            <input type="checkbox" name="BloomTime" (click)=summer()>
+            <label>SUMMER</label><br>
+            <input type="checkbox" name="BloomTime" (click)=winter()>
+            <label>WINTER</label><br>
+            <input type="checkbox" name="BloomTime" (click)=monsoon()>
+            <label>MONSOON</label><br><br> -->
+            <!-- </form>-->
+        <!-- </div>
+    </div></div>
+    <div class="s-box-container column column2">
+        <div class='col-md-2 '>Search:</div>
       <div class='col-md-4'>
         <input type='text' [(ngModel)]='listFilter'/>
-      </div>
+      </div></div>
+      <br>
     </div>
-        <button class="btn btn-danger"  (click)="addSeed()"> Add Seed</button><br><br>
+        <button class="btn btn-danger "  (click)="addSeed()"> Add Seed</button><br><br>
         <button class="btn btn-outline-success" (click)="onSortLowToHigh()"> Cost low to high</button>
         <button class="btn btn-outline-danger" (click)="onSortHighToLow()"> Cost High to low</button>
-    <div *ngIf =  "!sort && !sortHighToLow">
+    <div >
       <div  class="s-box" *ngFor = "let seed of filteredSeeds">
         <button class="btn button-small btn-danger" id="x"  (click) = "onDelete(seed)">X</button>     
         <img alt="1" src="https://ak.picdn.net/shutterstock/videos/1027610672/thumb/11.jpg" class="appIcon" />
-        <h1>{{seed.commonName}}</h1>
+        <h1><a [routerLink]="['/seeds/',seed.id]">{{seed.commonName}}</a></h1>
         <ul *ngIf = "showDetails">
              <li>Stock: {{seed.stock}} cm</li>
              <li>Temperature: {{seed.temperature}}</li>
@@ -29,19 +142,19 @@
           <button class="fa fa-edit btn btn-outline-primary" [routerLink] = "['/edit-seed/',seed.id]"> Edit</button><br>
         <a class="btn btn-success float-sm-end" href="#cart">Add to Cart</a>
     </div>
-      </div>
-<div *ngIf = "sort">
+      </div> --> 
+<!-- <div >
       <div class="s-box" *ngFor = "let seed of seedsCostLowToHigh">
         <button class="btn button-small btn-danger" id="x"  (click) = "onDelete(seed)">X</button>     
         <img alt="1" src="https://ak.picdn.net/shutterstock/videos/1027610672/thumb/11.jpg" class="appIcon" />
-        <h1>{{seed.commonName}}</h1>
+        <h1>{{seed.commonname}}</h1>
         <ul *ngIf = "showDetails">
              <li>Stock: {{seed.stock}} cm</li>
              <li>Temperature: {{seed.temperature}}</li>
              <li>Watering: {{seed.watering}}</li>
              <li>{{seed.typeOfSeed}}</li>
              <li>{{seed.description}}</li>
-             <li>Bloom time: {{seed.bloomTime}}</li>
+             <li>Bloom time: {{seed.bloomTime | titlecase}}</li>
 
           </ul>
             
@@ -55,7 +168,7 @@
       <div class="s-box" *ngFor = "let seed of seedsCostHighToLow">
         <button class="btn button-small btn-danger" id="x"  (click) = "onDelete(seed)">X</button>     
         <img alt="1" src="https://ak.picdn.net/shutterstock/videos/1027610672/thumb/11.jpg" class="appIcon" />
-        <h1>{{seed.commonName}}</h1>
+        <h1>{{seed.commonname}}</h1>
         <ul *ngIf = "showDetails">
              <li>Stock: {{seed.stock}} cm</li>
              <li>Temperature: {{seed.temperature}}</li>
@@ -70,6 +183,6 @@
           <button class="fa fa-edit btn btn-outline-primary" [routerLink] = "['/edit-seed/',seed.id]"> Edit</button><br>
         <a class="btn btn-success float-sm-end" href="#cart">Add to Cart</a>
         
-      </div>
-    </div>
-     
+      </div> -->
+    <!-- <button class="btn btn-primary" [routerLink]="['/payment']"> Proceed to pay</button><br>
+    </div></section> -->
