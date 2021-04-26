@@ -26,6 +26,7 @@
                 <span *ngIf="editForm.controls.cost.errors?.required">
                   Please enter 'Cost' of plant
                 </span>
+                <span *ngIf="editForm.controls.cost.errors?.min">Please enter positive value</span>
                 </span>
             </div>
         </div>
@@ -35,6 +36,7 @@
                 <input type="text" formControlName="stock" name="stock" class="form-control" id="stock" [ngClass]="{'is-invalid': (editForm.controls.stock.touched ||editForm.controls.stock.dirty) &&!editForm.controls.stock.valid }" />
                 <span class="invalid-feedback">
                     <span *ngIf="editForm.controls.stock.errors?.required">Please enter 'Stock' of plant</span>
+                <span *ngIf="editForm.controls.stock.errors?.min">Please enter positive value</span>
                 </span>
             </div>
         </div>

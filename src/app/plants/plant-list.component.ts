@@ -106,6 +106,7 @@ export class PlantListComponent implements OnInit {
     else this.noPlant=false;
 
     console.log("inside do check")
+    //window.location.reload();
   }
 
 

@@ -18,8 +18,8 @@ export class AddPlantComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private router: Router, private service: PlantService) {}
   ngOnInit() {
     this.addForm = this.formBuilder.group({
-      cost: ['', Validators.required],
-      stock: ['', Validators.required],
+      cost: ['', [ Validators.min(1), Validators.required ]],
+      stock: ['', [ Validators.min(1), Validators.required]],
       type: ['PLANT', Validators.required],
       height:[''],
       spread:[''],

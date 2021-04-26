@@ -22,8 +22,8 @@ export class EditPlantComponent implements OnInit {
         console.log(data); this.plant = data;
         this.editForm = this.formBuilder.group({
           id: this.plant.id,
-          cost: [this.plant.cost, Validators.required],
-          stock: [this.plant.stock, Validators.required],
+          cost: [this.plant.cost, [ Validators.min(1), Validators.required]],
+          stock: [this.plant.stock, [ Validators.min(1), Validators.required]],
           type: this.plant.type,
           height: this.plant.height,
           spread: this.plant.spread,
