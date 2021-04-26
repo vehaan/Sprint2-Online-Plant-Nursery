@@ -15,16 +15,15 @@
 
     <!-- Filtering -->
     <div>
-        <strong>Difficulty Level</strong>
+        <strong>Payment Mode</strong>
         <br>
-        <!-- <form action="/action_page.php">-->
         <input type="checkbox" name="Payment Mode" (click)=paymentModeCash()>
         <label>CASH</label><br>
         <input type="checkbox" name="Payment Mode" (click)=paymentModeCard()>
         <label>CARD</label><br>
         <input type="checkbox" name="Payment Mode" (click)=paymentModeUpi()>
-        <label>UPI</label><br><br>
-        <!-- </form>-->
+        <label>UPI</label>
+        <br><br>
     </div>
 
 
@@ -34,7 +33,7 @@
             <li>Ordered Date: {{order.bookingDate}}</li>
             <li>Payment Mode used: {{order.transactionMode}}</li>
            
-            <li>Ordered Products: {{order.products | json}} </li>
+            <!-- <li>Ordered Products: {{order.products | json}} </li> -->
 
             <li>Order Quantity: {{order.quantity}}</li>
             <li>Order Cost: {{order.totalCost}}</li>

@@ -45,4 +45,8 @@ export class OrderService {
   filterByTransactionMode(str: string): Observable<Order[]> {
     return <Observable<Order[]>>this.http.get(this.baseUrl + "/admin/orders/filterByTransactionMode/" + str);
   }
+
+  filterByTransactionModeCustomer(str: string, customerId: number): Observable<Order[]> {
+    return <Observable<Order[]>>this.http.get(this.baseUrl + "/customer/orders/filterByTransactionMode/" + str + "/" + customerId);
+  }
 }

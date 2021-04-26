@@ -66,6 +66,9 @@ export class PlanterComponent implements OnInit {
           
         if(value.id === planterId) {
           let cart = this.cartProducts[index];
+          //if() //Add validation code
+
+
           cart.quantity++;
           console.log(cart.id+" Quan: "+cart.quantity);
           this.cartProducts.splice(index, 1, cart);

@@ -91,7 +91,7 @@ export class CartComponent implements OnInit {
         products:productObj,
         customer :
           {
-              id:203   
+              id:203
           }
       } 
       

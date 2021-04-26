@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { IPlanter } from 'src/app/models/IPlanter';
 import { Order } from 'src/app/models/order';
 import { OrderService } from 'src/app/services/order/order.service';
@@ -32,7 +31,7 @@ export class AddOrderComponent implements OnInit {
       },
       (err) => this.error = err
     );
-
+      
     if(this.orders) {
       this.order = this.orders[0];
       console.log(this.order);
