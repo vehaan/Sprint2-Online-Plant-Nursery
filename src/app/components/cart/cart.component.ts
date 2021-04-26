@@ -20,6 +20,8 @@ export class CartComponent implements OnInit {
   cartPlanters: IPlanter[] = [];
   error!: string;
   flag: boolean = false;
+  cartFlagShow: boolean = false;
+  cartFlagHide: boolean = true;
 
   cartProductQuantity: number[] = [];
   index: number = 0;
@@ -54,6 +56,8 @@ export class CartComponent implements OnInit {
 
     if(this.cartPlanters){
       for(let i=0; i<this.cartProductQuantity.length; i++){
+        this.cartFlagShow = true;
+        this.cartFlagHide = false;
         console.log(this.cartProductQuantity[i]);
         
       }
@@ -87,18 +91,21 @@ export class CartComponent implements OnInit {
         products:productObj,
         customer :
           {
-              id:202          
+              id:203   
           }
       } 
       
+      // Sending the order object to database 
       var json = JSON.stringify(obj);
       this.orderService.addOrder(JSON.parse(json)).subscribe(
         data => this.order = data,
         err => console.log(err)
-      ) 
+      )
     }
 
     localStorage.removeItem('cart');
+
+    this._route.navigate(['/addorder']);
     
   }
 

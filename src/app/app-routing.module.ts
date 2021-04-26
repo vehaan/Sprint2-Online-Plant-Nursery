@@ -12,7 +12,7 @@ const routes: Routes = [
   {path:'edit-planter/:id',component:EditPlanterComponent},
   {path:'planter-list',component:PlanterListComponent},
   {path: 'cart', component: CartComponent},
-  { path: 'order', component: AddOrderComponent},
+  { path: 'addorder', component: AddOrderComponent},
   { path: 'orders', component: OrderListComponent}
 ];
 

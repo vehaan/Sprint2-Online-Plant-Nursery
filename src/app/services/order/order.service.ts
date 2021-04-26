@@ -41,4 +41,8 @@ export class OrderService {
     console.log("From service, order is added");
     return <Observable<Order>>this.http.post(this.baseUrl + "/admin/order", order);
   }
+
+  filterByTransactionMode(str: string): Observable<Order[]> {
+    return <Observable<Order[]>>this.http.get(this.baseUrl + "/admin/orders/filterByTransactionMode/" + str);
+  }
 }

@@ -5,46 +5,75 @@
 <section>
     <div>
         <h1>Your Cart</h1>
-        <div *ngIf = flag>
-            <div class="s-box" *ngFor = "let planter of cartPlanters;">
-                <button class="btn button-small btn-danger" id="x" [routerLink] = "['/cart']" (click) = "deleteFromCart(planter.id)">X</button>
+        
+        <div class="s-box" *ngFor = "let planter of cartPlanters;">
+            <button class="btn button-small btn-danger" id="x" [routerLink] = "['/cart']" (click) = "deleteFromCart(planter.id)">X</button>
 
     
-                <img alt="1" src="https://ak.picdn.net/shutterstock/videos/1027610672/thumb/11.jpg" class="appIcon" />
-                <h1>Planter Id: {{planter.id}}</h1>
-                <h1>Quantity: {{cartProductQuantity[cartPlanters.indexOf(planter)]}}</h1>
+            <img alt="1" src="https://ak.picdn.net/shutterstock/videos/1027610672/thumb/11.jpg" class="appIcon" />
+            <h1>Planter Id: {{planter.id}}</h1>
+            <h1>Quantity: {{cartProductQuantity[cartPlanters.indexOf(planter)]}}</h1>
           
-                <div class="blockquote" style="background-color:lightgreen; border-radius: 15px; width: 0%; text-align: center; ">{{planter.cost | currency:'INR':'symbol':'1.2'}}</div>
-                <hr width="100%">
-                <!-- <button class="btn button-small btn-danger" id="add" [routerLink] = "['/cart']" (click) = "incQuantity(planter.id)">+</button> -->
-                <div>
-                    <button type="button" class="btn btn-default btn-lg" id = "add" (click) = "incQuantity(planter.id)">
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                    </button>
+            <div class="blockquote" style="background-color:lightgreen; border-radius: 15px; width: 0%; text-align: center; ">{{planter.cost | currency:'INR':'symbol':'1.2'}}</div>
+            <hr width="100%">
+            <!-- <button class="btn button-small btn-danger" id="add" [routerLink] = "['/cart']" (click) = "incQuantity(planter.id)">+</button> -->
+            <div>
+                <button type="button" class="btn btn-default btn-lg" id = "add" (click) = "incQuantity(planter.id)">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </button>
             
-                    <button type="button" class="btn btn-default btn-lg" id = "minus" (click) = "decQuantity(planter.id)">
-                        <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
-                    </button>
-                </div>
-                <br>
-        
+                <button type="button" class="btn btn-default btn-lg" id = "minus" (click) = "decQuantity(planter.id)">
+                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                </button>
             </div>
+            <br>
+        
         </div>
+
     </div>
 
-    <h2>Total quantity:{{totalQuantity}}</h2>
-    <h2>Total cost:{{getSum()}}</h2><br>
-    <h3>Select payment mode:</h3>
-    <form action="/action_page.php">
-    <input type="radio"  name="payment" (click)="paymentMethod('CASH')">
-    <label>CASH</label><br>
-    <input type="radio"  name="payment" (click)="paymentMethod('CARD')">
-    <label>CARD</label><br>
-    <input type="radio"  name="payment" (click)="paymentMethod('UPI')">
-    <label>UPI</label> 
-    </form>
-    <br>
-    <button  (click) = "onSubmit()">Place Order</button>
+    <!-- <div class="s-box" *ngIf = "cartFlagShow">
+        <h2>Total quantity:{{totalQuantity}}</h2>
+        <h2>Total cost:{{getSum()}}</h2><br>
+        <h3>Select payment mode:</h3>
+        <form action="/action_page.php">
+        <input type="radio"  name="payment" (click)="paymentMethod('CASH')">
+        <label>CASH</label><br>
+        <input type="radio"  name="payment" (click)="paymentMethod('CARD')">
+        <label>CARD</label><br>
+        <input type="radio"  name="payment" (click)="paymentMethod('UPI')">
+        <label>UPI</label> 
+        </form>
+        <br>
+        <button  (click) = "onSubmit()">Place Order</button>
+    </div> -->
+
+
+
+
+    <ng-template [ngIf]="cartFlagShow" [ngIfElse]="cartFlagHide">
+    <div *ngIf = "cartFlagShow">
+        <h2>Total quantity:{{totalQuantity}}</h2>
+        <h2>Total cost:{{getSum()}}</h2><br>
+        <h3>Select payment mode:</h3>
+        <form action="/action_page.php">
+        <input type="radio"  name="payment" (click)="paymentMethod('CASH')">
+        <label>CASH</label><br>
+        <input type="radio"  name="payment" (click)="paymentMethod('CARD')">
+        <label>CARD</label><br>
+        <input type="radio"  name="payment" (click)="paymentMethod('UPI')">
+        <label>UPI</label> 
+        </form>
+        <br>
+        <button  (click) = "onSubmit()">Place Order</button>
+    </div>
+    </ng-template>
+
+    <ng-template #cartFlagHide>
+        <div>
+            <h2>Add a product to the cart for placing an order.</h2>
+        </div>
+    </ng-template>
     
 </section>
 

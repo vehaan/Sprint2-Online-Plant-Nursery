@@ -1,0 +1,22 @@
+<section>
+    <div class="s-box-container">
+        <img src=".\assets\images\successSymbol.gif" width="15%">
+        <h2>Your order has been placed</h2>
+        <div class="s-box" *ngFor = "let order of orders; let i = index">
+            <div *ngIf = "i==0">
+
+                <li>Order Id: {{order.bookingId}}</li>
+                <li>Ordered Date: {{order.bookingDate}}</li>
+                <li>Payment Mode used: {{order.transactionMode}}</li>
+            
+                <li>Ordered Products: {{order.products | json}} </li>
+
+                <li>Order Quantity: {{order.quantity}}</li>
+                <li>Order Cost: {{order.totalCost}}</li>
+            </div>
+
+        </div>
+    </div>
+    <br> <br>
+    <button (click) = "continueShopping()">Continue Shopping</button>
+</section>

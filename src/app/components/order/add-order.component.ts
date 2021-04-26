@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Cart } from 'src/app/models/Cart';
 import { IPlanter } from 'src/app/models/IPlanter';
-import { PlanterService } from 'src/app/services/planter/planter.service';
-import { PlanterComponent } from '../planter/planter.component';
+import { Order } from 'src/app/models/order';
+import { OrderService } from 'src/app/services/order/order.service';
+import { ProductService } from 'src/app/services/product/product.service';
+
 
 @Component({
   selector: 'app-add-order',
@@ -14,42 +16,34 @@ export class AddOrderComponent implements OnInit {
   planters: IPlanter[] = [];
   cartPlanters: IPlanter[] = [];
   prodId: number[] = [];
-  sub!: Subscription;
+
+  orders!: Order[];
+  order!: Order;
   error!: string;
-  order: string = `{"transactionMode": "CARD", 
-        "products" :
-        {
-            "2" : 5,
-            "8" : 1  
-        }
-    }`;
   
-  
+  constructor(private productService: ProductService, private orderService: OrderService, private _router: Router) { }
 
-  constructor(private planterService: PlanterService ) { }
-
+  //Need to refresh to see the recently placed order
   ngOnInit(): void {
-    let data = localStorage.getItem('cart');
-    if(data) {
-      let temp: Cart[] = JSON.parse(data);
-      console.log('View cart'+ temp);
-      for(let i=0; i<temp.length; i++) {
-        this.planterService.getPlanterById(temp[i].id).subscribe(
-          (next) => { 
-                      this.cartPlanters.push(next);
-                      console.log(this.cartPlanters[i]);
-          },
-          (err) => this.error = err
-        )
-      }
+    this.orderService.getAllCustomerOrders(203).subscribe(
+      (data) => {
+        this.orders = data;
+        console.log(this.orders);
+      },
+      (err) => this.error = err
+    );
 
-      console.log(JSON.stringify(this.order));
+    if(this.orders) {
+      this.order = this.orders[0];
+      console.log(this.order);
     }
-
-    
-    
   }
 
+  continueShopping() {
+    this._router.navigate(['/planter-list']); 
+    //For now, navigating to Planter List
+    //Navigate to Home Page after including it.
+  }
 
 
 }

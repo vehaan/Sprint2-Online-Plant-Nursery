@@ -88,8 +88,4 @@ export class PlanterComponent implements OnInit {
     
   }
 
-  // goToCart() {
-  //   this.router.navigate(['/cart']);
-  // }
-
 }
