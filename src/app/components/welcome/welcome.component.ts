@@ -31,10 +31,7 @@ export class WelcomeComponent implements OnInit {
 
   constructor(public loginService:AuthenticationService,private service:CustomerService, private router:Router, private planterService: PlanterServiceService, private plantService: PlantService, private seedService: SeedService ){ }
   ngOnInit() {
-      
     
-
-
     let sub1 = this.planterService.getAllPlanters();
 
     let sub2 = this.plantService.getAllPlants();
@@ -52,24 +49,30 @@ export class WelcomeComponent implements OnInit {
       this.shuffle(this.seeds);
      })
 
+  
+
      this.email= sessionStorage.getItem('email')
-    this.service.getCustomerByMail(this.email).subscribe(
-      (data)=> {console.log(data);
-          this.customer=data},
-      (err)=>console.log(err))
- 
-     this.checkStatus(this.customer.status);
+     this.service.getCustomerByMail(this.email).subscribe(
+       (data)=> {console.log(data);
+           this.customer=data},
+       (err)=>console.log(err))
+  
+      this.checkStatus(this.customer.status);
 
   
   }
 
-  // ngAfterViewChecked(): void {
-  //   this.customer=this.loginService.customer;
-  //   this.checkStatus(this.customer.status);
-  //   console.log(this.customer)
-  // }
 
+
+  ngAfterViewChecked(): void {
+    this.customer=this.loginService.customer;
+    this.checkStatus(this.customer.status);
+    console.log(this.customer)
+  }
   
+
+
+
   checkStatus(status:string){
 
     if(status == 'BLOCK'){

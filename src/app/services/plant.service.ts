@@ -25,10 +25,11 @@ export class PlantService {
     addPlant(plant: Plant): Observable<Plant> {
         return <Observable<Plant>>this.http.post(this.baseUrl + "/admin/plant", plant);
     }
-    costLowToHigh():Observable<Plant[]>{
-        return <Observable<Plant[]>>this.http.get(this.baseUrl+"/admin/plants/costLowToHigh");
+
+    FilterByDifficulty(difficulty:string):Observable<Plant[]>{
+        return <Observable<Plant[]>>this.http.get(this.baseUrl+"/admin/plants/filterByDifficulty/"+difficulty)
     }
-    costHighToLow():Observable<Plant[]>{
-        return <Observable<Plant[]>>this.http.get(this.baseUrl+"/admin/plants/costHighToLow");
+    FilterByBloomTime(bloomTime:string):Observable<Plant[]>{
+        return <Observable<Plant[]>>this.http.get(this.baseUrl+"/admin/plants/filterByBloomTime/"+bloomTime)
     }
 }

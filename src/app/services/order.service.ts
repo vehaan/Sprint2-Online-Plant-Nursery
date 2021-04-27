@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Order } from '../components/order-list/order';
+import { Order } from '../components/order/order-list/order';
 
 @Injectable({
   providedIn: 'root'
@@ -40,5 +40,13 @@ export class OrderService {
   addOrder(order: Order): Observable<Order> {
     console.log("From service, order is added");
     return <Observable<Order>>this.http.post(this.baseUrl + "/admin/order", order);
+  }
+
+  filterByTransactionMode(str: string): Observable<Order[]> {
+    return <Observable<Order[]>>this.http.get(this.baseUrl + "/admin/orders/filterByTransactionMode/" + str);
+  }
+
+  filterByTransactionModeCustomer(str: string, customerId: number): Observable<Order[]> {
+    return <Observable<Order[]>>this.http.get(this.baseUrl + "/customer/orders/filterByTransactionMode/" + str + "/" + customerId);
   }
 }

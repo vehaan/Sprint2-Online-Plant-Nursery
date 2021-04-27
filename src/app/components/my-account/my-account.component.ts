@@ -34,12 +34,12 @@ export class MyAccountComponent implements OnInit {
 
     }
 
-    // ngAfterViewChecked(): void {
+    ngAfterViewChecked(): void {
 
-    //   this.customer=this.authService.customer;
+      this.customer=this.authService.customer;
      
   
-    // }
+    }
     
 
 

@@ -162,3 +162,9 @@ a {
     color: #03fc94;
     text-shadow: 1px 1px 1px #919191, 1px 30px 60px rgba(16, 16, 16, 0.4);
 }
+
+.inCenter{
+    margin: 1% auto ;
+width: 100px;
+display: block;
+}

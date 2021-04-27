@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
-import { Seed } from "../seed/Seed";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { first } from "rxjs/operators";
-import { SeedService } from "../../../services/seed.service";
+import { SeedService } from 'src/app/services/seed.service';
+import { Seed } from '../seed/Seed';
+
 @Component({
   selector: 'app-edit-seed',
   templateUrl: './edit-seed.component.html',
@@ -23,15 +24,15 @@ export class EditSeedComponent implements OnInit {
           this.seed = data;
           this.editForm = this.formBuilder.group({
           id: this.seed.id,
-          cost: this.seed.cost,
-          stock: this.seed.stock,
+          cost: [this.seed.cost,[ Validators.min(1), Validators.required]],
+          stock: [this.seed.stock,[ Validators.min(1), Validators.required]],
           type: this.seed.type,
           watering: this.seed.watering,
           bloomTime: this.seed.bloomTime,
           difficultyLevel: this.seed.difficultyLevel,
           temperature: this.seed.temperature,
           typeOfSeed: this.seed.typeOfSeed,
-          name: this.seed.name,
+          commonName: [this.seed.name,Validators.required],
           description: this.seed.description,
           seedsPerPacket: this.seed.seedsPerPacket
         });

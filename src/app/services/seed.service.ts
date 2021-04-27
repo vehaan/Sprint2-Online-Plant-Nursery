@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { ApplicationRef, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Seed } from '../../app/components/seeds/seed/Seed';
+import { Seed } from '../components/seeds/seed/Seed';
 
 @Injectable({
     providedIn:'root'
@@ -16,6 +16,12 @@ export class SeedService {
         return <Observable<Seed[]>>this.http.get(this.baseUrl + "/admin/seeds")
     }
 
+    FilterByBloomTime(bloomTime:string) {
+        return <Observable<Seed[]>>this.http.get(this.baseUrl+"/admin/seeds/filterbybloomtime/"+bloomTime)
+    }
+    FilterByDifficulty(difficulty:string) {
+        return <Observable<Seed[]>>this.http.get(this.baseUrl+"/admin/seeds/filterbydifficulty/"+difficulty)
+    }
 
     getSeedById(id: number): Observable<Seed> {
         console.log("in service class")

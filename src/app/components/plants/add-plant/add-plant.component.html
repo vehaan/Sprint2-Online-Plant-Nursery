@@ -3,8 +3,7 @@
     <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
         <div class="form-group row required">
             <div class="col-25">
-                <label for="name">Common Name:</label> 
-            </div>
+                <label for="name">Common Name:</label> </div>
             <div class="col-75">
                 <input type="text" formControlName="name" name="name" class="form-control" id="name" [ngClass]="{'is-invalid': (addForm.controls.name.touched ||addForm.controls.name.dirty) &&!addForm.controls.name.valid }" />
                 <span class="invalid-feedback">
@@ -22,6 +21,9 @@
                 <span *ngIf="addForm.controls.cost.errors?.required">
                   Please enter 'Cost' of plant
                 </span>
+                <span *ngIf="addForm.controls.cost.errors?.min">
+                    Please enter positive value
+                  </span>
                 </span>
             </div>
         </div>
@@ -31,7 +33,9 @@
                 <input type="text" formControlName="stock" name="stock" class="form-control" id="stock" [ngClass]="{'is-invalid': (addForm.controls.stock.touched ||addForm.controls.stock.dirty) &&!addForm.controls.stock.valid }" />
                 <span class="invalid-feedback">
                     <span *ngIf="addForm.controls.stock.errors?.required">Please enter 'Stock' of plant</span>
+                <span *ngIf="addForm.controls.stock.errors?.min">Please enter positive value</span>
                 </span>
+
             </div>
         </div>
 

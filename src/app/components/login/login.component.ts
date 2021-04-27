@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/Auth/authentication.service';
 
-
 export class JwtResponse {
 
   jwtToken!: string;

@@ -72,7 +72,9 @@ back(){
     this.service.updateCustomer(this.editForm.value.id,this.editForm.value)
       .pipe(first())
       .subscribe(
-        data => {this.customer =data;
+        data => {
+          sessionStorage.setItem('email',this.customer.email);
+          this.customer =data;
                this.router.navigate(['account'])},
         (err)=>{
           console.log(err);
@@ -102,7 +104,7 @@ back(){
         }
          
       )
-      sessionStorage.setItem('email',this.customer.email);
+      
     
     }
     

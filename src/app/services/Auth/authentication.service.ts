@@ -5,10 +5,23 @@ import { Observable, throwError } from 'rxjs';
 import { Customer } from 'src/app/components/customers/view-customer/customer';
 import { CustomerService } from '../customer.service';
 
+
+export class User{
+
+  email!: string;
+  password!: string;
+  constructor(
+    public status:string,
+     ) {}
+  
+}
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
+user!:User;
 customer!:Customer;
 email!:any;
 
@@ -59,6 +72,13 @@ private baseUrl='http://localhost:9191/onlineplantnursery'
       (err)=>console.log(err))
 
       return this.customer;
+  }
+
+  checkRole(status:string){
+    if(status=='ADMIN'){
+      return true;
+    }
+    return false;
   }
 
 

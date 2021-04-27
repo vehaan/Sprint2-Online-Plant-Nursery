@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PlanterServiceService } from 'src/app/services/planter-service.service';
 import { IPlanter } from '../planter/IPlanter';
@@ -25,12 +25,12 @@ export class EditPlanterComponent implements OnInit {
       (data)=>{console.log(data);this.planter=data;
         this.editForm = this.formBuilder.group({
         id : this.planter.id,
-        name: this.planter.name,
-        cost: this.planter.cost,
-        stock: this.planter.stock,
+        name: [this.planter.name,Validators.required],
+        cost: [this.planter.cost, [ Validators.min(1), Validators.required]],
+        stock: [this.planter.stock, [ Validators.min(1), Validators.required]],
         type: this.planter.type,
-        height: this.planter.height,
-        shape: this.planter.shape,
+        height: [this.planter.height, [ Validators.min(1), Validators.required]],
+        shape: [this.planter.shape,Validators.required],
         capacity: this.planter.capacity,
         drainageHoles: this.planter.drainageHoles,
         color: this.planter.color

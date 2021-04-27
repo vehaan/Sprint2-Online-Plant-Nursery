@@ -7,6 +7,7 @@ import { IProduct } from '../components/welcome/IProduct';
   providedIn: 'root'
 })
 export class ProductService {
+  public static badgeNumber = 0;
 public baseUrl:string = "http://localhost:9191/onlineplantnursery/products/admin"
 
   constructor(private http:HttpClient) { } 

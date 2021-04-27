@@ -1,4 +1,4 @@
-import { Order } from "../../order-list/order";
+import { Order } from "../../order/order-list/order";
 
 export interface Address{
 

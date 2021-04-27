@@ -27,12 +27,16 @@
         <div class="col-75">
           <input  [(ngModel)]="planter.cost"
           placeholder="Cost" name="cost"
-          class="form-control" id="cost" required #cost="ngModel">
+          class="form-control" id="cost" required pattern="^[1-9]\d*$" #cost="ngModel">
         </div>
         <div *ngIf="cost.invalid && (cost.dirty || cost.touched)">
          <div style="margin-top: 1%; margin-left: 27%; color: red;" *ngIf="cost.errors?.required">
     Cost is required!
   </div>
+  <div style="margin-top: 1%; margin-left: 27%; color: red;" *ngIf="cost.errors?.pattern">
+    Cost must be positive!
+  </div>
+ 
 </div>
 
       </div>
@@ -45,12 +49,15 @@
         placeholder="Stock"
          name="stock" 
          class="form-control"
-          id="stock" required #stock="ngModel">
+          id="stock" required pattern="^[1-9]\d*$" #stock="ngModel">
         </div>
         <div *ngIf="stock.invalid && (stock.dirty || stock.touched)">
           <div style="margin-top: 1%; margin-left: 27%; color: red;" *ngIf="stock.errors?.required">
      Stock is required!
    </div>
+   <div style="margin-top: 1%; margin-left: 27%; color: red;" *ngIf="stock.errors?.pattern">
+    Stock must be positive!
+  </div>
  </div>
       </div>
     
@@ -75,12 +82,15 @@
         placeholder="Height"
          name="height" 
          class="form-control"
-          id="height" required #height="ngModel">
+          id="height" required pattern="^[1-9]\d*$" #height="ngModel">
       </div>
       <div *ngIf="height.invalid && (height.dirty || height.touched)">
         <div style="margin-top: 1%; margin-left: 27%; color: red;" *ngIf="height.errors?.required">
    Height is required!
  </div>
+ <div style="margin-top: 1%; margin-left: 27%; color: red;" *ngIf="height.errors?.pattern">
+  Height must be positive!
+</div>
 </div>
     </div>
 

@@ -25,13 +25,17 @@ import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { MyAccountComponent } from './components/my-account/my-account.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
-import { AdminComponent } from './components/admin/admin.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { AuthInterceptor } from './services/Auth/AuthInterceptor.service';
 import { CustomerService } from './services/customer.service';
 import { FooterComponent } from './components/footer/footer.component';
 import { CartComponent } from './components/cart/cart.component';
-import { OrderListComponent } from './components/order-list/order-list.component';
+import { OrderListComponent } from './components/order/order-list/order-list.component';
+import { AddOrderComponent } from './components/order/add-order/add-order.component';
+import { AllOrdersComponent } from './components/order/all-orders/all-orders.component';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 
 
 @NgModule({
@@ -57,18 +61,21 @@ import { OrderListComponent } from './components/order-list/order-list.component
     LogoutComponent,
     MyAccountComponent,
     WelcomeComponent,
-    AdminComponent,
     ForgotPasswordComponent,
     FooterComponent,
     CartComponent,
     OrderListComponent,
+    AddOrderComponent,
+    AllOrdersComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxSliderModule,
+    Ng2SearchPipeModule
   
   ],
   providers: [CustomerService,

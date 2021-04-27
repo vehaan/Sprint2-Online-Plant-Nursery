@@ -3,6 +3,7 @@ import { ApplicationRef, Injectable } from '@angular/core';
  
 import { Observable } from 'rxjs';
 import { Customer } from '../components/customers/view-customer/customer';
+
 @Injectable({
   providedIn: 'root'
 })

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/app/services/Auth/authentication.service';
 import { CustomerService } from 'src/app/services/customer.service';
-
+import { Customer } from '../customers/view-customer/customer';
 
 @Component({
   selector: 'app-forgot-password',
@@ -13,11 +14,13 @@ export class ForgotPasswordComponent implements OnInit {
 
   resetForm!: FormGroup;
   submitted = false;
-  constructor(private formBuilder: FormBuilder,private service:CustomerService,private router:Router) { }
+  customer!:Customer;
+  constructor(private formBuilder: FormBuilder,private service:CustomerService,private router:Router,private authService:AuthenticationService) { }
 
   ngOnInit(): void {
+    this.customer=this.authService.getCustomer();
     this.resetForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: [this.customer.email, [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required]
   }, {

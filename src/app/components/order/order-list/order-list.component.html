@@ -1,0 +1,50 @@
+<section>
+
+    <!-- Sorting -->
+     <div class="btn-group col-md-1">
+         <button type="button" class="btn btn-secondary">Sort</button>
+         <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+         <span class="caret"></span>
+       </button>
+         <div class="dropdown-menu">
+             <a class="dropdown-item" (click)="ascendingSort()"> Cost low to high</a>
+             <a class="dropdown-item" (click)="descendingSort()"> Cost High to low</a>
+         </div>
+ 
+     </div>
+ 
+     <!-- Filtering -->
+     <div>
+         <strong>Difficulty Level</strong>
+         <br>
+         <!-- <form action="/action_page.php">-->
+         <input type="checkbox" name="Payment Mode" (click)=paymentModeCash()>
+         <label>CASH</label><br>
+         <input type="checkbox" name="Payment Mode" (click)=paymentModeCard()>
+         <label>CARD</label><br>
+         <input type="checkbox" name="Payment Mode" (click)=paymentModeUpi()>
+         <label>UPI</label><br><br>
+         <!-- </form>-->
+     </div>
+ 
+ 
+     <div class="s-box-container">
+         <div class="s-box" *ngFor = "let order of orders">
+             <li>Order Id: {{order.bookingId}}</li>
+             <li>Ordered Date: {{order.bookingDate}}</li>
+             <li>Payment Mode used: {{order.transactionMode}}</li>
+            
+             <li>Ordered Products: {{order.products | json}} </li>
+ 
+             <li>Order Quantity: {{order.quantity}}</li>
+             <li>Order Cost: {{order.totalCost}}</li>
+             
+         </div>
+         
+     </div>
+ 
+ 
+     <div *ngIf="noOrder">
+         Sorry NO Order matches this criteria
+     </div>
+ </section>

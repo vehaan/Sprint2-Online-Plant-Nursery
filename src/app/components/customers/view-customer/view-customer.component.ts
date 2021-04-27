@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CustomerService } from 'src/app/services/customer.service';
 import { Customer } from './customer';
 
-
 @Component({
   selector: 'app-view-customer',
   templateUrl: './view-customer.component.html',

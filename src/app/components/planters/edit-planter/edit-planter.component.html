@@ -7,27 +7,45 @@
       </div>
       <div class="form-group row">
         <div class="col-25"><label for="name">Name: </label></div>
-        <div class="col-75"><input type="text" formControlName="name" placeholder="Name" name="name" class="form-control" id="name" ></div>
+        <div class="col-75"><input type="text" formControlName="name" placeholder="Name" name="name" class="form-control" id="name" [ngClass]="{'is-invalid': (editForm.controls.name.touched ||editForm.controls.name.dirty) &&!editForm.controls.name.valid }" ></div>
+        <span class="invalid-feedback">
+          <span *ngIf="editForm.controls.name.errors?.required">Please enter 'name' of the Planter</span>
+        </span>
       </div>
       <div class="form-group row">
         <div class="col-25"><label for="cost">Cost: </label></div>
-        <div class="col-75"><input type="number" formControlName="cost" placeholder="Cost" name="cost" class="form-control" id="cost" ></div>
+        <div class="col-75"><input type="number" formControlName="cost" placeholder="Cost" name="cost" class="form-control" id="cost" [ngClass]="{'is-invalid': (editForm.controls.cost.touched ||editForm.controls.cost.dirty) &&!editForm.controls.cost.valid }" ></div>
+        <span class="invalid-feedback">
+          <span *ngIf="editForm.controls.cost.errors?.required">
+            Please enter 'Cost' of planter
+          </span>
+          <span *ngIf="editForm.controls.cost.errors?.min">Please enter positive value</span>
+          </span>
       </div>
   
       
       <div class="form-group row">
         <div class="col-25"><label for="type">Product Type: </label></div>
-        <div class="col-75"><input type="text" formControlName="type" placeholder="Product Type" name="type" class="form-control" id="type"></div>
+        <div class="col-75"><input type="text" formControlName="type" placeholder="Product Type" name="type" class="form-control" id="type" readonly></div>
       </div>
   
       <div class="form-group row">
         <div class="col-25"><label for="height">Height: </label></div>
-        <div class="col-75"><input type="number" formControlName="height" placeholder="Height" name="height" class="form-control" id="height"></div>
+        <div class="col-75"><input type="number" formControlName="height" placeholder="Height" name="height" class="form-control" id="height" [ngClass]="{'is-invalid': (editForm.controls.height.touched ||editForm.controls.height.dirty) &&!editForm.controls.height.valid }" ></div>
+        <span class="invalid-feedback">
+          <span *ngIf="editForm.controls.height.errors?.required">
+            Please enter 'Height' of  the Planter
+          </span>
+          <span *ngIf="editForm.controls.cost.errors?.min">Please enter positive value</span>
+          </span>
       </div>
 
       <div class="form-group row">
         <div class="col-25"><label for="shape">Shape: </label></div>
-        <div class="col-75"><input type="text" formControlName="shape" placeholder="Shape" name="shape" class="form-control" id="shape"></div>
+        <div class="col-75"><input type="text" formControlName="shape" placeholder="Shape" name="shape" class="form-control" id="shape" [ngClass]="{'is-invalid': (editForm.controls.shape.touched ||editForm.controls.shape.dirty) &&!editForm.controls.shape.valid }"></div>
+        <span class="invalid-feedback">
+          <span *ngIf="editForm.controls.shape.errors?.required">Please enter 'Shape' of the Planter</span>
+        </span>
       </div>
 
       <div class="form-group row">

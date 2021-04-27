@@ -1,4 +1,4 @@
-import { Customer } from "../customers/view-customer/customer";
+import { Customer } from "../../customers/view-customer/customer";
 
 
 export interface Order {

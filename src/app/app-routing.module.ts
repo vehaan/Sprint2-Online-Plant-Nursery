@@ -10,7 +10,8 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { MyAccountComponent } from './components/my-account/my-account.component';
-import { OrderListComponent } from './components/order-list/order-list.component';
+import { OrderListComponent } from './components/order/order-list/order-list.component';
+import { AddOrderComponent } from './components/order/add-order/add-order.component';
 import { AddPlanterComponent } from './components/planters/add-planter/add-planter.component';
 import { EditPlanterComponent } from './components/planters/edit-planter/edit-planter.component';
 import { PlanterListComponent } from './components/planters/planter-list/planter-list.component';
@@ -27,6 +28,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { AdminGuard } from './services/Auth/admin-guard.service';
 import { AuthGuardService } from './services/Auth/auth-guard.service';
 import { CustomerDetailGuard } from './services/Auth/customer-details.guard';
+import { AllOrdersComponent } from './components/order/all-orders/all-orders.component';
 
 
 const routes: Routes = [
@@ -47,6 +49,8 @@ const routes: Routes = [
 
 {path: 'cart', component: CartComponent},
 { path: 'order-list', component: OrderListComponent},
+{ path: 'add-order', component: AddOrderComponent},
+{ path: 'allorders', component: AllOrdersComponent },
 
 
 
@@ -64,6 +68,7 @@ canActivate: [CustomerDetailGuard]},
 { path: 'logout', component: LogoutComponent},
 {path:"customer-list",component:CustomerListComponent,
 canActivate:[AuthGuardService,AdminGuard]}
+
 ];
 
 @NgModule({
