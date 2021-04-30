@@ -8,6 +8,8 @@ import { Order } from 'src/app/models/order';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { OrderService } from 'src/app/services/order/order.service';
 import { PlanterService } from 'src/app/services/planter/planter.service';
+import { ProductService } from 'src/app/services/product/product.service';
+import { PlanterComponent } from '../planter/planter.component';
 
 @Component({
   selector: 'app-cart',
@@ -22,6 +24,7 @@ export class CartComponent implements OnInit {
   flag: boolean = false;
   cartFlagShow: boolean = false;
   cartFlagHide: boolean = true;
+  stockFlag: boolean = false;
 
   cartProductQuantity: number[] = [];
   index: number = 0;
@@ -31,6 +34,7 @@ export class CartComponent implements OnInit {
   totalCost : number = 0
   totalQuantity: number = 0
   paymentMode!: string
+  limitReached: boolean[] = [];
 
   constructor(private formBuilder: FormBuilder, private planterService: PlanterService, private _route: Router, private orderService: OrderService) { }
 
@@ -51,18 +55,16 @@ export class CartComponent implements OnInit {
         
       }
 
-      
     }
 
     if(this.cartPlanters){
       for(let i=0; i<this.cartProductQuantity.length; i++){
         this.cartFlagShow = true;
         this.cartFlagHide = false;
-        console.log(this.cartProductQuantity[i]);
         
       }
-      console.log(this.cartPlanters)
-      }
+      
+    }
 
   }
 
@@ -91,7 +93,7 @@ export class CartComponent implements OnInit {
         products:productObj,
         customer :
           {
-              id:203
+              id:204
           }
       } 
       
@@ -124,11 +126,9 @@ export class CartComponent implements OnInit {
   saveCart() {
     //Get the data from cart(localstorage) and save it before calling AddtoCart
     let prevData = localStorage.getItem('cart');
-    console.log('prevdata'+prevData);
 
     if(prevData){
       let prodInCart: Cart[] = JSON.parse(prevData);
-      console.log('saved in prodInCart'+prodInCart);
       
       return prodInCart;
     }
@@ -154,7 +154,6 @@ export class CartComponent implements OnInit {
 
           let cart = this.cartProducts[index];
           cart.quantity--;
-          console.log(cart.id+" Quan: "+cart.quantity);
           this.cartProducts.splice(index, 1, cart);
           flag = false;
 
@@ -177,7 +176,11 @@ export class CartComponent implements OnInit {
       
     }
 
+    // badge--;
+    ProductService.badgeNumber--;
+    console.log(ProductService.badgeNumber);
     localStorage.setItem('cart', JSON.stringify(this.cartProducts));
+    window.location.reload();
   }
   
   incQuantity(planterId: number) {
@@ -198,11 +201,19 @@ export class CartComponent implements OnInit {
         if(value.id === planterId) {
 
           let cart = this.cartProducts[index];
-          cart.quantity++;
-          console.log(cart.id+" Quan: "+cart.quantity);
-          this.cartProducts.splice(index, 1, cart);
-          flag = false;
-        }
+          // cart.quantity++;
+          if(planter){
+            if(cart.quantity < planter.stock){
+              cart.quantity++;
+              this.stockFlag = true;
+            }
+            else{
+              this.limitReached[index] = true
+            }
+            this.cartProducts.splice(index, 1, cart);
+            flag = false;
+          }
+      }
 
         
       })
@@ -214,7 +225,17 @@ export class CartComponent implements OnInit {
         })
       }
     }
+    
+    ProductService.badgeNumber++;
+    localStorage.setItem('badgeCount', JSON.stringify(ProductService.badgeNumber));
+    console.log(ProductService.badgeNumber);
+    // PlanterComponent.badgeOfProducts++;
+    // console.log(PlanterComponent.badgeOfProducts);
     localStorage.setItem('cart', JSON.stringify(this.cartProducts));
+    if(this.stockFlag){
+      window.location.reload();
+    }
+    
   }
 
   deleteFromCart(planterId: number) {
@@ -232,8 +253,10 @@ export class CartComponent implements OnInit {
           })
         }
     }
+    // PlanterComponent.badgeOfProducts--;
+    // console.log(PlanterComponent.badgeOfProducts);
     localStorage.setItem('cart', JSON.stringify(this.cartProducts));
-
+    window.location.reload();
   }
 
 }

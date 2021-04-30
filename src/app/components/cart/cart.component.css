@@ -15,6 +15,12 @@
     transition: transform 1s;
 }
 
+/* .container {
+  position: auto;
+  align-items: center;
+  text-align: left;
+} */
+
 #x {
     position: relative;
     float: right;
@@ -30,6 +36,8 @@
     top: -10px;
     right: -50%;
     border-radius: 10px;
+    background-color: rgba(0, 128, 0, 0.719);
+    /* Newly Added */
 }
 
 #minus{
@@ -38,6 +46,8 @@
     top: -10px;
     right: -50%;
     border-radius: 10px;
+    background-color: rgba(255, 0, 0, 0.719);
+    /*Newly Added */
 }
 
   .s-box img {

@@ -6,7 +6,7 @@
     <div>
         <h1>Your Cart</h1>
         
-        <div class="s-box" *ngFor = "let planter of cartPlanters;">
+        <div class="s-box" *ngFor = "let planter of cartPlanters; let j=index;">
             <button class="btn button-small btn-danger" id="x" [routerLink] = "['/cart']" (click) = "deleteFromCart(planter.id)">X</button>
 
     
@@ -16,62 +16,59 @@
           
             <div class="blockquote" style="background-color:lightgreen; border-radius: 15px; width: 0%; text-align: center; ">{{planter.cost | currency:'INR':'symbol':'1.2'}}</div>
             <hr width="100%">
-            <!-- <button class="btn button-small btn-danger" id="add" [routerLink] = "['/cart']" (click) = "incQuantity(planter.id)">+</button> -->
+            
+
             <div>
-                <button type="button" class="btn btn-default btn-lg" id = "add" (click) = "incQuantity(planter.id)">
+                <button type="button" [disabled]="limitReached[j]" class="btn btn-default btn-lg" id = "add" (click) = "incQuantity(planter.id)">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                 </button>
-            
+                
                 <button type="button" class="btn btn-default btn-lg" id = "minus" (click) = "decQuantity(planter.id)">
                     <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                 </button>
+                <br> <br>
             </div>
+            <span style="color:red" *ngIf = "limitReached[j]" aria-hidden="true">Not enough stock</span>
             <br>
         
         </div>
 
     </div>
 
-    <!-- <div class="s-box" *ngIf = "cartFlagShow">
-        <h2>Total quantity:{{totalQuantity}}</h2>
-        <h2>Total cost:{{getSum()}}</h2><br>
-        <h3>Select payment mode:</h3>
-        <form action="/action_page.php">
-        <input type="radio"  name="payment" (click)="paymentMethod('CASH')">
-        <label>CASH</label><br>
-        <input type="radio"  name="payment" (click)="paymentMethod('CARD')">
-        <label>CARD</label><br>
-        <input type="radio"  name="payment" (click)="paymentMethod('UPI')">
-        <label>UPI</label> 
-        </form>
-        <br>
-        <button  (click) = "onSubmit()">Place Order</button>
-    </div> -->
-
-
-
-
     <ng-template [ngIf]="cartFlagShow" [ngIfElse]="cartFlagHide">
-    <div *ngIf = "cartFlagShow">
-        <h2>Total quantity:{{totalQuantity}}</h2>
-        <h2>Total cost:{{getSum()}}</h2><br>
-        <h3>Select payment mode:</h3>
-        <form action="/action_page.php">
-        <input type="radio"  name="payment" (click)="paymentMethod('CASH')">
-        <label>CASH</label><br>
-        <input type="radio"  name="payment" (click)="paymentMethod('CARD')">
-        <label>CARD</label><br>
-        <input type="radio"  name="payment" (click)="paymentMethod('UPI')">
-        <label>UPI</label> 
-        </form>
-        <br>
-        <button  (click) = "onSubmit()">Place Order</button>
-    </div>
+        <div *ngIf = "cartFlagShow">
+            <div>
+                <h4>Total quantity: {{totalQuantity}}</h4>
+                <h4>Total cost: {{getSum()}}</h4><br>
+            </div>
+            <hr>
+            <div class="container">
+                
+                <div class="row">
+                <div class="col-4">
+
+                </div>
+                <div class="col-5">
+                    <h3><strong>Select payment mode:</strong></h3>
+                    <form action="/action_page.php">
+                    <input type="radio"  name="payment" (click)="paymentMethod('CASH')">
+                    <label>CASH</label><br>
+                    <input type="radio"  name="payment" (click)="paymentMethod('CARD')">
+                    <label>CARD</label><br>
+                    <input type="radio"  name="payment" (click)="paymentMethod('UPI')">
+                    <label>UPI</label> 
+                    </form>
+                    <br>
+                    <button class="btn btn-success" (click) ="onSubmit()">Place Order</button>
+                </div>
+            </div>
+            </div>
+        </div>
     </ng-template>
 
     <ng-template #cartFlagHide>
-        <div>
-            <h2>Add a product to the cart for placing an order.</h2>
+        <div class="container" style="text-align: center;">
+            <h4>Add a product to the cart for placing an order.</h4>
         </div>
     </ng-template>
     

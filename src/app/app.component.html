@@ -4,6 +4,12 @@
     <title>Online Plant Nursery</title>
     <link rel="stylesheet" type="text/css" href="./app.component.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/js/all.min.js"></script>
+    
 </head>
 <body>
     <div id="header-img">
@@ -19,7 +25,17 @@
         <li><a href="#seed">Seed</a></li>
         <li><a href="/planter-list">Planter</a></li>  
 
-        <li class="float-end"><a href="/cart"><i class="fas fa-shopping-cart"></i></a></li>
+        <!-- <li class="float-end"><a href="/cart"><i class="fas fa-shopping-cart"></i></a>{{temp}}</li> -->
+        <li class="float-end"><a href="/cart"><i class="fas fa-shopping-cart"></i></a><span class="badge badge-light">{{temp}}</span></li>
+
+        <!-- <span id="group">
+            <button type="button" class="btn btn-info"> 
+             <i class="fas fa-shopping-cart"></i>
+            </button>
+            <span class="badge badge-light">{{temp}}</span>
+          </span> -->
+
+
         <li class="float-end"><a href="/orders">My Orders</a></li>
         <!-- Admin sees all Orders -->
         <li class="float-end"><a href="/allorders">All Orders</a></li>

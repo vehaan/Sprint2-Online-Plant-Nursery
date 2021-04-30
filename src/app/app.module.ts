@@ -8,19 +8,18 @@ import { CartComponent } from './components/cart/cart.component';
 import { AddOrderComponent } from './components/order/add-order.component';
 import { AllOrdersComponent } from './components/order/all-orders.component';
 import { OrderListComponent } from './components/order/order-list.component';
-import { OrderComponent } from './components/order/order.component';
 import { AddPlanterComponent } from './components/planter/add-planter.component';
 import { EditPlanterComponent } from './components/planter/edit-planter.component';
 import { PlanterListComponent } from './components/planter/planter-list.component';
 import { PlanterComponent } from './components/planter/planter.component';
 
+// declare var badge: number;
 
 @NgModule({
   declarations: [
     AppComponent,
     AddOrderComponent,
     OrderListComponent,
-    OrderComponent,
     PlanterListComponent,
     PlanterComponent,
     AddPlanterComponent,

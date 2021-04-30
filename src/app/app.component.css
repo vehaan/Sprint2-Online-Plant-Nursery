@@ -52,6 +52,14 @@ body {
   color: #333;
 }
 
+.badge {
+  position: relative;
+  top: -10px;
+  left: -15px;
+  border: 1px solid rgb(248, 198, 198);
+  background-color: red;
+  border-radius: 50%;
+ }
 .site-footer
 {
   background-color:#26272b;

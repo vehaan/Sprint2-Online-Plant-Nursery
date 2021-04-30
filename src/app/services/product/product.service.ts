@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { ApplicationRef, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
  
 import { Observable } from 'rxjs';
 import { IProduct } from 'src/app/models/IProduct';
@@ -8,7 +8,8 @@ import { IProduct } from 'src/app/models/IProduct';
   providedIn: 'root'
 })
 export class ProductService {
-public baseUrl:string = "http://localhost:9191/onlineplantnursery/products/admin"
+  public static badgeNumber: number = 0;
+  public baseUrl:string = "http://localhost:9191/onlineplantnursery/products/admin"
 
   constructor(private http:HttpClient) { }
 

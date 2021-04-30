@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { IPlanter } from 'src/app/models/IPlanter';
 import { PlanterService } from 'src/app/services/planter/planter.service';
 import { Cart } from 'src/app/models/Cart';
+import { ProductService } from 'src/app/services/product/product.service';
+
 
 @Component({
   selector: 'app-planter',
@@ -17,8 +19,13 @@ export class PlanterComponent implements OnInit {
 
   //Cart Elements ---------------------------------------------
   cartProducts:Cart[] = [];
+  limitReached: boolean[] = [];
+  index: number = 0;
+  stockFlag: boolean = false;
+  newFlag: boolean[] = [];
+  
 
-  constructor(private service:PlanterService, private router:Router) {  }
+  constructor(private service:PlanterService, private router:Router) { }
 
   ngOnInit(): void {
     this.service.getAllPlanters().subscribe(
@@ -26,6 +33,18 @@ export class PlanterComponent implements OnInit {
       (err)=>this.error = err
     );
     
+  }
+
+  ngDoCheck(): void {
+    if(this.planters) {
+      for(let i=0; i<this.planters.length; i++) {
+        
+        if(this.newFlag[i] != false) {
+          this.newFlag[i] = true;
+        }
+      }
+      
+    }
   }
 
   deletePlanter(planter: IPlanter): void {
@@ -37,20 +56,17 @@ export class PlanterComponent implements OnInit {
   //Cart methods--------------------------------------------
   saveCart() {
     let prevData = localStorage.getItem('cart');
-    console.log('prevdata'+prevData);
 
     if(prevData){
       let prodInCart: Cart[] = JSON.parse(prevData);
-      console.log('saved in prodInCart'+prodInCart);
-      
       return prodInCart;
     }
     return null;
 
   }
 
-  addToCart(planterId: number) {
-     
+  addToCart(planterId: number, num: number) {
+
     let prodInCart = this.saveCart();
     if(prodInCart){
       this.cartProducts = prodInCart;
@@ -63,19 +79,14 @@ export class PlanterComponent implements OnInit {
 
     if(planter){
       this.cartProducts.forEach((value, index)=>{
-          
+
         if(value.id === planterId) {
+
           let cart = this.cartProducts[index];
-          //if() //Add validation code
 
-
-          cart.quantity++;
-          console.log(cart.id+" Quan: "+cart.quantity);
           this.cartProducts.splice(index, 1, cart);
           flag = false;
-
         }
-
       })
 
       if(flag) {
@@ -84,11 +95,22 @@ export class PlanterComponent implements OnInit {
           "quantity": 1
         })
       }
-      
-    }
 
-    localStorage.setItem('cart', JSON.stringify(this.cartProducts));
+      if(this.planters) {
+        for(let i=0; i<this.planters.length; i++) {
+      
+          if(this.newFlag[i] != false) {
+            this.newFlag[i] = true;
+          }
+        }
     
+      }
+      this.newFlag[num] = false;
+
+    }
+    ProductService.badgeNumber++;
+    localStorage.setItem('cart', JSON.stringify(this.cartProducts));
+  
   }
 
 }

@@ -38,10 +38,18 @@ export class AllOrdersComponent implements OnInit {
     );
   }
 
+  ngOnChanges(): void {
+    this.orderService.getAllOrders().subscribe(
+      (data) => {
+        this.orders = data;
+      },
+      (err) => this.error = err
+    );
+  }
 
   ngDoCheck(): void {
 
-    this.orderService.getAllCustomerOrders(203).subscribe(
+    this.orderService.getAllOrders().subscribe(
       (data) => {
         this.orders = data;
       },
@@ -51,31 +59,25 @@ export class AllOrdersComponent implements OnInit {
     //Filtering BY Payment
     let tempOrders: (any | Order)[] = [];
     if(this.cash) {
-      tempOrders = [...this.pmCash]
+      tempOrders = [...this.pmCash];
     }
     if(this.card) {
-      tempOrders = [...tempOrders, ...this.pmCard]
-      console.log(tempOrders);
+      tempOrders = [...tempOrders, ...this.pmCard];
     }
     if(this.upi) {
-      tempOrders = [...tempOrders, ...this.pmUpi]
+      tempOrders = [...tempOrders, ...this.pmUpi];
     }
 
     if(!this.cash && !this.card && !this.upi) { // If nothing is selected 
-      tempOrders = this.orders
-      console.log(JSON.stringify(tempOrders));
-      console.log(JSON.stringify(this.orders))
+      tempOrders = this.orders;
     }
 
     if(this.cash && this.card && this.upi) {
       tempOrders = this.orders;
-      console.log(JSON.stringify(tempOrders));
-
     }
     
     // Sorting
     this.orders = tempOrders;
-    // console.log(JSON.stringify(this.orders))
     if (this.sortLowToHigh) {
       this.orders.sort((a, b) => (a.totalCost > b.totalCost) ? 1 : -1)
     }
@@ -84,7 +86,6 @@ export class AllOrdersComponent implements OnInit {
     }
 
     if(this.orders.length==0){
-      // console.log(this.orders.length)
       this.noOrder = true;
     }
     else this.noOrder=false;
@@ -104,7 +105,6 @@ export class AllOrdersComponent implements OnInit {
 
   paymentModeCash() {
     this.cash = !this.cash;
-    console.log(this.cash);
     this.orderService.filterByTransactionMode('CASH').subscribe(
       (data) => this.pmCash = data,
       (err) => this.error = err)
@@ -112,7 +112,6 @@ export class AllOrdersComponent implements OnInit {
 
   paymentModeCard() {
     this.card = !this.card;
-    console.log(this.card);
     this.orderService.filterByTransactionMode('CARD').subscribe(
       (data) => this.pmCard = data,
       (err) => this.error = err)
@@ -120,11 +119,9 @@ export class AllOrdersComponent implements OnInit {
 
   paymentModeUpi() {
     this.upi = !this.upi;
-    console.log(this.upi);
     this.orderService.filterByTransactionMode('UPI').subscribe(
       (data) => this.pmUpi = data,
       (err) => this.error = err)
   }
-
 
 }
