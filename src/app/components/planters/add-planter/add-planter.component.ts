@@ -6,11 +6,11 @@ import { IPlanter } from '../planter/IPlanter';
 @Component({
   selector: 'app-add-planter',
   templateUrl: './add-planter.component.html',
-  styleUrls: ['./add-planter.component.css']
+  styleUrls: ['./add-planter.component.css'],
 })
 export class AddPlanterComponent implements OnInit {
-
-  planter:IPlanter = {id: 0,
+  planter: IPlanter = {
+    id: 0,
     name: '',
     cost: 0,
     stock: 0,
@@ -19,23 +19,18 @@ export class AddPlanterComponent implements OnInit {
     shape: '',
     capacity: 0,
     drainageHoles: 0,
-    color: ''}
-
-  constructor(private service: PlanterServiceService, private router: Router) { }
-
-  ngOnInit(): void {
-  }
-
-  
-  createPlanter(form1: any): void {  
-    alert("Planter added successfully!")  
-    this.service.createPlanter(this.planter)
-        .subscribe( data => {
-          console.log(data);
-          this.router.navigate(['/planters'])
-          
-        });
-
+    color: '',
   };
 
+  constructor(private service: PlanterServiceService, private router: Router) {}
+
+  ngOnInit(): void {}
+
+  createPlanter(form1: any): void {
+    alert('Planter added successfully!');
+    this.service.createPlanter(this.planter).subscribe((data) => {
+      console.log(data);
+      this.router.navigate(['/planters']);
+    });
+  }
 }

@@ -6,17 +6,19 @@ import { Customer } from './customer';
 @Component({
   selector: 'app-view-customer',
   templateUrl: './view-customer.component.html',
-  styleUrls: ['./view-customer.component.css']
+  styleUrls: ['./view-customer.component.css'],
 })
 export class ViewCustomerComponent implements OnInit {
   pageTitle = 'Customer Detail';
-  customer!:Customer;
+  customer!: Customer;
   errorMessage = '';
-  show:boolean=true;
-updatedName!:string;
-  constructor(private route: ActivatedRoute,
+  show: boolean = true;
+  updatedName!: string;
+  constructor(
+    private route: ActivatedRoute,
     private router: Router,
-    private service: CustomerService){ }
+    private service: CustomerService
+  ) {}
 
   ngOnInit(): void {
     const param = this.route.snapshot.paramMap.get('id');
@@ -26,11 +28,10 @@ updatedName!:string;
     }
   }
 
-
   getCustomer(id: number): void {
     this.service.getCustomerById(id).subscribe({
-      next: customer => this.customer = customer,
-      error: err => this.errorMessage = err
+      next: (customer) => (this.customer = customer),
+      error: (err) => (this.errorMessage = err),
     });
   }
 
@@ -38,34 +39,19 @@ updatedName!:string;
     this.router.navigate(['/customer-list']);
   }
 
-
-
-
-  onToggle(customer:Customer):void{
-
-    this.service.setStatus(customer.id).subscribe(
-      data=>{
-        console.log(data);    
-        this.show=false;
-        if(data.status.valueOf()=='BLOCK') 
-           this.updatedName='UNBLOCK';
-        else
-           this.updatedName="BlOCK";  
-
-           
-      
-      }
-    )
-
+  onToggle(customer: Customer): void {
+    this.service.setStatus(customer.id).subscribe((data) => {
+      console.log(data);
+      this.show = false;
+      if (data.status.valueOf() == 'BLOCK') this.updatedName = 'UNBLOCK';
+      else this.updatedName = 'BlOCK';
+    });
   }
 
-  buttonName(name:string):string{
+  buttonName(name: string): string {
+    if (name.valueOf() == 'BLOCK') name = 'UNBLOCK';
+    else name = 'BlOCK';
 
-      if(name.valueOf()=='BLOCK')
-         name='UNBLOCK';
-      else
-         name='BlOCK';
-
-   return this.show ? name : this.updatedName;
+    return this.show ? name : this.updatedName;
   }
 }

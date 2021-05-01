@@ -1,60 +1,96 @@
-     <!DOCTYPE html>
-     <html lang="en">
-     <head>
-         <meta charset="UTF-8">
-         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    
-         <title>Document</title>
-     </head>
-     <body>
-         
-     <ul id="nav-bar">
-        <li><a  routerLink="/welcome" class="nav-link"> <span class="glyphicon glyphicon-home"></span>  Home</a></li>
-       
-        <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/plants">Plant</a></li>
-        <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/seeds">Seed</a></li>
-        <li><a *ngIf="loginService.isUserLoggedIn()" routerLink="/planters">Planter</a></li>
-        <li ><a *ngIf="loginService.isUserLoggedIn() && onlyToAdmin " routerLink="/customer-list" class="nav-link"> Customers</a></li>
-        
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
-        <!-- <li class="float-end"><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/add-customer" class="nav-link">Register</a></li>
-        <li class="float-end"><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/login" >  <span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-        <li class="float-end"><a *ngIf="loginService.isUserLoggedIn()" routerLink="/logout" class="nav-link"><span class="glyphicon glyphicon-log-out"></span> LogOut</a></li>
-        <li class="float-end"><a href="/cart"><i class="glyphicon glyphicon-shopping-cart"></i></a></li>
-        <li class="float-end"><a *ngIf="loginService.isUserLoggedIn()" routerLink="/order-list">My Orders</a></li>
-        <li class="float-end"><a *ngIf="loginService.isUserLoggedIn() "  routerLink="/account" class="nav-link"> <span class="glyphicon glyphicon-user"></span>  My Account</a></li> -->
-        <li class="float-end"><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/add-customer" class="nav-link">Register</a></li>
-         <li class="float-end"><a *ngIf="!loginService.isUserLoggedIn()" routerLink="/login" >  <span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-         
-         <li class="float-end"><a *ngIf="loginService.isUserLoggedIn()" routerLink="/logout" class="nav-link"><span class="glyphicon glyphicon-log-out"></span> LogOut</a></li>
-         <li class="float-end" ><a *ngIf="loginService.isUserLoggedIn() && onlyToAdmin " routerLink="/allorders" class="nav-link"> All Orders</a></li>
-         <li class="float-end"><a *ngIf="loginService.isUserLoggedIn() && !onlyToAdmin " routerLink="/account" class="nav-link"> <span class="glyphicon glyphicon-user"></span>  My Account</a></li>        
-         <li class="float-end"><a  *ngIf="loginService.isUserLoggedIn() && !onlyToAdmin " href="/cart"><i class="glyphicon glyphicon-shopping-cart"></i></a><span *ngIf="loginService.isUserLoggedIn() && !onlyToAdmin" class="badge badge-light">{{temp}}</span></li>
-         
-        
+    <title>Document</title>
+  </head>
+  <body>
+    <ul id="nav-bar">
+      <li>
+        <a routerLink="/welcome" class="nav-link">
+          <span class="glyphicon glyphicon-home"></span> Home</a
+        >
+      </li>
+
+      <li>
+        <a *ngIf="loginService.isUserLoggedIn()" routerLink="/plants">Plant</a>
+      </li>
+      <li>
+        <a *ngIf="loginService.isUserLoggedIn()" routerLink="/seeds">Seed</a>
+      </li>
+      <li>
+        <a *ngIf="loginService.isUserLoggedIn()" routerLink="/planters"
+          >Planter</a
+        >
+      </li>
+      <li>
+        <a
+          *ngIf="loginService.isUserLoggedIn() && onlyToAdmin"
+          routerLink="/customer-list"
+          class="nav-link"
+        >
+          Customers</a
+        >
+      </li>
+      <li class="float-end">
+        <a
+          *ngIf="!loginService.isUserLoggedIn()"
+          routerLink="/add-customer"
+          class="nav-link"
+          >Register</a
+        >
+      </li>
+      <li class="float-end">
+        <a *ngIf="!loginService.isUserLoggedIn()" routerLink="/login">
+          <span class="glyphicon glyphicon-log-in"></span> Login</a
+        >
+      </li>
+
+      <li class="float-end">
+        <a
+          *ngIf="loginService.isUserLoggedIn()"
+          routerLink="/logout"
+          class="nav-link"
+          ><span class="glyphicon glyphicon-log-out"></span> LogOut</a
+        >
+      </li>
+      <li class="float-end">
+        <a
+          *ngIf="loginService.isUserLoggedIn() && onlyToAdmin"
+          routerLink="/allorders"
+          class="nav-link"
+        >
+          All Orders</a
+        >
+      </li>
+      <li class="float-end">
+        <a
+          *ngIf="loginService.isUserLoggedIn() && !onlyToAdmin"
+          routerLink="/account"
+          class="nav-link"
+        >
+          <span class="glyphicon glyphicon-user"></span> My Account</a
+        >
+      </li>
+      <li class="float-end">
+        <a *ngIf="loginService.isUserLoggedIn() && !onlyToAdmin" href="/cart"
+          ><i class="glyphicon glyphicon-shopping-cart"></i></a
+        ><span
+          *ngIf="loginService.isUserLoggedIn() && !onlyToAdmin"
+          class="badge badge-light"
+          >{{ temp }}</span
+        >
+      </li>
     </ul>
-
-  
-        <!-- <div class="container " id="content"> -->
-           
-
-            <router-outlet></router-outlet>
-      
-      
-         <!-- </div>  -->
-         
-
-       
-         <!-- <app-footer></app-footer> -->
-     
-
-
-
-
-     </body>
-     </html>
- 
+    <router-outlet></router-outlet>
+  </body>
+</html>

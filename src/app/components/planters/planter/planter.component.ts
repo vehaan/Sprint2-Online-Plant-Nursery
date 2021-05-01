@@ -6,26 +6,31 @@ import { IPlanter } from './IPlanter';
 @Component({
   selector: 'app-planter',
   templateUrl: './planter.component.html',
-  styleUrls: ['./planter.component.css']
+  styleUrls: ['./planter.component.css'],
 })
 export class PlanterComponent implements OnInit {
-  id: number = 0
+  id: number = 0;
   sub!: any;
   planter!: IPlanter;
-  constructor(private service:PlanterServiceService,private router:Router, private ActivatedRoute: ActivatedRoute) {  }
+  constructor(
+    private service: PlanterServiceService,
+    private router: Router,
+    private ActivatedRoute: ActivatedRoute
+  ) {}
 
-  ngOnInit(): void {    
-    this.id = Number(this.ActivatedRoute.snapshot.paramMap.get("id"));
-    console.log(this.id + " " + this.ActivatedRoute)
+  ngOnInit(): void {
+    this.id = Number(this.ActivatedRoute.snapshot.paramMap.get('id'));
+    console.log(this.id + ' ' + this.ActivatedRoute);
     this.service.getPlanterById(this.id).subscribe(
-      (data) => { console.log(data); this.planter = data },
+      (data) => {
+        console.log(data);
+        this.planter = data;
+      },
       (err) => console.log(err)
     );
-
   }
 
   onBack(): void {
-    this.router.navigate(['/planters'])
+    this.router.navigate(['/planters']);
   }
-
 }

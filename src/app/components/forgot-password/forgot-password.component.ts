@@ -8,64 +8,71 @@ import { Customer } from '../customers/view-customer/customer';
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.css']
+  styleUrls: ['./forgot-password.component.css'],
 })
 export class ForgotPasswordComponent implements OnInit {
-
   resetForm!: FormGroup;
   submitted = false;
-  customer!:Customer;
-  constructor(private formBuilder: FormBuilder,private service:CustomerService,private router:Router,private authService:AuthenticationService) { }
+  customer!: Customer;
+  constructor(
+    private formBuilder: FormBuilder,
+    private service: CustomerService,
+    private router: Router,
+    private authService: AuthenticationService
+  ) {}
 
   ngOnInit(): void {
-    this.customer=this.authService.getCustomer();
-    this.resetForm = this.formBuilder.group({
-      email: [this.customer.email, [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required]
-  }, {
-      validator: MustMatch('password', 'confirmPassword')
-  });
+    this.customer = this.authService.getCustomer();
+    this.resetForm = this.formBuilder.group(
+      {
+        email: [this.customer.email, [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ['', Validators.required],
+      },
+      {
+        validator: MustMatch('password', 'confirmPassword'),
+      }
+    );
   }
 
-
-  get f() { return this.resetForm.controls; }
+  get f() {
+    return this.resetForm.controls;
+  }
   onSubmit() {
     this.submitted = true;
 
     // stop here if form is invalid
     if (this.resetForm.invalid) {
-        return;
+      return;
     }
     this.service.changePassword(this.resetForm.value).subscribe(
-     (data)=>{console.log(data)},
-      err=>console.log(err)
-    )
+      (data) => {
+        console.log(data);
+      },
+      (err) => console.log(err)
+    );
 
+    this.router.navigate(['account']);
 
-  this.router.navigate(['account']);
-
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.resetForm.value))
+    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.resetForm.value));
+  }
 }
-  
-}
-
 
 export function MustMatch(controlName: string, matchingControlName: string) {
   return (formGroup: FormGroup) => {
-      const control = formGroup.controls[controlName];
-      const matchingControl = formGroup.controls[matchingControlName];
+    const control = formGroup.controls[controlName];
+    const matchingControl = formGroup.controls[matchingControlName];
 
-      if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-          // return if another validator has already found an error on the matchingControl
-          return;
-      }
+    if (matchingControl.errors && !matchingControl.errors.mustMatch) {
+      // return if another validator has already found an error on the matchingControl
+      return;
+    }
 
-      // set error on matchingControl if validation fails
-      if (control.value !== matchingControl.value) {
-          matchingControl.setErrors({ mustMatch: true });
-      } else {
-          matchingControl.setErrors(null);
-      }
-  }
+    // set error on matchingControl if validation fails
+    if (control.value !== matchingControl.value) {
+      matchingControl.setErrors({ mustMatch: true });
+    } else {
+      matchingControl.setErrors(null);
+    }
+  };
 }

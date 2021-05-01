@@ -32,25 +32,33 @@ import { AllOrdersComponent } from './components/order/all-orders/all-orders.com
 
 
 const routes: Routes = [
-  { path: 'add-planter',component: AddPlanterComponent},
-  {path:'edit-planter/:id',component:EditPlanterComponent},
+  { path: '', component: WelcomeComponent},
+  { path: 'add-planter',component: AddPlanterComponent,
+  canActivate:[AuthGuardService,AdminGuard]},
+  {path:'edit-planter/:id',component:EditPlanterComponent,
+  canActivate:[AuthGuardService,AdminGuard]},
   {path:'planters',component:PlanterListComponent},
   {path:'planters/:id',component:PlanterComponent},
 
   {path:'seeds',component:SeedListComponent},
 {path:'seeds/:id',component:SeedComponent},
-{path:'add-seed',component:AddSeedComponent},
-{path:'edit-seed/:id',component:EditSeedComponent},
+{path:'add-seed',component:AddSeedComponent,
+canActivate:[AuthGuardService,AdminGuard]},
+{path:'edit-seed/:id',component:EditSeedComponent,
+canActivate:[AuthGuardService,AdminGuard]},
 
 {path:'plants',component:PlantListComponent},
 {path:'plants/:id',component:PlantComponent},
-{path:'edit-plant/:id',component:EditPlantComponent},
-{path:'add-plant',component:AddPlantComponent},
+{path:'edit-plant/:id',component:EditPlantComponent,
+canActivate:[AuthGuardService,AdminGuard]},
+{path:'add-plant',component:AddPlantComponent,
+canActivate:[AuthGuardService,AdminGuard]},
 
 {path: 'cart', component: CartComponent},
 { path: 'order-list', component: OrderListComponent},
 { path: 'add-order', component: AddOrderComponent},
-{ path: 'allorders', component: AllOrdersComponent },
+{ path: 'allorders', component: AllOrdersComponent,
+canActivate:[AuthGuardService,AdminGuard]},
 
 
 
@@ -67,7 +75,8 @@ canActivate: [CustomerDetailGuard]},
 { path: 'change-password', component: ForgotPasswordComponent },
 { path: 'logout', component: LogoutComponent},
 {path:"customer-list",component:CustomerListComponent,
-canActivate:[AuthGuardService,AdminGuard]}
+canActivate:[AuthGuardService,AdminGuard]},
+{path: '**', component: WelcomeComponent}
 
 ];
 

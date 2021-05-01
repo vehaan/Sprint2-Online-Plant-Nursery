@@ -1,23 +1,14 @@
-  
 <section>
-    <div class="s-box-container">
-        <img src="https://media.tenor.com/images/cbae2dfd31aa5ec2fcb7f46b65e1550f/tenor.gif" width="15%">
-        <h2>Your order has been placed</h2>
-        <!-- <div class="s-box" *ngFor = "let order of orders; let i = index">
-            <div *ngIf = "i==0">
+  <div  class="container">
+      <div style="margin-top: 20%;" class="row">
+    <img class="col-md-2 col-md-offset-5"
+      src="https://media.tenor.com/images/cbae2dfd31aa5ec2fcb7f46b65e1550f/tenor.gif"
+      width="5%"
+    />
+    <h2 class="col-md-6 col-md-offset-4">Your order has been placed</h2>
+    <button style="margin-top: 2%;"  class="btn btn-success col-md-4 col-md-offset-4" (click)="continueShopping()">Continue Shopping</button>
+  </div>
+</div>
 
-                <li>Order Id: {{order.bookingId}}</li>
-                <li>Ordered Date: {{order.bookingDate}}</li>
-                <li>Payment Mode used: {{order.transactionMode}}</li>
-            
-                <li>Ordered Products: {{order.products | json}} </li>
-
-                <li>Order Quantity: {{order.quantity}}</li>
-                <li>Order Cost: {{order.totalCost}}</li>
-            </div>
-
-        </div> -->
-    </div>
-    <br> <br>
-    <button (click) = "continueShopping()">Continue Shopping</button>
+  
 </section>

@@ -1,152 +1,228 @@
-<div class="col-lg-6 container">
-    <h2 class="text-center">Add Planter</h2>
+<div style="margin-left: 22%;" class="col-lg-6 container">
+  <h2 class="text-center">Add Planter</h2>
 
-    <form #form1="ngForm"  (ngSubmit)="createPlanter(form1)">
-
-      <div class="form-group row required">
-        <div class="col-25">
-        <label for="name">Name:</label></div>
-        <div class="col-75">
-        <input [(ngModel)]="planter.name" 
-        placeholder="Name"
-         name="name" 
-         class="form-control"
-          id="name" required #name="ngModel">
+  <form #form1="ngForm" (ngSubmit)="createPlanter(form1)">
+    <div class="form-group row required">
+      <div class="col-25">
+        <label for="name">Name:</label>
+      </div>
+      <div class="col-75">
+        <input
+          [(ngModel)]="planter.name"
+          placeholder="Name"
+          name="name"
+          class="form-control"
+          id="name"
+          required
+          #name="ngModel"
+        />
       </div>
       <div *ngIf="name.invalid && (name.dirty || name.touched)">
-        <div style="margin-top: 1%; margin-left: 27%; color: red;" *ngIf="name.errors?.required">
-   Name is required!
- </div>
-</div>
+        <div
+          style="margin-top: 1%; margin-left: 27%; color: red"
+          *ngIf="name.errors?.required"
+        >
+          Name is required!
+        </div>
+      </div>
     </div>
 
-      <div class="form-group row required" >
-        <div class="col-25">
-          <label for="cost">Cost:</label>
+    <div class="form-group row required">
+      <div class="col-25">
+        <label for="cost">Cost:</label>
+      </div>
+      <div class="col-75">
+        <input
+          [(ngModel)]="planter.cost"
+          placeholder="Cost"
+          name="cost"
+          class="form-control"
+          id="cost"
+          required
+          pattern="^[1-9]\d*$"
+          #cost="ngModel"
+        />
+      </div>
+      <div *ngIf="cost.invalid && (cost.dirty || cost.touched)">
+        <div
+          style="margin-top: 1%; margin-left: 27%; color: red"
+          *ngIf="cost.errors?.required"
+        >
+          Cost is required!
         </div>
-        <div class="col-75">
-          <input  [(ngModel)]="planter.cost"
-          placeholder="Cost" name="cost"
-          class="form-control" id="cost" required pattern="^[1-9]\d*$" #cost="ngModel">
+        <div
+          style="margin-top: 1%; margin-left: 27%; color: red"
+          *ngIf="cost.errors?.pattern"
+        >
+          Cost must be positive!
         </div>
-        <div *ngIf="cost.invalid && (cost.dirty || cost.touched)">
-         <div style="margin-top: 1%; margin-left: 27%; color: red;" *ngIf="cost.errors?.required">
-    Cost is required!
-  </div>
-  <div style="margin-top: 1%; margin-left: 27%; color: red;" *ngIf="cost.errors?.pattern">
-    Cost must be positive!
-  </div>
- 
-</div>
+      </div>
+    </div>
 
+    <div class="form-group row required">
+      <div class="col-25">
+        <label for="stock">Stock:</label>
       </div>
-    
-      <div class="form-group row required">
-        <div class="col-25">
-        <label for="stock">Stock:</label></div>
-        <div class="col-75">
-        <input [(ngModel)]="planter.stock" 
-        placeholder="Stock"
-         name="stock" 
-         class="form-control"
-          id="stock" required pattern="^[1-9]\d*$" #stock="ngModel">
+      <div class="col-75">
+        <input
+          [(ngModel)]="planter.stock"
+          placeholder="Stock"
+          name="stock"
+          class="form-control"
+          id="stock"
+          required
+          pattern="^[1-9]\d*$"
+          #stock="ngModel"
+        />
+      </div>
+      <div *ngIf="stock.invalid && (stock.dirty || stock.touched)">
+        <div
+          style="margin-top: 1%; margin-left: 27%; color: red"
+          *ngIf="stock.errors?.required"
+        >
+          Stock is required!
         </div>
-        <div *ngIf="stock.invalid && (stock.dirty || stock.touched)">
-          <div style="margin-top: 1%; margin-left: 27%; color: red;" *ngIf="stock.errors?.required">
-     Stock is required!
-   </div>
-   <div style="margin-top: 1%; margin-left: 27%; color: red;" *ngIf="stock.errors?.pattern">
-    Stock must be positive!
-  </div>
- </div>
+        <div
+          style="margin-top: 1%; margin-left: 27%; color: red"
+          *ngIf="stock.errors?.pattern"
+        >
+          Stock must be positive!
+        </div>
       </div>
-    
-      <div class="form-group row">
-        <div class="col-25">
-        <label for="type">Product Type: </label></div>
-          <div class="col-75">
-        <input [(ngModel)]="planter.type"
-         placeholder="Product Type"
+    </div>
+
+    <div class="form-group row">
+      <div class="col-25">
+        <label for="type">Product Type: </label>
+      </div>
+      <div class="col-75">
+        <input
+          [(ngModel)]="planter.type"
+          placeholder="Product Type"
           name="type"
-           class="form-control"
-            id="type" readonly>
-      </div></div>
+          class="form-control"
+          id="type"
+          readonly
+        />
+      </div>
+    </div>
 
-      
-
-      <div class="form-group row required">
-        <div class="col-25">
-        <label for="height">Height:</label></div>
-        <div class="col-75">
-        <input [(ngModel)]="planter.height" 
-        placeholder="Height"
-         name="height" 
-         class="form-control"
-          id="height" required pattern="^[1-9]\d*$" #height="ngModel">
+    <div class="form-group row required">
+      <div class="col-25">
+        <label for="height">Height:</label>
+      </div>
+      <div class="col-75">
+        <input
+          [(ngModel)]="planter.height"
+          placeholder="Height"
+          name="height"
+          class="form-control"
+          id="height"
+          required
+          pattern="^[1-9]\d*$"
+          #height="ngModel"
+        />
       </div>
       <div *ngIf="height.invalid && (height.dirty || height.touched)">
-        <div style="margin-top: 1%; margin-left: 27%; color: red;" *ngIf="height.errors?.required">
-   Height is required!
- </div>
- <div style="margin-top: 1%; margin-left: 27%; color: red;" *ngIf="height.errors?.pattern">
-  Height must be positive!
-</div>
-</div>
+        <div
+          style="margin-top: 1%; margin-left: 27%; color: red"
+          *ngIf="height.errors?.required"
+        >
+          Height is required!
+        </div>
+        <div
+          style="margin-top: 1%; margin-left: 27%; color: red"
+          *ngIf="height.errors?.pattern"
+        >
+          Height must be positive!
+        </div>
+      </div>
     </div>
 
-      <div class="form-group row required">
-        <div class="col-25">
-        <label for="shape">Shape:</label></div>
-        <div class="col-75">
-        <input [(ngModel)]="planter.shape" 
-        placeholder="Shape"
-         name="shape" 
-         class="form-control"
-          id="shape" required #shape="ngModel">
+    <div class="form-group row required">
+      <div class="col-25">
+        <label for="shape">Shape:</label>
+      </div>
+      <div class="col-75">
+        <input
+          [(ngModel)]="planter.shape"
+          placeholder="Shape"
+          name="shape"
+          class="form-control"
+          id="shape"
+          required
+          #shape="ngModel"
+        />
       </div>
       <div *ngIf="shape.invalid && (shape.dirty || shape.touched)">
-        <div style="margin-top: 1%; margin-left: 27%; color: red;" *ngIf="shape.errors?.required">
-   Shape is required!
- </div>
+        <div
+          style="margin-top: 1%; margin-left: 27%; color: red"
+          *ngIf="shape.errors?.required"
+        >
+          Shape is required!
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-25">
+        <label for="capacity">Capacity:</label>
+      </div>
+      <div class="col-75">
+        <input
+          [(ngModel)]="planter.capacity"
+          placeholder="Capacity"
+          name="capacity"
+          class="form-control"
+          id="capacity"
+        />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-25">
+        <label for="drainageHoles">Drainage Holes:</label>
+      </div>
+      <div class="col-75">
+        <input
+          [(ngModel)]="planter.drainageHoles"
+          placeholder="Drainage Holes"
+          name="drainageHoles"
+          class="form-control"
+          id="drainageHoles"
+        />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-25">
+        <label for="color">Color:</label>
+      </div>
+      <div class="col-75">
+        <input
+          [(ngModel)]="planter.color"
+          placeholder="Color"
+          name="color"
+          class="form-control"
+          id="color"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <button
+        style="margin-top: 1%"
+        class="btn btn-dark pull-left"
+        type="reset"
+      >
+        Reset
+      </button>
+      <button
+        style="margin-top: 1%"
+        class="btn btn-success pull-right"
+        type="submit"
+      >
+        Submit!
+      </button>
+    </div>
+  </form>
 </div>
-    </div>
-
-      <div class="form-group row">
-        <div class="col-25">
-        <label for="capacity">Capacity:</label></div>
-        <div class="col-75">
-        <input [(ngModel)]="planter.capacity" 
-        placeholder="Capacity"
-         name="capacity" 
-         class="form-control"
-          id="capacity">
-      </div></div>
-
-      <div class="form-group row">
-        <div class="col-25">
-        <label for="drainageHoles">Drainage Holes:</label></div>
-        <div class="col-75">
-        <input [(ngModel)]="planter.drainageHoles" 
-        placeholder="Drainage Holes"
-         name="drainageHoles" 
-         class="form-control"
-          id="drainageHoles">
-      </div></div>
-
-      <div class="form-group row">
-        <div class="col-25">
-        <label for="color">Color:</label></div>
-        <div class="col-75">
-        <input [(ngModel)]="planter.color" 
-        placeholder="Color"
-         name="color" 
-         class="form-control"
-          id="color">
-      </div></div>
-      <div class="row">
-      <button style="margin-top: 1%;" class="btn btn-dark pull-left" type="reset">Reset</button>
-      <button style="margin-top: 1%;"  class="btn btn-success pull-right" type="submit">Submit!</button>
-    </div>
-    </form>
-    
-    </div>

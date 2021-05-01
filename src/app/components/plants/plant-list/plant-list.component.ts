@@ -11,17 +11,17 @@ import { Plant } from '../plant/Plant';
 @Component({
   selector: 'app-plant-list',
   templateUrl: './plant-list.component.html',
-  styleUrls: ['./plant-list.component.css']
+  styleUrls: ['./plant-list.component.css'],
 })
 export class PlantListComponent implements OnInit {
-  customer !: Customer;
-  onlyToAdmin !: boolean;
+  customer!: Customer;
+  onlyToAdmin!: boolean;
   cartProducts!: Cart[];
   public plants!: Plant[];
-  private error!: string
+  private error!: string;
   private _listFilter: string = '';
   filteredPlants: Plant[] = [];
-  searchedPlants:Plant[]=[];
+  searchedPlants: Plant[] = [];
   sub!: Subscription;
   //qty: number = 0;
   public sortLowToHigh: boolean = false;
@@ -40,120 +40,135 @@ export class PlantListComponent implements OnInit {
   DifficultyEasyPlants!: Plant[];
   DifficultyMediumPlants!: Plant[];
   DifficultyHardPlants!: Plant[];
-  
+
   limitReached: boolean[] = [];
   index: number = 0;
   stockFlag: boolean = false;
   newFlag: boolean[] = [];
 
-  noPlant:boolean=false;
+  noPlant: boolean = false;
   get listFilter(): string {
     return this._listFilter;
   }
   set listFilter(value: string) {
     this._listFilter = value;
-    console.log("in setter:", value);
+    console.log('in setter:', value);
     this.searchedPlants = this.performFilter(value);
   }
 
-  constructor(private service: PlantService, private router: Router, public loginService:AuthenticationService) { }
+  constructor(
+    private service: PlantService,
+    private router: Router,
+    public loginService: AuthenticationService
+  ) {}
 
   ngOnInit(): void {
     this.sub = this.service.getAllPlants().subscribe({
-      next: plants => {
+      next: (plants) => {
         this.plants = plants;
         this.searchedPlants = this.plants;
       },
-      error: err => this.error = err
+      error: (err) => (this.error = err),
     });
     this.customer = this.loginService.getCustomer();
     this.onlyToAdmin = this.loginService.checkRole(this.customer.role);
   }
   ngDoCheck(): void {
-    if(this.plants) {
-      for(let i=0; i<this.plants.length; i++) {
-        
-        if(this.newFlag[i] != false) {
+    if (this.plants) {
+      for (let i = 0; i < this.plants.length; i++) {
+        if (this.newFlag[i] != false) {
           this.newFlag[i] = true;
         }
       }
-      
     }
     let tempPlants: (any | Plant)[] = [];
-    let bloomPlants:(any | Plant)[] = [];
+    let bloomPlants: (any | Plant)[] = [];
     if (this.difficultyEasyBool) {
-      tempPlants = [...this.DifficultyEasyPlants]
+      tempPlants = [...this.DifficultyEasyPlants];
     }
     if (this.difficultyMediumBool) {
-      tempPlants = [...tempPlants, ...this.DifficultyMediumPlants]
+      tempPlants = [...tempPlants, ...this.DifficultyMediumPlants];
     }
     if (this.difficultyHardBool) {
-      tempPlants = [...tempPlants, ...this.DifficultyHardPlants]
+      tempPlants = [...tempPlants, ...this.DifficultyHardPlants];
     }
     if (this.autumnBool) {
-      bloomPlants = [...this.autumnPlants]
+      bloomPlants = [...this.autumnPlants];
     }
     if (this.winterBool) {
-      bloomPlants = [...bloomPlants, ...this.winterPlants]
+      bloomPlants = [...bloomPlants, ...this.winterPlants];
     }
     if (this.summerBool) {
-      bloomPlants = [...bloomPlants, ...this.summerPlants]
+      bloomPlants = [...bloomPlants, ...this.summerPlants];
     }
     if (this.monsoonBool) {
-      bloomPlants = [...bloomPlants, ...this.monsoonPlants]
+      bloomPlants = [...bloomPlants, ...this.monsoonPlants];
     }
-    if((this.difficultyEasyBool || this.difficultyMediumBool || this.difficultyHardBool) && (this.autumnBool || this.winterBool || this.summerBool || this.monsoonBool)){
-      let result = tempPlants.filter(o => bloomPlants.some(({id,name,}) => o.id === id && o.name === name));
-      this.filteredPlants=result;
-    }
-    else if(this.difficultyEasyBool || this.difficultyMediumBool || this.difficultyHardBool){
-      this.filteredPlants=tempPlants;
-    }
-    else if(this.autumnBool || this.winterBool || this.summerBool || this.monsoonBool){
-      this.filteredPlants=bloomPlants;
-    }
-    else{
+    if (
+      (this.difficultyEasyBool ||
+        this.difficultyMediumBool ||
+        this.difficultyHardBool) &&
+      (this.autumnBool ||
+        this.winterBool ||
+        this.summerBool ||
+        this.monsoonBool)
+    ) {
+      let result = tempPlants.filter((o) =>
+        bloomPlants.some(({ id, name }) => o.id === id && o.name === name)
+      );
+      this.filteredPlants = result;
+    } else if (
+      this.difficultyEasyBool ||
+      this.difficultyMediumBool ||
+      this.difficultyHardBool
+    ) {
+      this.filteredPlants = tempPlants;
+    } else if (
+      this.autumnBool ||
+      this.winterBool ||
+      this.summerBool ||
+      this.monsoonBool
+    ) {
+      this.filteredPlants = bloomPlants;
+    } else {
       //this.filteredPlants=this.plants;
-      this.filteredPlants=this.searchedPlants;
+      this.filteredPlants = this.searchedPlants;
     }
     if (this.sortLowToHigh) {
-      this.filteredPlants.sort((a, b) => (a.cost > b.cost) ? 1 : -1)
+      this.filteredPlants.sort((a, b) => (a.cost > b.cost ? 1 : -1));
     }
     if (this.sortHighToLow) {
-      this.filteredPlants.sort((a, b) => (a.cost < b.cost) ? 1 : -1)
+      this.filteredPlants.sort((a, b) => (a.cost < b.cost ? 1 : -1));
     }
-    if(this.filteredPlants.length==0){
-      console.log(this.filteredPlants.length)
-      this.noPlant=true;
-    }
-    else this.noPlant=false;
+    if (this.filteredPlants.length == 0) {
+      console.log(this.filteredPlants.length);
+      this.noPlant = true;
+    } else this.noPlant = false;
 
-    console.log("inside do check")
+    console.log('inside do check');
     //window.location.reload();
   }
-
 
   performFilter(filterBy: string): Plant[] {
     filterBy = filterBy.toLocaleLowerCase();
     return this.plants.filter((plant: Plant) =>
-      plant.name.toLocaleLowerCase().includes(filterBy));
-
+      plant.name.toLocaleLowerCase().includes(filterBy)
+    );
   }
 
   onEdit(plant: Plant) {
-    this.router.navigate(['edit-plant', plant.id])
+    this.router.navigate(['edit-plant', plant.id]);
   }
 
   onDelete(plant: Plant): void {
-    this.service.deletePlantById(plant.id)
-      .subscribe(data => {
-        console.log("user deleted")
-        this.plants = this.plants.filter(u => u !== plant);
-      })
-    this.router.navigate(['plants'])
-  };
+    this.service.deletePlantById(plant.id).subscribe((data) => {
+      console.log('user deleted');
+      this.plants = this.plants.filter((u) => u !== plant);
+    });
+    this.router.navigate(['plants']);
+  }
   addPlant() {
-    this.router.navigate(['add-plant'])
+    this.router.navigate(['add-plant']);
   }
   ascendingSort() {
     this.sortLowToHigh = !this.sortLowToHigh;
@@ -165,115 +180,110 @@ export class PlantListComponent implements OnInit {
     this.sortHighToLow = !this.sortHighToLow;
   }
 
-
   difficultyEasy() {
     this.difficultyEasyBool = !this.difficultyEasyBool;
     console.log(this.difficultyEasyBool);
-    this.service.FilterByDifficulty("EASY").subscribe(
-      (data) => this.DifficultyEasyPlants = data,
-      (err) => this.error = err)
+    this.service.FilterByDifficulty('EASY').subscribe(
+      (data) => (this.DifficultyEasyPlants = data),
+      (err) => (this.error = err)
+    );
   }
   difficultyMedium() {
     this.difficultyMediumBool = !this.difficultyMediumBool;
-    this.service.FilterByDifficulty("MEDIUM").subscribe(
-      (data) => this.DifficultyMediumPlants = data,
-      (err) => this.error = err)
+    this.service.FilterByDifficulty('MEDIUM').subscribe(
+      (data) => (this.DifficultyMediumPlants = data),
+      (err) => (this.error = err)
+    );
   }
   difficultyHard() {
     this.difficultyHardBool = !this.difficultyHardBool;
-    this.service.FilterByDifficulty("HARD").subscribe(
-      (data) => this.DifficultyHardPlants = data,
-      (err) => this.error = err)
+    this.service.FilterByDifficulty('HARD').subscribe(
+      (data) => (this.DifficultyHardPlants = data),
+      (err) => (this.error = err)
+    );
   }
   autumn() {
     this.autumnBool = !this.autumnBool;
-    this.service.FilterByBloomTime("AUTUMN").subscribe(
-      (data) => this.autumnPlants = data,
-      (err) => this.error = err)
+    this.service.FilterByBloomTime('AUTUMN').subscribe(
+      (data) => (this.autumnPlants = data),
+      (err) => (this.error = err)
+    );
   }
   winter() {
     this.winterBool = !this.winterBool;
-    this.service.FilterByBloomTime("WINTER").subscribe(
-      (data) => this.winterPlants = data,
-      (err) => this.error = err)
+    this.service.FilterByBloomTime('WINTER').subscribe(
+      (data) => (this.winterPlants = data),
+      (err) => (this.error = err)
+    );
   }
   summer() {
     this.summerBool = !this.summerBool;
-    this.service.FilterByBloomTime("SUMMER").subscribe(
-      (data) => this.summerPlants = data,
-      (err) => this.error = err)
+    this.service.FilterByBloomTime('SUMMER').subscribe(
+      (data) => (this.summerPlants = data),
+      (err) => (this.error = err)
+    );
   }
   monsoon() {
     this.monsoonBool = !this.monsoonBool;
-    this.service.FilterByBloomTime("MONSOON").subscribe(
-      (data) => this.monsoonPlants = data,
-      (err) => this.error = err)
+    this.service.FilterByBloomTime('MONSOON').subscribe(
+      (data) => (this.monsoonPlants = data),
+      (err) => (this.error = err)
+    );
   }
 
   // Cart methods--------------------------------------------
   saveCart() {
-   let prevData = localStorage.getItem('cart');
-   console.log('prevdata'+prevData);
+    let prevData = localStorage.getItem('cart');
+    console.log('prevdata' + prevData);
 
-   if(prevData){
-     let prodInCart: Cart[] = JSON.parse(prevData);
-     console.log('saved in prodInCart'+prodInCart);
-     
-     return prodInCart;
-   }
-   return null;
+    if (prevData) {
+      let prodInCart: Cart[] = JSON.parse(prevData);
+      console.log('saved in prodInCart' + prodInCart);
 
- }
-
- addToCart(plantId: number, num: number) {
-
-  let prodInCart = this.saveCart();
-  if(prodInCart){
-    this.cartProducts = prodInCart;
+      return prodInCart;
+    }
+    return null;
   }
 
-  let plant = this.plants.find(plant=> {
-    return plant.id === plantId;
-  });
-
-  let flag = true;
-
-  if(plant){
-    this.cartProducts.forEach((value, index)=>{
-
-      if(value.id === plantId) {
-
-        let cart = this.cartProducts[index];
-
-        this.cartProducts.splice(index, 1, cart);
-        flag = false;
-      }
-    })
-
-    if(flag) {
-      this.cartProducts.push({
-        "id" : plant.id,
-        "quantity": 1
-      })
+  addToCart(plantId: number, num: number) {
+    let prodInCart = this.saveCart();
+    if (prodInCart) {
+      this.cartProducts = prodInCart;
     }
 
-    if(this.plants) {
-      for(let i=0; i<this.plants.length; i++) {
-    
-        if(this.newFlag[i] != false) {
-          this.newFlag[i] = true;
+    let plant = this.plants.find((plant) => {
+      return plant.id === plantId;
+    });
+
+    let flag = true;
+
+    if (plant) {
+      this.cartProducts.forEach((value, index) => {
+        if (value.id === plantId) {
+          let cart = this.cartProducts[index];
+
+          this.cartProducts.splice(index, 1, cart);
+          flag = false;
+        }
+      });
+
+      if (flag) {
+        this.cartProducts.push({
+          id: plant.id,
+          quantity: 1,
+        });
+      }
+
+      if (this.plants) {
+        for (let i = 0; i < this.plants.length; i++) {
+          if (this.newFlag[i] != false) {
+            this.newFlag[i] = true;
+          }
         }
       }
-  
+      this.newFlag[num] = false;
     }
-    this.newFlag[num] = false;
-
+    ProductService.badgeNumber++;
+    localStorage.setItem('cart', JSON.stringify(this.cartProducts));
   }
-  ProductService.badgeNumber++;
-  localStorage.setItem('cart', JSON.stringify(this.cartProducts));
-
 }
-
-}
-
-

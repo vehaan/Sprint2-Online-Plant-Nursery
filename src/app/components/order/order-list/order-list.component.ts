@@ -5,15 +5,12 @@ import { ProductService } from 'src/app/services/product.service';
 import { IProduct } from '../../welcome/IProduct';
 import { Order } from './order';
 
-
-
 @Component({
   selector: 'app-order-list',
   templateUrl: './order-list.component.html',
-  styleUrls: ['./order-list.component.css']
+  styleUrls: ['./order-list.component.css'],
 })
 export class OrderListComponent implements OnInit {
-
   private error!: string;
   orders!: Order[];
   orderedProducts!: IProduct[];
@@ -23,123 +20,90 @@ export class OrderListComponent implements OnInit {
   pmCard!: Order[];
   pmUpi!: Order[];
   noOrder: boolean = false;
-  
+
   sortLowToHigh: boolean = false;
   cash: boolean = false;
   card: boolean = false;
   upi: boolean = false;
 
   sortHighToLow: boolean = false;
-  // orderedProductsMap!: Map<number, number>;
-  // orderedPlantersId!: number[];
-  // orderedPlantersCost!: number[];
 
-  constructor(private orderService: OrderService, private productService: ProductService, private authenticationService: AuthenticationService ) { }
+  constructor(
+    private orderService: OrderService,
+    private productService: ProductService,
+    private authenticationService: AuthenticationService
+  ) {}
 
   ngOnInit(): void {
-    this.orderService.getAllCustomerOrders(this.authenticationService.customer.id).subscribe(
-      (data) => {
-        this.orders = data;
-      },
-      (err) => this.error = err
-    );
-    
-    // console.log(this.orders)
-
-    // if(this.orders){
-    //   for(let i=0; i<this.orders.length; i++){
-    //     let map = this.orders[i].products;
-
-    //     for(let key of map.keys()){
-    //       this.orderedPlantersId.push(key);
-    //     }
-    //     console.log(this.orderedPlantersId);
-
-    //     for(let value of map.values()){
-    //       this.orderedPlantersCost.push(value);
-    //     }
-    //     console.log(this.orderedPlantersCost);
-    //   }
-    // }
-
+    this.orderService
+      .getAllCustomerOrders(this.authenticationService.customer.id)
+      .subscribe(
+        (data) => {
+          this.orders = data;
+        },
+        (err) => (this.error = err)
+      );
   }
 
-
-
-  ngDoCheck(): void {
-
+  ngOnChanges(): void {
     this.orderService.getAllCustomerOrders(this.authenticationService.customer.id).subscribe(
       (data) => {
         this.orders = data;
       },
       (err) => this.error = err
     );
+  }
+
+  ngDoCheck(): void {
+    this.orderService
+      .getAllCustomerOrders(this.authenticationService.customer.id)
+      .subscribe(
+        (data) => {
+          this.orders = data;
+        },
+        (err) => (this.error = err)
+      );
 
     //Filtering BY Payment
     let tempOrders: (any | Order)[] = [];
-    if(this.cash) {
-      tempOrders = [...this.pmCash]
+    if (this.cash) {
+      tempOrders = [...this.pmCash];
       // console.log(tempOrders);
     }
-    if(this.card) {
-      tempOrders = [...tempOrders, ...this.pmCard]
+    if (this.card) {
+      tempOrders = [...tempOrders, ...this.pmCard];
     }
-    if(this.upi) {
-      tempOrders = [...tempOrders, ...this.pmUpi]
+    if (this.upi) {
+      tempOrders = [...tempOrders, ...this.pmUpi];
     }
 
-    if(!this.cash && !this.card && !this.upi) {
+    if (!this.cash && !this.card && !this.upi) {
       tempOrders = this.orders;
     }
 
-
     // Sorting
-    // this.filterOrders = this.orders;
+
     this.filterOrders = tempOrders;
     if (this.sortLowToHigh) {
-      this.filterOrders.sort((a, b) => (a.totalCost > b.totalCost) ? 1 : -1)
+      this.filterOrders.sort((a, b) => (a.totalCost > b.totalCost ? 1 : -1));
     }
     if (this.sortHighToLow) {
-      this.filterOrders.sort((a, b) => (a.totalCost < b.totalCost) ? 1 : -1)
+      this.filterOrders.sort((a, b) => (a.totalCost < b.totalCost ? 1 : -1));
     }
 
-    this.orders = this.filterOrders
+    this.orders = this.filterOrders;
 
-    if(this.orders.length==0){
+    if (this.orders.length == 0) {
       // console.log(this.orders.length)
       this.noOrder = true;
-    }
-    else this.noOrder=false;
-
-
+    } else this.noOrder = false;
   }
-
-
-  // method(): number[] {
-  //   console.log(this.orders)
-  //   if(this.orders){
-  //     for(let i=0; i<this.orders.length; i++){
-  //       let map = this.orders[i].products;
-
-  //       for(let key of map.keys()){
-  //         this.orderedPlantersId.push(key);
-  //       }
-  //       console.log(this.orderedPlantersId);
-
-  //       for(let value of map.values()){
-  //         this.orderedPlantersCost.push(value);
-  //       }
-  //       console.log(this.orderedPlantersCost);
-  //     }
-  //   }
-  //   return this.orderedPlantersCost;
-  // }
 
   ascendingSort() {
     this.sortLowToHigh = !this.sortLowToHigh;
     this.sortHighToLow = false;
   }
- 
+
   descendingSort() {
     this.sortLowToHigh = false;
     this.sortHighToLow = !this.sortHighToLow;
@@ -148,25 +112,42 @@ export class OrderListComponent implements OnInit {
   paymentModeCash() {
     this.cash = !this.cash;
     // console.log(this.cash);
-    this.orderService.filterByTransactionModeCustomer('CASH', this.authenticationService.customer.id).subscribe(
-      (data) => this.pmCash = data,
-      (err) => this.error = err)
+    this.orderService
+      .filterByTransactionModeCustomer(
+        'CASH',
+        this.authenticationService.customer.id
+      )
+      .subscribe(
+        (data) => (this.pmCash = data),
+        (err) => (this.error = err)
+      );
   }
- 
+
   paymentModeCard() {
     this.card = !this.card;
     // console.log(this.card);
-    this.orderService.filterByTransactionModeCustomer('CARD',  this.authenticationService.customer.id).subscribe(
-      (data) => this.pmCard = data,
-      (err) => this.error = err)
+    this.orderService
+      .filterByTransactionModeCustomer(
+        'CARD',
+        this.authenticationService.customer.id
+      )
+      .subscribe(
+        (data) => (this.pmCard = data),
+        (err) => (this.error = err)
+      );
   }
- 
+
   paymentModeUpi() {
     this.upi = !this.upi;
     // console.log(this.upi);
-    this.orderService.filterByTransactionModeCustomer('UPI',  this.authenticationService.customer.id).subscribe(
-      (data) => this.pmUpi = data,
-      (err) => this.error = err)
+    this.orderService
+      .filterByTransactionModeCustomer(
+        'UPI',
+        this.authenticationService.customer.id
+      )
+      .subscribe(
+        (data) => (this.pmUpi = data),
+        (err) => (this.error = err)
+      );
   }
-
 }

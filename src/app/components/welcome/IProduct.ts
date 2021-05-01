@@ -3,5 +3,4 @@ export interface IProduct{
     name: string;
     cost: number;
     stock: number;
-    // type: string;
 }
