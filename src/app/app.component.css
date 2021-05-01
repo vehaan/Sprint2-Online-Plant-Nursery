@@ -1,0 +1,59 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: poppins;
+  overflow-x: hidden;
+}
+
+#header-img {
+  height: 50vh;
+  /* background: url(./images/daniel-oberg-iSdpb3NuNWA-unsplash.jpg); */
+  background-size: cover;
+  position: relative;
+  z-index: 1;
+  background-attachment: fixed;
+  color: #fff;
+  display: flex;
+  align-items: flex-end;
+}
+
+#header-img h1 {
+  margin: 12px 4px;
+  font-size: 42px;
+}
+#header-img img {
+  height: 57px;
+  margin: 12px 0 12px 12px;
+}
+#nav-bar {
+  list-style-type: none;
+  background: green;
+  position: sticky;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  z-index: 999;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+#nav-bar li {
+  display: inline-block;
+  transition: 0.6s;
+}
+#nav-bar li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 12px;
+  display: inline-block;
+}
+#nav-bar li:hover {
+  background: #000;
+}
+
+.badge {
+  position: relative;
+  top: -13px;
+  left: -12px;
+  border: 1px solid red;
+  background-color: red;
+  border-radius: 50%;
+}

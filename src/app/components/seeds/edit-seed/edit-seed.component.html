@@ -1,0 +1,226 @@
+<div class="col-lg-6 container">
+  <h2 class="text-center">Edit Seed</h2>
+  <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <div class="hidden row">
+      <div class="col-25"><label for="id">Id</label></div>
+      <div class="col-75">
+        <input
+          type="text"
+          formControlName="id"
+          placeholder="id"
+          name="id"
+          class="form-control"
+          id="id"
+          readonly="true"
+        />
+      </div>
+    </div>
+    <br />
+    <div class="form-group row required">
+      <div class="col-25">
+        <label for="commonName">Common Name:</label>
+      </div>
+      <div class="col-75">
+        <input
+          type="text"
+          formControlName="commonName"
+          name="commonName"
+          class="form-control"
+          id="commonName"
+          [ngClass]="{
+            'is-invalid':
+              (editForm.controls.commonName.touched ||
+                editForm.controls.commonName.dirty) &&
+              !editForm.controls.commonName.valid
+          }"
+        />
+        <span class="invalid-feedback">
+          <span *ngIf="editForm.controls.commonName.errors?.required"
+            >Please enter 'Common name' of seed</span
+          >
+        </span>
+      </div>
+    </div>
+    <div class="form-group row required">
+      <div class="col-25"><label for="cost">Cost</label></div>
+      <div class="col-75">
+        <input
+          formControlName="cost"
+          type="cost"
+          name="cost"
+          class="form-control"
+          id="cost"
+          [ngClass]="{
+            'is-invalid':
+              (editForm.controls.cost.touched ||
+                editForm.controls.cost.dirty) &&
+              !editForm.controls.cost.valid
+          }"
+        />
+        <span class="invalid-feedback">
+          <span *ngIf="editForm.controls.cost.errors?.required">
+            Please enter 'Cost' of Seed
+          </span>
+          <span *ngIf="editForm.controls.cost.errors?.min"
+            >Please enter positive value</span
+          >
+        </span>
+      </div>
+    </div>
+    <div class="form-group row required">
+      <div class="col-25"><label for="stock ">Stock</label></div>
+      <div class="col-75">
+        <input
+          type="text"
+          formControlName="stock"
+          name="stock"
+          class="form-control"
+          id="stock"
+          [ngClass]="{
+            'is-invalid':
+              (editForm.controls.stock.touched ||
+                editForm.controls.stock.dirty) &&
+              !editForm.controls.stock.valid
+          }"
+        />
+        <span class="invalid-feedback">
+          <span *ngIf="editForm.controls.stock.errors?.required"
+            >Please enter 'Stock' of seed</span
+          >
+          <span *ngIf="editForm.controls.stock.errors?.min"
+            >Please enter positive value</span
+          >
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-25"><label for="type">Type</label></div>
+      <div class="col-75">
+        <input
+          type="text"
+          formControlName="type"
+          name="type"
+          class="form-control"
+          id="type"
+          readonly="true"
+        />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-25"><label for="watering">Watering</label></div>
+      <div class="col-75">
+        <input
+          type="text"
+          formControlName="watering"
+          name="watering"
+          class="form-control"
+          id="watering"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-25"><label for="bloomTime">Bloom Time</label></div>
+      <div class="col-75">
+        <select
+          type="text"
+          formControlName="bloomTime"
+          name="bloomTime"
+          class="form-control"
+          id="bloomTime"
+        >
+          <option value="WINTER">Winter</option>
+          <option value="SUMMER">Summer</option>
+          <option value="MONSOON">Monsoon</option>
+          <option value="AUTUMN">Autumn</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-25">
+        <label for="seedsPerPacket ">Seeds per packet</label>
+      </div>
+      <div class="col-75">
+        <input
+          type="text"
+          formControlName="seedsPerPacket"
+          name="seedsPerPacket"
+          class="form-control"
+          id="seedsPerPacket"
+        />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-25">
+        <label for="difficultyLevel">Difficulty Level</label>
+      </div>
+      <div class="col-75">
+        <select
+          type="text"
+          formControlName="difficultyLevel"
+          name="difficultyLevel"
+          class="form-control"
+          id="difficultyLevel"
+        >
+          <option value="EASY">Easy</option>
+          <option value="MEDIUM">Medium</option>
+          <option value="HARD">Hard</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-25"><label for="temperature">Temperature</label></div>
+      <div class="col-75">
+        <input
+          type="text"
+          formControlName="temperature"
+          name="temperature"
+          class="form-control"
+          id="temperature"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-25"><label for="typeOfSeed ">Type Of Seed</label></div>
+      <div class="col-75">
+        <input
+          type="text"
+          formControlName="typeOfSeed"
+          name="typeOfSeed"
+          class="form-control"
+          id="typeOfSeed"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-25"><label for="description">Description</label></div>
+      <div class="col-75">
+        <input
+          type="text"
+          formControlName="description"
+          name="description"
+          class="form-control"
+          id="description"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div id="add_button">
+        <input
+          type="submit"
+          value="Update"
+          class="btn btn-success"
+          [title]="
+            editForm.valid
+              ? 'The plant data is ready to add'
+              : 'Disabled until the form data is valid'
+          "
+          [disabled]="!editForm.valid"
+        />
+      </div>
+    </div>
+  </form>
+</div>

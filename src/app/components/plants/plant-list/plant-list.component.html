@@ -1,0 +1,140 @@
+<section class="">
+  <div *ngIf="loginService.isUserLoggedIn() && onlyToAdmin">
+    <button
+      style="align-items: center"
+      class="btn btn-danger inCenter"
+      (click)="addPlant()"
+    >
+      Add Plant
+    </button>
+  </div>
+  <div class="plantHeading">
+    <h1 class="container-fluid text-center">PLANT</h1>
+  </div>
+  <div style="margin-left: 2%" class="container-xxl row">
+    <div class="column column1">
+      <div>
+        <strong>Difficulty Level</strong>
+        <br />
+        <!-- <form action="/action_page.php">-->
+        <input type="checkbox" name="Difficulty" (click)="difficultyEasy()" />
+        <label>Easy</label><br />
+        <input type="checkbox" name="Difficulty" (click)="difficultyMedium()" />
+        <label>Medium</label><br />
+        <input type="checkbox" name="Difficulty" (click)="difficultyHard()" />
+        <label>Hard</label><br /><br />
+        <!-- </form>-->
+      </div>
+      <div>
+        <strong>Blooming Time</strong>
+        <br />
+        <!-- <form action="/action_page.php">-->
+        <input type="checkbox" name="BloomTime" (click)="autumn()" />
+        <label>AUTUMN</label><br />
+        <input type="checkbox" name="BloomTime" (click)="summer()" />
+        <label>SUMMER</label><br />
+        <input type="checkbox" name="BloomTime" (click)="winter()" />
+        <label>WINTER</label><br />
+        <input type="checkbox" name="BloomTime" (click)="monsoon()" />
+        <label>MONSOON</label><br /><br />
+        <!-- </form>-->
+      </div>
+    </div>
+
+    <div class="s-box-container column column2">
+      <div class="row">
+        <div class="col-md-1">Search:</div>
+        <div class="col-md-3">
+          <input type="text" [(ngModel)]="listFilter" />
+        </div>
+        <div class="row pull-right col-md-8">
+          <!-- <div class="col-md-4"></div> -->
+          <div>
+            <button
+              type="button"
+              class="btn btn-outline-success"
+              (click)="ascendingSort()"
+            >
+              Cost low to high
+            </button>
+            <!-- <div class="col-md-1"></div> -->
+            <button
+              type="button"
+              class="btn btn-outline-danger"
+              (click)="descendingSort()"
+            >
+              Cost High to low
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <br />
+      <div>
+        <div class="s-box" *ngFor="let plant of filteredPlants; let i = index">
+          <img
+            alt="1"
+            src="https://images.unsplash.com/photo-1511201267681-44406db0f523?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cmVkJTIwYW5kJTIwd2hpdGUlMjByb3NlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&w=1000&q=80"
+            class="appIcon"
+          />
+          <h4>
+            <a [routerLink]="['/plants/', plant.id]"
+              ><strong>{{ plant.name | titlecase }}</strong></a
+            >
+          </h4>
+          <ul>
+            <li>Height: {{ plant.height }} feet</li>
+            <li>Blooming Time: {{ plant.bloomTime | titlecase }}</li>
+            <li>Difficulty: {{ plant.difficultyLevel | titlecase }}</li>
+          </ul>
+          <div
+            class="blockquote"
+            style="
+              background-color: lightgreen;
+              border-radius: 15px;
+              width: 50%;
+              text-align: center;
+            "
+          >
+            {{ plant.cost | currency: "INR":"symbol":"1.2" }}
+          </div>
+          <ng-template [ngIf]="newFlag[i]" [ngIfElse]="show">
+            <div *ngIf="newFlag[i]">
+              <button
+                *ngIf="loginService.isUserLoggedIn() && !onlyToAdmin"
+                class="btn btn-success"
+                (click)="addToCart(plant.id, i)"
+              >
+                Add to Cart
+              </button>
+            </div>
+          </ng-template>
+
+          <ng-template #show>
+            <div>
+              <h6>Added to cart.</h6>
+            </div>
+          </ng-template>
+          <hr width="100%" />
+          <div *ngIf="loginService.isUserLoggedIn() && onlyToAdmin" class="row">
+            <button
+              class="fa fa-edit btn btn-outline-primary"
+              style="float: left"
+              [routerLink]="['/edit-plant/', plant.id]"
+            >
+              Edit</button
+            ><br />
+            <button
+              class="btn button-small btn-danger"
+              style="float: right"
+              (click)="onDelete(plant)"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="noPlant">Sorry NO Plant matches this criteria</div>
+    </div>
+  </div>
+</section>

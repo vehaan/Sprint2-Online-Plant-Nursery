@@ -1,0 +1,302 @@
+<div class="row">
+  <!-- Carousel -->
+  <div
+    id="carousel-example-generic"
+    class="carousel slide"
+    data-ride="carousel"
+  >
+    <div class="carousel-inner">
+      <div class="item active">
+        <img
+          src="https://c1.wallpaperflare.com/preview/277/103/602/dark-foliage-tree-leaf.jpg"
+          alt="First slide"
+        />
+        <!-- Static Header -->
+        <div class="header-text hidden-xs">
+          <div class="col-md-12 text-center">
+            <h2>
+              <span>Welcome to <strong>ONLINE PLANT NURSERY</strong></span>
+            </h2>
+            <br />
+            <h3>
+              <span>Hope you have a great visit here</span>
+            </h3>
+            <br />
+            <div class="">
+              <span *ngIf="!loginService.isUserLoggedIn()"
+                >Login to surf the world of greenery :)</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="service-sec" id="benefits">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="heading">
+            <h2>
+              <small>Benefits of Plants</small>You must surroud yourself with
+              plants. But why?
+            </h2>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-6 text-sm-center service-block">
+              <i class="fa fa-plus" aria-hidden="true"></i>
+              <h3>Better Sleep</h3>
+              <p>
+                There are two ways in which plants can help you get a good
+                night's sleep: by purifying the air in your bedroom and by
+                giving off a scent that helps you relax. Plants such as snake
+                plants, orchids and aloe vera give out oxygen at night to help
+                you breathe better as well as absorbing toxins from the air
+              </p>
+            </div>
+            <div class="col-md-6 text-sm-center service-block">
+              <i class="fa fa-leaf" aria-hidden="true"></i>
+              <h3>Reduces Weight</h3>
+              <p>
+                Aloe vera is a succulent plant that’s well known for its
+                medicinal properties. Though it’s most commonly used topically
+                to heal burns and promote skin health, it has also been used to
+                treat a variety of other conditions. In recent years, it has
+                even become a key ingredient in juices, herbal supplements, and
+                diet drinks geared toward weight loss.
+              </p>
+            </div>
+            <div class="col-md-6 text-sm-center service-block">
+              <i class="fa fa-leaf" aria-hidden="true"></i>
+              <h3>Improves Mood</h3>
+              <p>
+                Plants have the power to heal. Science proves interacting with
+                plants, both indoors and outdoors, is beneficial to physical and
+                mental health. Anyone of any age and skill level can enjoy the
+                benefits of gardening and surrounding him- or herself with
+                nature.
+              </p>
+            </div>
+            <div class="col-md-6 text-sm-center service-block">
+              <i class="fa fa-bell" aria-hidden="true"></i>
+              <h3>Boosts Energy</h3>
+              <p>
+                While getting enough sleep, eating a nutrient-dense diet,
+                maintaining a healthy body weight, and practicing self-care are
+                the most important factors for feeling your best, some
+                supplements, including herbal ones, have been shown to boost
+                your energy and cognitive health.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div *ngIf="loginService.isUserLoggedIn()">
+    <div style="margin-left: 13%; margin-top: 3%">
+      <h1 style="margin-left: 28%" class="">
+        Featured Plants<span class="glyphicon glyphicon-leaf"></span>
+      </h1>
+      <hr style="margin-left: 28%; height: 5px; color: teal" width="280px" />
+      <div class="s-box" *ngFor="let plant of plants | slice: 0:3">
+        <img
+          alt="1"
+          src="https://ak.picdn.net/shutterstock/videos/1027610672/thumb/11.jpg"
+          class="appIcon"
+        />
+        <h1>
+          <a
+            style="font-weight: bold; font-size: larger; color: lightseagreen"
+            >{{ plant.name }}</a
+          >
+        </h1>
+        <ul>
+          <li>Height: {{ plant.height }}</li>
+          <!-- <li>Shape: {{planter.shape}}</li> -->
+          <!-- <li>Capacity: {{planter.capacity}}</li> -->
+          <!-- <li>Drainage Holes: {{planter.drainageHoles}}</li> -->
+          <!-- <li>Color: {{planter.color}}</li> -->
+          <li>Stock: {{ plant.stock }}</li>
+        </ul>
+
+        <div
+          class="blockquote"
+          style="
+            background-color: lightgreen;
+            border-radius: 15px;
+            width: 50%;
+            text-align: center;
+          "
+        >
+          {{ plant.cost | currency: "INR":"symbol":"1.2" }}
+        </div>
+        <hr width="100%" />
+      </div>
+      <a
+        routerLink="/planters"
+        style="margin-top: 12%; margin-right: 12%"
+        class="pull-right btn btn-success btn-lg"
+        title="View all Planters"
+      >
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </a>
+    </div>
+
+    <div style="margin-left: 13%; margin-top: 3%">
+      <h1 style="margin-left: 28%">
+        Featured Seeds<span class="glyphicon glyphicon-grain"></span>
+      </h1>
+      <hr style="margin-left: 28%; height: 5px; color: teal" width="280px" />
+      <div class="s-box" *ngFor="let seed of seeds | slice: 0:3">
+        <!-- <button class="btn button-small btn-danger" id="x" (click)="onDelete(planter)">X</button> -->
+        <img
+          alt="1"
+          src="https://ak.picdn.net/shutterstock/videos/1027610672/thumb/11.jpg"
+          class="appIcon"
+        />
+        <h1>
+          <a
+            style="font-weight: bold; font-size: larger; color: lightseagreen"
+            >{{ seed.name }}</a
+          >
+        </h1>
+        <ul>
+          <!-- <li>Height: {{planter.height}}</li> -->
+          <!-- <li>Shape: {{planter.shape}}</li> -->
+          <!-- <li>Capacity: {{planter.capacity}}</li> -->
+          <!-- <li>Drainage Holes: {{planter.drainageHoles}}</li> -->
+          <!-- <li>Color: {{planter.color}}</li> -->
+          <li>Stock: {{ seed.stock }}</li>
+        </ul>
+
+        <div
+          class="blockquote"
+          style="
+            background-color: lightgreen;
+            border-radius: 15px;
+            width: 50%;
+            text-align: center;
+          "
+        >
+          {{ seed.cost | currency: "INR":"symbol":"1.2" }}
+        </div>
+        <hr width="100%" />
+        <!-- <button class="fa fa-edit btn btn-outline-primary" [routerLink]="['/edit-planter/',planter.id]"> Edit</button><br> -->
+        <!-- <a class="btn btn-success float-sm-end" href="#cart">Add to Cart</a> -->
+      </div>
+      <a
+        routerLink="/planters"
+        style="margin-top: 12%; margin-right: 12%"
+        class="pull-right btn btn-success btn-lg"
+        title="View all Planters"
+      >
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </a>
+    </div>
+
+    <div style="margin-left: 13%; margin-top: 3%">
+      <h1 style="margin-left: 28%">
+        Featured Planters<span class="glyphicon glyphicon-tower"></span>
+      </h1>
+      <hr style="margin-left: 28%; height: 5px; color: teal" width="315px" />
+      <div class="s-box" *ngFor="let planter of planters | slice: 0:3">
+        <!-- <button class="btn button-small btn-danger" id="x" (click)="onDelete(planter)">X</button> -->
+        <img
+          alt="1"
+          src="https://ak.picdn.net/shutterstock/videos/1027610672/thumb/11.jpg"
+          class="appIcon"
+        />
+        <h1>
+          <a
+            style="font-weight: bold; font-size: larger; color: lightseagreen"
+            >{{ planter.name }}</a
+          >
+        </h1>
+        <ul>
+          <li>Height: {{ planter.height }}</li>
+          <li>Shape: {{ planter.shape }}</li>
+          <li>Capacity: {{ planter.capacity }}</li>
+          <li>Drainage Holes: {{ planter.drainageHoles }}</li>
+          <li>Color: {{ planter.color }}</li>
+          <li>Stock: {{ planter.stock }}</li>
+        </ul>
+
+        <div
+          class="blockquote"
+          style="
+            background-color: lightgreen;
+            border-radius: 15px;
+            width: 50%;
+            text-align: center;
+          "
+        >
+          {{ planter.cost | currency: "INR":"symbol":"1.2" }}
+        </div>
+        <hr width="100%" />
+        <!-- <button class="fa fa-edit btn btn-outline-primary" [routerLink]="['/edit-planter/',planter.id]"> Edit</button><br> -->
+        <!-- <a class="btn btn-success float-sm-end" href="#cart">Add to Cart</a> -->
+      </div>
+
+      <a
+        routerLink="/planters"
+        style="margin-top: 18%; margin-right: 12%"
+        class="pull-right btn btn-success btn-lg"
+        title="View all Planters"
+      >
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </a>
+    </div>
+  </div>
+
+  <div
+    *ngIf="loginService.isUserLoggedIn()"
+    style="margin-left: 10%; margin-bottom: 2%"
+    class="container-fluid row"
+  >
+    <div class="container-img">
+      <a routerLink="/plants">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrvMbm8NRFCf5EWwQL55a-F-jDGFG_g4huMQ&usqp=CAU"
+          alt="Avatar"
+          class="image"
+        />
+        <div class="overlay-left">
+          <div class="text">PLANTS</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="container-img">
+      <a routerLink="/seeds">
+        <img
+          src="https://media.istockphoto.com/photos/background-of-variety-of-dried-fruit-and-nuts-on-a-table-picture-id1128648264?k=6&m=1128648264&s=612x612&w=0&h=uG2mV4MTMUnDaiG-tR4cEIzu4Cp-k7wqXHXQPs86lDA="
+          alt="Avatar"
+          class="image"
+        />
+        <div class="overlay-up">
+          <div class="text">SEEDS</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="container-img">
+      <a routerLink="/planters">
+        <img
+          src="https://www.wallpapertip.com/wmimgs/225-2250063_cactus-succulent-pot-and-planter-hd-4k-wallpaper.jpg"
+          alt="Avatar"
+          class="image"
+        />
+        <div class="overlay-right">
+          <div class="text">PLANTERS</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <app-footer></app-footer>
+</div>

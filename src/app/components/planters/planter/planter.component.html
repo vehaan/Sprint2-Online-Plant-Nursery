@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="card">
+    <div class="container-fliud">
+      <div class="wrapper row">
+        <div class="preview col-md-6">
+          <div class="preview-pic tab-content">
+            <div class="tab-pane active" id="pic-1">
+              <img
+                src="https://ak.picdn.net/shutterstock/videos/1027610672/thumb/11.jpg"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="details col-md-6">
+          <h3 class="product-title">{{ planter.name }}</h3>
+
+          <ul>
+            <li>Available Stock: {{ planter.stock }}</li>
+            <li>Height: {{ planter.height }} inches</li>
+            <li>Shape: {{ planter.shape }}</li>
+            <li>Color: {{ planter.color }}</li>
+            <li title="Number of plants this planter can hold">
+              Capacity: {{ planter.capacity }}
+            </li>
+            <li>Drainage Holes: {{ planter.drainageHoles }}</li>
+          </ul>
+
+          <h4 class="price">
+            current price:
+            <span>{{ planter.cost | currency: "INR":true }}</span>
+          </h4>
+
+          <div class="action">
+            <div class="card-footer">
+              <button class="btn btn-warning" (click)="onBack()">Back</button>
+          </div>
+
+           
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

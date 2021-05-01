@@ -1,0 +1,108 @@
+<link
+  href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css"
+  rel="stylesheet"
+  id="bootstrap-css"
+/>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<section>
+  <div>
+    <h1 style="margin-left: 2%;">My Cart</h1>
+
+    <div class="s-box" *ngFor="let product of cartProduct; let j = index">
+      <button
+        class="btn button-small btn-danger"
+        id="x"
+        [routerLink]="['/cart']"
+        (click)="deleteFromCart(product.id)"
+      >
+        X
+      </button>
+
+      <img
+        alt="1"
+        src="https://ak.picdn.net/shutterstock/videos/1027610672/thumb/11.jpg"
+        class="appIcon"
+      />
+      <h1>Product Name: {{ product.name }}</h1>
+      <h1>Quantity: {{ cartProductQuantity[cartProduct.indexOf(product)] }}</h1>
+
+      <div
+        class="blockquote"
+        style="
+          background-color: lightgreen;
+          border-radius: 15px;
+          width: 0%;
+          text-align: center;
+        "
+      >
+        {{ product.cost | currency: "INR":"symbol":"1.2" }}
+      </div>
+      <hr width="100%" />
+
+      <div>
+        <button
+          type="button"
+          [disabled]="limitReached[j]"
+          class="btn btn-default btn-lg"
+          id="add"
+          (click)="incQuantity(product.id)"
+        >
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-default btn-lg"
+          id="minus"
+          (click)="decQuantity(product.id)"
+        >
+          <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+        </button>
+        <br />
+        <br />
+      </div>
+      <span style="color: red" *ngIf="limitReached[j]" aria-hidden="true"
+        >Not enough stock</span
+      >
+      <br />
+    </div>
+  </div>
+  <ng-template [ngIf]="cartFlagShow" [ngIfElse]="cartFlagHide">
+    <div *ngIf = "cartFlagShow">
+        <div>
+            <h3 style="margin-left: 2%;">Total quantity: {{totalQuantity}}</h3>
+            <h3 style="margin-left: 2%;">Total cost: {{getSum()}}</h3><br>
+        </div>
+        <hr>
+        <div class="container">
+            
+            <div class="row">
+            <div class="col-4">
+
+            </div>
+            <div class="col-5">
+                <h3><strong>Select payment mode:</strong></h3>
+                <form action="/action_page.php">
+                <input type="radio"  name="payment" (click)="paymentMethod('CASH')" checked>
+                <label>CASH</label><br>
+                <input type="radio"  name="payment" (click)="paymentMethod('CARD')">
+                <label>CARD</label><br>
+                <input type="radio"  name="payment" (click)="paymentMethod('UPI')">
+                <label>UPI</label> 
+                </form>
+                <br>
+                <button class="btn btn-success" (click) ="onSubmit()">Place Order</button>
+            </div>
+        </div>
+        </div>
+    </div>
+</ng-template>
+
+  <ng-template #cartFlagHide>
+    <div class="container" style="text-align: center;">
+        <h4>Add a product to the cart for placing an order.</h4>
+    </div>
+  </ng-template>
+</section>

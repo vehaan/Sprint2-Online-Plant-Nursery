@@ -1,0 +1,49 @@
+
+<div class="container-fluid">
+
+  <div style="margin: 10% 25% ;" class="row">
+  
+  <div class="card col-2" style="width: 18rem;">
+      <img style='height: 100%; width: 100%; object-fit: contain'
+       src="https://i.pinimg.com/originals/74/ab/48/74ab48240e34df5e05a398e997a42b0e.png" alt="Login image">
+      <div class="card-body">
+        <h5 style="color: brown;" class="card-title">Login & Security</h5>
+        <p class="card-text">Edit login,name and mobile number  </p>
+        <a  class="btn btn-primary" (click)="onEdit()" >Edit</a>
+      </div>
+    </div>
+  
+    <div class="card col-2" style="width: 18rem;">
+      <img style='height: 100%; width: 100%; object-fit: contain'
+      class="card-img-top" src="https://icon-library.com/images/purchase-order-icon/purchase-order-icon-17.jpg" alt="Orders image">
+      <div class="card-body">
+        <h5 style="color: brown;" class="card-title">My Orders</h5>
+        <p class="card-text">View orders &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+        <a routerLink = "/order-list" class="btn btn-warning">Show</a>
+      </div>
+    </div>
+  
+    <div class="card col-2" style="width: 18rem;">
+      <img style='height: 100%; width: 100%; object-fit: contain'
+      class="card-img-top" src="https://logodix.com/logo/435803.png" alt="Delete image">
+      <div class="card-body">
+        <h5 style="color: brown;" class="card-title">Delete Account</h5>
+        <p class="card-text">Click below to delete the account</p>
+        <a href="#" class="btn btn-danger"  (click)="delete()">Delete</a>
+      </div>
+    </div>
+  
+    <div class="card col-2" style="width: 18rem;">
+      <img style='height: 100%; width: 100%; object-fit: contain'
+      class="card-img-top" src="https://uxwing.com/wp-content/themes/uxwing/download/01-user_interface/change-password.png" alt="Change Password">
+      <div class="card-body">
+        <h5 style="color: brown;" class="card-title">Change Password</h5>
+        <p class="card-text">Click below to change password</p>
+        <a  class="btn btn-primary" routerLink="/change-password">Change Password</a>
+      </div>
+    </div>
+  
+  </div>
+  
+  </div>
+  

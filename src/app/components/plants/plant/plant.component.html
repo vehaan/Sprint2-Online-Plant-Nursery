@@ -1,0 +1,52 @@
+<div class="container">
+    <div class="col">
+        <div class="card">
+            <!-- <h5 class="card-header">{{plant.name}}</h5> -->
+            <div class="card-body">
+
+                <h5 class="card-title">Details</h5>
+                <table>
+                    <tr>
+                        <th>Cost</th>
+                        <td>{{plant.cost}}</td>
+                    </tr>
+                    <tr>
+                        <th>Stock left</th>
+                        <td>{{plant.stock}}</td>
+                    </tr>
+                    <tr>
+                        <th>Height</th>
+                        <td>{{plant.height}}</td>
+                    </tr>
+                    <tr>
+                        <th>Spread</th>
+                        <td>{{plant.spread}}</td>
+                    </tr>
+                    <tr>
+                        <th>Blooming Time</th>
+                        <td>{{plant.bloomTime}}</td>
+                    </tr>
+                    <tr>
+                        <th>Use</th>
+                        <td>{{plant.medicinalOrCulinaryUse}}</td>
+                    </tr>
+                    <tr>
+                        <th>Temperature</th>
+                        <td>{{plant.temparature}}</td>
+                    </tr>
+                    <tr>
+                        <th>Type of Plant</th>
+                        <td>{{plant.typeOfPlant}}</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>{{plant.description}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="card-footer">
+                <button (click)="onBack()">Back</button>
+            </div>
+        </div>
+    </div>
+</div>

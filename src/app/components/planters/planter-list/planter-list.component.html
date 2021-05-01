@@ -1,0 +1,129 @@
+<div>
+  <div>
+    <button
+      *ngIf="loginService.isUserLoggedIn() && onlyToAdmin"
+      class="btn btn-danger inCenter"
+      (click)="addPlanter()"
+    >
+      Add Planter
+    </button>
+  </div>
+  <div style="background: teal">
+    <h1 class="container-fluid text-center">PLANTER</h1>
+  </div>
+  <section>
+    <div class="container-fluid">
+      <input
+        style="margin-bottom: 1%"
+        class="form-control"
+        type="text"
+        name="search"
+        [(ngModel)]="searchText"
+        autocomplete="off"
+        placeholder="Search anything"
+      />
+      <div class="container-fluid">
+        <ngx-slider
+          class="col-md-2"
+          [(value)]="minValue"
+          [(highValue)]="maxValue"
+          [options]="options"
+        ></ngx-slider>
+        <button class="btn btn-primary col-md-1" (click)="filterRange()">
+          Cost Filter
+        </button>
+        <button
+          class="btn btn-primary pull-right col-md-1"
+          (click)="toggleDetails()"
+        >
+          {{ showDetails ? "Hide" : "Show" }} Details
+        </button>
+        <button
+          style="margin-right: 1%"
+          class="btn btn-outline-success pull-right col-md-1"
+          (click)="ascendingSort()"
+        >
+          Cost--Low to High
+        </button>
+        <button
+          class="btn btn-outline-danger pull-right col-md-1"
+          (click)="descendingSort()"
+        >
+          Cost--High to Low
+        </button>
+      </div>
+      <div>
+        <div
+          class="s-box"
+          *ngFor="let planter of planters | filter: searchText; let i = index"
+        >
+          <button
+            *ngIf="loginService.isUserLoggedIn() && onlyToAdmin"
+            class="btn button-small btn-danger"
+            id="x"
+            (click)="onDelete(planter)"
+          >
+            X
+          </button>
+          <img
+            alt="1"
+            src="https://ak.picdn.net/shutterstock/videos/1027610672/thumb/11.jpg"
+            class="appIcon"
+          />
+          <h1>
+            <a [routerLink]="['/planters/', planter.id]">{{ planter.name }}</a>
+          </h1>
+          <ul *ngIf="showDetails">
+            <li>Height: {{ planter.height }}</li>
+            <li>Shape: {{ planter.shape }}</li>
+            <li>Capacity: {{ planter.capacity }}</li>
+            <li>Drainage Holes: {{ planter.drainageHoles }}</li>
+            <li>Color: {{ planter.color }}</li>
+            <li>Stock: {{ planter.stock }}</li>
+          </ul>
+
+          <div
+            class="blockquote"
+            style="
+              background-color: lightgreen;
+              border-radius: 15px;
+              width: 50%;
+              text-align: center;
+            "
+          >
+            {{ planter.cost | currency: "INR":"symbol":"1.2" }}
+          </div>
+          <hr width="100%" />
+          <button
+            *ngIf="loginService.isUserLoggedIn() && onlyToAdmin"
+            class="fa fa-edit btn btn-outline-primary"
+            [routerLink]="['/edit-planter/', planter.id]"
+          >
+            Edit</button
+          ><br />
+
+          <ng-template [ngIf]="newFlag[i]" [ngIfElse]="show">
+            <div *ngIf="newFlag[i]">
+              <button
+                *ngIf="loginService.isUserLoggedIn() && !onlyToAdmin"
+                class="btn btn-success"
+                (click)="addToCart(planter.id, i)"
+              >
+                Add to Cart
+              </button>
+            </div>
+          </ng-template>
+
+          <ng-template #show>
+            <div>
+              <h6>Added to cart.</h6>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+      <div *ngIf="noPlanter">
+        <h2>Ooops! No Planter found :(</h2>
+      </div>
+    </div>
+  </section>
+</div>
